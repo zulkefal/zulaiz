@@ -1,3 +1,12 @@
+/*
+  DISABLED. Not rendered anywhere.
+
+  The three testimonials in src/lib/site.ts are invented, and so are the people
+  and companies attached to them. Publishing them as customer endorsement would
+  be fabricated social proof. This component is kept intact so it can be dropped
+  back into src/app/page.tsx the day there are real quotes, with permission,
+  from real customers. See section 8 of IMAGES.md.
+*/
 import Image from "next/image";
 import { testimonials } from "@/lib/site";
 import { Container, Heading } from "@/components/ui";

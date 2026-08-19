@@ -15,7 +15,7 @@ export function PageHeader({
       <Container>
         <div className="grid gap-8 lg:grid-cols-12 lg:items-end lg:gap-12">
           <div className={aside ? "lg:col-span-7" : "lg:col-span-9"}>
-            <Heading as="h1" size="xl" className="max-w-[17ch]">
+            <Heading as="h1" size="xl" className="max-w-[24ch]">
               {title}
             </Heading>
             <p className="mt-5 max-w-[58ch] text-lg leading-relaxed text-muted">

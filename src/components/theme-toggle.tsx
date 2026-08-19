@@ -5,8 +5,11 @@ import { MoonIcon, SunIcon } from "@phosphor-icons/react/dist/ssr";
 
 type Theme = "light" | "dark";
 
-/* Runs before paint so the page never flashes the wrong theme. */
-export const themeScript = `(function(){try{var s=localStorage.getItem("zulaiz-theme");var d=window.matchMedia("(prefers-color-scheme: dark)").matches;document.documentElement.dataset.theme=(s==="light"||s==="dark")?s:(d?"dark":"light");}catch(e){document.documentElement.dataset.theme="light";}})();`;
+/*
+  Runs before paint so the page never flashes the wrong theme. Dark is the
+  default: a stored choice wins, otherwise dark regardless of the OS setting.
+*/
+export const themeScript = `(function(){try{var s=localStorage.getItem("zulaiz-theme");document.documentElement.dataset.theme=(s==="light")?"light":"dark";}catch(e){document.documentElement.dataset.theme="dark";}})();`;
 
 const EVENT = "zulaiz:themechange";
 
@@ -22,7 +25,7 @@ function getSnapshot(): Theme {
 }
 
 export function ThemeToggle() {
-  const theme = useSyncExternalStore<Theme>(subscribe, getSnapshot, () => "light");
+  const theme = useSyncExternalStore<Theme>(subscribe, getSnapshot, () => "dark");
 
   const toggle = useCallback(() => {
     const next: Theme = getSnapshot() === "dark" ? "light" : "dark";

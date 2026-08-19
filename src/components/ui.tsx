@@ -55,10 +55,13 @@ export function Heading({
   className?: string;
   children: ReactNode;
 }) {
+  /* Display steps wait for their breakpoint: at lg the content column is only
+     ~7/12 of 1024px, and jumping to the largest size there pushes headlines
+     onto a third line. */
   const scale = {
-    xl: "text-4xl sm:text-5xl lg:text-[3.5rem] lg:leading-[1.02] font-semibold",
-    lg: "text-3xl sm:text-4xl font-semibold",
-    md: "text-xl sm:text-2xl font-semibold",
+    xl: "text-[2.5rem] leading-[1.05] sm:text-[3.25rem] xl:text-[3.75rem] xl:leading-[1.02] font-semibold",
+    lg: "text-[2rem] leading-[1.1] sm:text-[2.75rem] sm:leading-[1.08] font-semibold",
+    md: "text-2xl sm:text-[1.75rem] font-semibold",
   }[size];
   return <Tag className={`${scale} ${className}`}>{children}</Tag>;
 }
@@ -71,7 +74,9 @@ export function Lead({
   children: ReactNode;
 }) {
   return (
-    <p className={`max-w-[62ch] text-lg leading-relaxed text-muted ${className}`}>
+    <p
+      className={`max-w-[62ch] text-lg leading-relaxed text-muted sm:text-xl ${className}`}
+    >
       {children}
     </p>
   );

@@ -8,7 +8,7 @@ import { Reveal } from "@/components/reveal";
 */
 export function OnboardingTrack() {
   return (
-    <section className="border-b border-line py-20 sm:py-28">
+    <section className="border-b border-line bg-sunken py-24 sm:py-32">
       <Container>
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-5">

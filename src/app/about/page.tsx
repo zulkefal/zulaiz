@@ -16,8 +16,8 @@ export default function AboutPage() {
   return (
     <>
       <PageHeader
-        title="We started because outsourced support kept being bad."
-        lead="Two of us ran support at DTC brands and kept hiring agencies that treated replies as piecework. Zulaiz is the version we wanted to buy."
+        title="The support team we wanted to hire."
+        lead="Two of us ran support at DTC brands and kept hiring agencies that treated replies as piecework. So we built the alternative."
         aside={
           <dl className="grid gap-6 sm:grid-cols-3 lg:gap-5">
             {teamFacts.map((fact) => (
@@ -40,11 +40,10 @@ export default function AboutPage() {
       <section className="border-b border-line py-20 sm:py-24">
         <Container>
           <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-16">
-            {/* TODO: replace with a real photo of the team, 1200x900. */}
             <div className="relative aspect-[4/3] overflow-hidden rounded-card border border-line lg:col-span-5">
               <Image
-                src="https://picsum.photos/seed/zulaiz-team-office/1200/900"
-                alt="The Zulaiz team working together"
+                src="/images/about-team.jpg"
+                alt="Four colleagues around a table, one showing something on a laptop"
                 fill
                 sizes="(max-width: 1024px) 100vw, 42vw"
                 className="object-cover"

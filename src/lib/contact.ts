@@ -13,7 +13,7 @@ export const channelOptions = [
   "Live chat",
   "WISMO and tracking",
   "Returns and exchanges",
-  "Voice and SMS",
+  "Guest messaging",
   "Reviews and social",
 ] as const;
 

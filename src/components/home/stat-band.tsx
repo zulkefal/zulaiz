@@ -5,7 +5,7 @@ import { Reveal } from "@/components/reveal";
 /* Hairlines instead of cards. Metrics do not need containers to feel grouped. */
 export function StatBand() {
   return (
-    <section className="border-b border-line py-16 sm:py-20">
+    <section className="border-b border-line bg-sunken py-16 sm:py-20">
       <Container>
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-0">
           {headlineStats.map((stat, i) => (

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRightIcon } from "@phosphor-icons/react/dist/ssr";
-import { additionalServices, featuredServices } from "@/lib/site";
+import { additionalServices, featuredServices, toolsByJob } from "@/lib/site";
 import { PageHeader } from "@/components/page-header";
 import { CtaBand } from "@/components/cta-band";
 import { ServiceIcon } from "@/components/service-icon";
@@ -11,15 +11,15 @@ import { Container, Heading } from "@/components/ui";
 export const metadata: Metadata = {
   title: "Services",
   description:
-    "Email support, live chat, WISMO, returns, voice and social. Six services run by a named pod inside your existing helpdesk.",
+    "Email support, live chat, WISMO, returns, guest messaging and social. Six services run by named agents inside your existing helpdesk.",
 };
 
 export default function ServicesPage() {
   return (
     <>
       <PageHeader
-        title="Six services. One pod that knows your catalogue."
-        lead="Start with the channel that hurts most. Most brands begin with WISMO or email, then add chat once the queue is stable."
+        title="Six services. One team that knows your business."
+        lead="Start with the channel that hurts most. Most brands begin with WISMO or email, then add chat once the queue is stable. Rental hosts usually start with guest messaging."
       />
 
       {/* Grouped rows rather than tiles: the numbers are the argument here. */}
@@ -99,6 +99,43 @@ export default function ServicesPage() {
                     </p>
                   </div>
                 </article>
+              ))}
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      {/*
+        Grouped chunks rather than one long list. Nineteen tool names as a flat
+        <ul> would be the lazy layout, and nobody reads it.
+      */}
+      <section className="border-b border-line bg-sunken py-20 sm:py-24">
+        <Container>
+          <div className="grid gap-10 lg:grid-cols-12 lg:gap-16">
+            <div className="lg:col-span-4">
+              <Heading className="max-w-[16ch]">
+                We work in your tools, not ours.
+              </Heading>
+              <p className="mt-5 max-w-[42ch] text-base leading-relaxed text-muted">
+                Whatever you already run, we log in as named users and work
+                inside it. Nothing migrates to a system you cannot audit.
+              </p>
+            </div>
+            <div className="grid gap-8 sm:grid-cols-2 lg:col-span-8">
+              {toolsByJob.map((group) => (
+                <div key={group.job}>
+                  <h3 className="text-sm font-semibold text-text">{group.job}</h3>
+                  <ul className="mt-3 flex flex-wrap gap-2">
+                    {group.tools.map((tool) => (
+                      <li
+                        key={tool}
+                        className="rounded-full border border-line bg-raised px-3 py-1 text-sm text-muted"
+                      >
+                        {tool}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               ))}
             </div>
           </div>

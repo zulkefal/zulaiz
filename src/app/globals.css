@@ -19,33 +19,38 @@
   --ease-out-soft: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Light is the base layer. */
+/*
+  Light is the base layer. The page sits a step down from the cards so raised
+  surfaces actually read as raised, and sunken is far enough below the page
+  that alternating section bands are visible rather than implied.
+*/
 :root {
-  --surface: #f6f7f8;
-  --surface-raised: #fcfcfd;
-  --surface-sunken: #eceef1;
-  --text: #14171c;
-  --text-muted: #5a626d;
-  --text-subtle: #79818d;
-  --line: #e1e4e9;
-  --line-strong: #ccd1d8;
-  --accent: #ba562c;
-  --accent-hover: #a44a24;
+  --surface: #f1f3f5;
+  --surface-raised: #fdfdfe;
+  --surface-sunken: #e4e8ec;
+  --text: #0e1218;
+  --text-muted: #4b5563;
+  --text-subtle: #616b7a;
+  --line: #d6dce3;
+  --line-strong: #b6c0cb;
+  /* Darker than the dark-mode accent so small text clears AA on a light page. */
+  --accent: #ad4d26;
+  --accent-hover: #96401d;
   --accent-contrast: #ffffff;
-  --accent-soft: rgba(186, 86, 44, 0.09);
-  --accent-line: rgba(186, 86, 44, 0.28);
+  --accent-soft: rgba(173, 77, 38, 0.1);
+  --accent-line: rgba(173, 77, 38, 0.35);
   --shadow-tint: 218 20% 32%;
 }
 
 [data-theme="dark"] {
-  --surface: #0c0e12;
-  --surface-raised: #13161c;
-  --surface-sunken: #090b0e;
-  --text: #edeff2;
-  --text-muted: #99a1ad;
-  --text-subtle: #7c848f;
-  --line: #212630;
-  --line-strong: #2f3641;
+  --surface: #0a0d12;
+  --surface-raised: #141922;
+  --surface-sunken: #06080c;
+  --text: #eef1f5;
+  --text-muted: #a2abb8;
+  --text-subtle: #848d9a;
+  --line: #232a35;
+  --line-strong: #343d4b;
   --accent: #e78350;
   --accent-hover: #f0925f;
   --accent-contrast: #14171c;
@@ -128,11 +133,9 @@
   }
 
   .accent-wash {
-    background-image: radial-gradient(
-      120% 100% at 100% 0%,
-      var(--accent-soft),
-      transparent 62%
-    );
+    background-image:
+      radial-gradient(120% 100% at 100% 0%, var(--accent-soft), transparent 60%),
+      radial-gradient(90% 80% at 0% 100%, var(--accent-soft), transparent 55%);
   }
 
   @media (prefers-reduced-motion: reduce) {

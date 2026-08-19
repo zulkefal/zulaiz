@@ -15,7 +15,7 @@ const layout: Record<string, string> = {
   "email-support": "lg:col-span-2",
   "live-chat": "lg:col-span-2",
   "returns-and-exchanges": "lg:col-span-2",
-  "voice-and-sms": "lg:col-span-2",
+  "guest-communication": "lg:col-span-2",
   "reviews-and-social": "lg:col-span-2",
 };
 
@@ -26,7 +26,7 @@ export function ServicesBento() {
   ];
 
   return (
-    <section id="services" className="border-b border-line py-20 sm:py-28">
+    <section id="services" className="border-b border-line py-24 sm:py-32">
       <Container>
         <Eyebrow>What we run</Eyebrow>
         <Heading className="mt-4 max-w-[20ch]">
@@ -40,10 +40,9 @@ export function ServicesBento() {
               href={wismo.href}
               className="group relative flex h-full min-h-[22rem] flex-col justify-end overflow-hidden rounded-card border border-line p-7"
             >
-              {/* TODO: replace with real fulfilment photography, 1200x900. */}
               <Image
-                src={`https://picsum.photos/seed/${wismo.image!.seed}/1200/900`}
-                alt={wismo.image!.alt}
+                src={wismo.tileImage!.src}
+                alt={wismo.tileImage!.alt}
                 fill
                 sizes="(max-width: 1024px) 100vw, 60vw"
                 className="object-cover transition-transform duration-700 ease-[var(--ease-out-soft)] group-hover:scale-[1.03]"
@@ -114,7 +113,7 @@ export function ServicesBento() {
         </div>
 
         <div className="mt-10">
-          <TextLink href="/services">Compare all six services</TextLink>
+          <TextLink href="/services">See every service</TextLink>
         </div>
       </Container>
     </section>

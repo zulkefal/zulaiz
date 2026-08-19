@@ -56,9 +56,8 @@ export default async function ServicePage({
       {service.image ? (
         <div className="border-b border-line">
           <div className="relative aspect-[21/9] w-full">
-            {/* TODO: replace with real brand photography, 2400x1030. */}
             <Image
-              src={`https://picsum.photos/seed/${service.image.seed}/2400/1030`}
+              src={service.image.src}
               alt={service.image.alt}
               fill
               priority

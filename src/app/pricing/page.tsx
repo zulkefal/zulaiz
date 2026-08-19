@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { CheckIcon } from "@phosphor-icons/react/dist/ssr";
-import { CTA, faqs, plans } from "@/lib/site";
-import { PageHeader } from "@/components/page-header";
+import { CTA, commitments, faqs, included, rate, rateNotes, ticketBundle } from "@/lib/site";
 import { FaqAccordion } from "@/components/faq-accordion";
 import { CtaBand } from "@/components/cta-band";
 import { Reveal } from "@/components/reveal";
@@ -10,102 +9,136 @@ import { ButtonLink, Container, Heading } from "@/components/ui";
 export const metadata: Metadata = {
   title: "Pricing",
   description:
-    "Monthly retainers based on ticket volume, channel mix and coverage hours. No per ticket pricing, no per ticket incentives.",
+    "Six dollars an hour, one rate for every channel. Buy it as hours a week or as a fixed 500 ticket bundle from $300 a month.",
 };
-
-const priceDrivers = [
-  {
-    title: "Ticket volume",
-    body: "The single biggest factor. We size the pod from your last three months, then agree what happens when a month runs 30% over.",
-  },
-  {
-    title: "Coverage hours",
-    body: "Business hours in one time zone costs less than weekends, and a lot less than around the clock. You pick the windows that match your traffic.",
-  },
-  {
-    title: "Channel mix",
-    body: "Email is the cheapest to staff. Live chat and voice need people on shift rather than in a queue, so they carry a higher seat cost.",
-  },
-];
 
 export default function PricingPage() {
   return (
     <>
-      <PageHeader
-        title="Priced per month, not per ticket."
-        lead="Paying by the ticket rewards whoever closes fastest. We would rather be paid to make your ticket count go down, so the retainer is fixed and the volume band is agreed up front."
-      />
+      {/* The rate is the whole pitch, so it gets the hero rather than a table. */}
+      <section className="accent-wash border-b border-line py-16 sm:py-20">
+        <Container>
+          <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
+            <div className="lg:col-span-6">
+              <div className="flex items-baseline gap-3">
+                <span className="font-mono text-6xl font-medium tracking-tight text-accent sm:text-7xl">
+                  {rate.amount}
+                </span>
+                <span className="text-xl text-muted">{rate.unit}</span>
+              </div>
+              <Heading as="h1" size="lg" className="mt-6 max-w-[18ch]">
+                One rate, three ways to buy it.
+              </Heading>
+              <p className="mt-5 max-w-[52ch] text-lg leading-relaxed text-muted">
+                Every channel bills at the same rate. Buy it as hours a week or
+                as a fixed bundle of tickets, and change that when it changes.
+              </p>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <ButtonLink href={CTA.primaryHref}>{CTA.primary}</ButtonLink>
+              </div>
+            </div>
+
+            <div className="lg:col-span-6">
+              <h2 className="text-sm font-semibold text-text">
+                Included at every hour
+              </h2>
+              <ul className="mt-5 grid gap-3.5">
+                {included.map((item) => (
+                  <li key={item} className="flex gap-3">
+                    <CheckIcon
+                      weight="bold"
+                      aria-hidden
+                      className="mt-1 size-4 shrink-0 text-accent"
+                    />
+                    <span className="text-base leading-relaxed text-muted">
+                      {item}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </Container>
+      </section>
 
       <section className="border-b border-line py-16 sm:py-20">
         <Container>
-          <div className="grid items-start gap-5 lg:grid-cols-3">
-            {plans.map((plan, i) => (
+          <Heading className="max-w-[22ch]">
+            What that looks like in practice.
+          </Heading>
+          <p className="mt-4 max-w-[58ch] text-base leading-relaxed text-muted">
+            The same rate, packaged three ways. Most brands land on Standard,
+            which bills 80 hours and delivers 100.
+          </p>
+
+          {/*
+            Separate cards with the featured one lifted, rather than one joined
+            grid. items-stretch keeps the three the same height so the buttons
+            line up, and mt-auto pins each button to the bottom regardless of
+            how much copy sits above it.
+          */}
+          <div className="mt-14 grid items-stretch gap-5 lg:grid-cols-3">
+            {commitments.map((c, i) => (
               <Reveal
-                key={plan.name}
+                key={c.name}
                 delay={i * 0.06}
-                className={plan.featured ? "lg:-mt-6" : ""}
+                className={c.featured ? "lg:-mt-6" : ""}
               >
                 <div
-                  className={`flex h-full flex-col rounded-card border p-7 ${
-                    plan.featured
-                      ? "accent-wash border-accent-line bg-raised lg:p-8"
-                      : "border-line bg-raised"
+                  className={`flex h-full flex-col rounded-card border p-7 transition-colors duration-300 sm:p-8 ${
+                    c.featured
+                      ? "accent-wash border-accent-line bg-raised lg:pb-14"
+                      : "border-line bg-raised hover:border-line-strong"
                   }`}
                 >
-                  <div className="flex items-center gap-3">
-                    <h2 className="text-lg font-semibold">{plan.name}</h2>
-                    {plan.featured ? (
-                      <span className="rounded-full border border-accent-line px-2.5 py-0.5 text-xs font-semibold text-accent">
-                        Most brands start here
+                  <div className="flex min-h-7 items-center justify-between gap-3">
+                    <h3 className="text-base font-semibold">{c.name}</h3>
+                    {c.badge ? (
+                      <span className="rounded-full bg-accent px-2.5 py-1 text-xs font-semibold text-accent-contrast">
+                        {c.badge}
                       </span>
                     ) : null}
                   </div>
 
-                  <p className="mt-4 font-mono text-3xl font-medium tracking-tight">
-                    {plan.price}
-                  </p>
-                  <p className="mt-1 text-sm text-subtle">{plan.cadence}</p>
-
-                  <p className="mt-4 text-sm leading-relaxed text-muted">
-                    {plan.blurb}
+                  <p className="mt-7 flex items-baseline gap-2">
+                    <span className="font-mono text-5xl font-medium tracking-tight">
+                      {c.monthly}
+                    </span>
+                    <span className="text-sm text-subtle">a month</span>
                   </p>
 
-                  <dl className="mt-7 grid gap-3.5 border-t border-line pt-6 text-sm">
-                    {(
-                      [
-                        ["Volume", plan.volume],
-                        ["Channels", plan.channels],
-                        ["Coverage", plan.coverage],
-                        ["Team", plan.team],
-                        ["Reporting", plan.reporting],
-                      ] as const
-                    ).map(([label, value]) => (
-                      <div
-                        key={label}
-                        className="grid grid-cols-[6rem_1fr] items-baseline gap-3"
-                      >
-                        <dt className="text-subtle">{label}</dt>
-                        <dd className="text-text">{value}</dd>
-                      </div>
-                    ))}
-                  </dl>
+                  <div className="mt-5 border-t border-line pt-5">
+                    <p className="text-base font-medium text-text">{c.measure}</p>
+                    <p className="mt-1 text-sm text-subtle">{c.equivalent}</p>
+                    {c.bonus ? (
+                      <p className="mt-3 inline-flex rounded-full bg-accent-soft px-3 py-1 text-sm font-semibold text-accent">
+                        {c.bonus}
+                      </p>
+                    ) : null}
+                  </div>
 
-                  <ul className="mt-6 grid gap-2.5 text-sm">
-                    {plan.extras.map((extra) => (
-                      <li key={extra} className="flex gap-2.5">
+                  <ul className="mt-6 grid gap-3">
+                    {c.points.map((point) => (
+                      <li key={point} className="flex gap-2.5">
                         <CheckIcon
                           weight="bold"
                           aria-hidden
                           className="mt-1 size-3.5 shrink-0 text-accent"
                         />
-                        <span className="leading-relaxed text-muted">{extra}</span>
+                        <span className="text-sm leading-relaxed text-muted">
+                          {point}
+                        </span>
                       </li>
                     ))}
                   </ul>
 
+                  <p className="mt-6 text-sm leading-relaxed text-subtle">
+                    {c.suits}
+                  </p>
+
                   <ButtonLink
                     href={CTA.primaryHref}
-                    variant={plan.featured ? "primary" : "secondary"}
+                    variant={c.featured ? "primary" : "secondary"}
                     className="mt-8 w-full"
                   >
                     {CTA.primary}
@@ -115,10 +148,35 @@ export default function PricingPage() {
             ))}
           </div>
 
-          <p className="mt-8 max-w-[70ch] text-sm leading-relaxed text-subtle">
-            Prices exclude tax. Three month initial term, then rolling monthly
-            with 30 days notice. Peak season staffing is quoted separately and
-            agreed before the season starts.
+          <div className="mt-14 flex flex-col items-start gap-6 rounded-card border border-line bg-raised p-8 sm:flex-row sm:items-center sm:justify-between sm:p-10">
+            <div>
+              <div className="flex flex-wrap items-baseline gap-3">
+                <h3 className="text-xl font-semibold">{ticketBundle.name}</h3>
+                <span className="font-mono text-2xl font-medium tracking-tight">
+                  {ticketBundle.monthly}
+                </span>
+                <span className="text-sm text-subtle">
+                  a month, {ticketBundle.equivalent}
+                </span>
+              </div>
+              <p className="mt-3 max-w-[62ch] text-base leading-relaxed text-muted">
+                {ticketBundle.body}
+              </p>
+            </div>
+            <ButtonLink
+              href={CTA.primaryHref}
+              variant="secondary"
+              className="shrink-0"
+            >
+              {CTA.primary}
+            </ButtonLink>
+          </div>
+
+          <p className="mt-8 max-w-[74ch] text-sm leading-relaxed text-subtle">
+            Every figure above is the hourly rate times the hours involved, so
+            nothing is a made up band. Prices exclude tax. Three month initial
+            term, then rolling monthly with 30 days notice, and you can move
+            between the three at any point.
           </p>
         </Container>
       </section>
@@ -127,17 +185,17 @@ export default function PricingPage() {
         <Container>
           <div className="grid gap-10 lg:grid-cols-12 lg:gap-16">
             <Heading className="max-w-[15ch] lg:col-span-4">
-              What moves the number.
+              Why it is priced this way.
             </Heading>
             <div className="lg:col-span-8">
-              {priceDrivers.map((driver, i) => (
+              {rateNotes.map((note, i) => (
                 <div
-                  key={driver.title}
+                  key={note.title}
                   className={`py-6 ${i > 0 ? "border-t border-line" : "lg:pt-0"}`}
                 >
-                  <h3 className="text-lg font-semibold">{driver.title}</h3>
+                  <h3 className="text-lg font-semibold">{note.title}</h3>
                   <p className="mt-2 max-w-[62ch] text-base leading-relaxed text-muted">
-                    {driver.body}
+                    {note.body}
                   </p>
                 </div>
               ))}
@@ -146,16 +204,41 @@ export default function PricingPage() {
         </Container>
       </section>
 
+      <section className="border-b border-line py-16 sm:py-20">
+        <Container>
+          <div className="flex flex-col items-start gap-6 rounded-card border border-line bg-raised p-8 sm:flex-row sm:items-center sm:justify-between sm:p-10">
+            <div>
+              <h2 className="text-xl font-semibold">
+                Around the clock, multi brand or multi language?
+              </h2>
+              <p className="mt-2.5 max-w-[60ch] text-base leading-relaxed text-muted">
+                Coverage that never sleeps needs enough agents to rotate through
+                the night, so it is quoted rather than listed. Contractual SLAs,
+                a named account manager, security review, DPA and BAA are all on
+                the table.
+              </p>
+            </div>
+            <ButtonLink
+              href={CTA.primaryHref}
+              variant="secondary"
+              className="shrink-0"
+            >
+              {CTA.primary}
+            </ButtonLink>
+          </div>
+        </Container>
+      </section>
+
       <section className="border-b border-line py-20 sm:py-24">
         <Container>
           <Heading className="max-w-[16ch]">Everything else you asked.</Heading>
-          <FaqAccordion items={faqs} className="mt-10 max-w-[75ch]" />
+          <FaqAccordion items={faqs} className="mt-10 max-w-[78ch]" />
         </Container>
       </section>
 
       <CtaBand
-        title="Not sure which band you land in?"
-        body="Send us three months of ticket exports. We will tell you the pod size and the number, in writing, before you commit to anything."
+        title="Not sure how many hours you need?"
+        body="Send us three months of ticket exports. We will come back with an hours estimate and what it costs, in writing, before you commit to anything."
       />
     </>
   );

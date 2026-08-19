@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
@@ -22,12 +22,30 @@ export const metadata: Metadata = {
     title: "Zulaiz | Customer support for ecommerce brands",
     description: site.description,
     url: site.url,
+    images: [
+      {
+        url: "/images/og.jpg",
+        width: 1730,
+        height: 909,
+        alt: "Parcels on a conveyor in a dimly lit fulfilment warehouse",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Zulaiz | Customer support for ecommerce brands",
     description: site.description,
+    images: ["/images/og.jpg"],
   },
+};
+
+/* Tells the browser to render native controls dark-first, matching the site. */
+export const viewport: Viewport = {
+  colorScheme: "dark light",
+  themeColor: [
+    { media: "(prefers-color-scheme: dark)", color: "#0a0d12" },
+    { media: "(prefers-color-scheme: light)", color: "#f1f3f5" },
+  ],
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

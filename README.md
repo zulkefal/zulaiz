@@ -14,17 +14,29 @@ npm run lint
 
 ## Contact form
 
-The demo request form is a React server action in `src/lib/actions.ts` that
-sends through Resend. Copy `.env.example` to `.env.local` and fill in:
+The demo request form on `/contact` submits to **Formspree** (form ID
+`xoeaporq`) through the official `@formspree/react` `useForm` hook.
 
-| Variable | Purpose |
-| --- | --- |
-| `RESEND_API_KEY` | Resend API key. Without it the form still validates and succeeds, and the payload is logged to the server console instead of emailed. |
-| `CONTACT_TO_EMAIL` | Inbox that receives demo requests. Defaults to the address in `src/lib/site.ts`. |
-| `CONTACT_FROM_EMAIL` | Sender. Must be a domain verified in Resend. |
+Two deliberate choices:
 
-Validation lives in `src/lib/contact.ts` and runs on the server, so the schema
-is the single source of truth for both the field errors and the email body.
+- **The library, not a raw `fetch`.** `@formspree/react` carries Formspree's
+  spam and reCAPTCHA tokens. A hand-rolled POST to the endpoint does not, and
+  gets filtered.
+- **Our own validation runs first.** [src/lib/formspree.ts](src/lib/formspree.ts)
+  validates against the zod schema in
+  [src/lib/contact.ts](src/lib/contact.ts) before anything leaves the browser,
+  so the error copy is ours. Formspree validates again server-side, and
+  [demo-form.tsx](src/components/demo-form.tsx) merges those errors onto the
+  same inputs via `state.errors.getFieldErrors(field)`.
+
+No environment variables are required. The form ID is committed because
+Formspree IDs are public by design, so the form works from a clean clone. See
+[.env.example](.env.example) for the two optional overrides (a different form
+for staging, or a local stub for tests).
+
+Fields posted: `name`, `email`, `company`, `website`, `volume`, `channels`
+(comma joined), `message`, plus `_subject`. The submitter's `email` becomes the
+reply-to, so replying from your inbox reaches them directly.
 
 ## Where the content lives
 
@@ -64,8 +76,9 @@ Defined once in `src/app/globals.css`:
 2. **Write the legal pages.** `/privacy` and `/terms` are structural scaffolds
    with a visible notice on them. They carry `robots: { index: false }` until
    real reviewed copy replaces the prompts.
-3. **Confirm the numbers.** The metrics, prices and testimonials in
-   `src/lib/site.ts` are placeholders written to be plausible. Swap them for
-   figures you can stand behind.
+3. **Confirm the numbers.** The rate of $6 an hour is real; the performance
+   metrics in `src/lib/site.ts` (41 min first response, 4.8 CSAT, 58% WISMO
+   deflection) are still plausible placeholders. Swap them for figures you can
+   stand behind.
 4. **Set the real domain.** `site.url` in `src/lib/site.ts` feeds
    `metadataBase`, the sitemap and the robots file.

@@ -1,13 +1,11 @@
 export const site = {
   name: "Zulaiz",
   description:
-    "Zulaiz runs customer support for ecommerce brands. Email, live chat and WISMO owned end to end by a named pod, so shoppers get fast answers and your team gets its week back.",
+    "Zulaiz runs customer support for ecommerce brands and short-term rental hosts. Email, live chat, WISMO and guest messaging owned end to end by named agents, from $4 an hour.",
   url: "https://zulaiz.com",
   email: "hello@zulaiz.com",
-  phone: "+1 (312) 847-1928",
   social: {
     linkedin: "https://www.linkedin.com/company/zulaiz",
-    x: "https://x.com/zulaiz",
   },
 } as const;
 
@@ -34,8 +32,10 @@ export type Service = {
   href: string;
   summary: string;
   /* Phosphor icon name, resolved in components/service-icon.tsx */
-  icon: "envelope" | "chats" | "package" | "arrows" | "phone" | "star";
-  image?: { seed: string; alt: string };
+  icon: "envelope" | "chats" | "package" | "arrows" | "star" | "house";
+  image?: { src: string; alt: string };
+  /* Only WISMO has one: the home page bento tile uses a different crop. */
+  tileImage?: { src: string; alt: string };
   metrics: { value: string; label: string }[];
   /* Grouped so the detail page never renders a flat list of more than five rows. */
   scope: { group: string; items: string[] }[];
@@ -55,8 +55,12 @@ export const services: Service[] = [
       "Where is my order is usually half your inbox. We answer it in minutes, then remove it with proactive delay alerts and carrier escalations.",
     icon: "package",
     image: {
-      seed: "zulaiz-parcels-warehouse",
-      alt: "Parcels moving through a fulfilment warehouse",
+      src: "/images/banner-wismo.jpg",
+      alt: "Cardboard parcels moving along a sorting conveyor in a fulfilment warehouse",
+    },
+    tileImage: {
+      src: "/images/wismo-tile.jpg",
+      alt: "A fulfilment warehouse aisle with parcels on a conveyor",
     },
     metrics: [
       { value: "58%", label: "Typical WISMO deflection by month three" },
@@ -120,8 +124,8 @@ export const services: Service[] = [
       "A trained pod owns your shared inbox. Triage, replies, escalations and reporting, in a voice your customers will not notice is outsourced.",
     icon: "envelope",
     image: {
-      seed: "zulaiz-support-desk-morning",
-      alt: "A support specialist working through a morning queue",
+      src: "/images/banner-email-support.jpg",
+      alt: "Three support specialists at spaced desks in a sunlit open-plan office",
     },
     metrics: [
       { value: "41 min", label: "Median first response across accounts" },
@@ -185,8 +189,8 @@ export const services: Service[] = [
       "Staffed chat during the hours your traffic converts, answering the sizing, stock and shipping questions that decide whether the cart survives.",
     icon: "chats",
     image: {
-      seed: "zulaiz-storefront-checkout",
-      alt: "A shopper completing a purchase on a phone",
+      src: "/images/banner-live-chat.jpg",
+      alt: "A shopper using their phone at a kitchen counter in the evening",
     },
     metrics: [
       { value: "22 sec", label: "Median pickup during staffed hours" },
@@ -256,13 +260,13 @@ export const services: Service[] = [
     featured: false,
   },
   {
-    slug: "voice-and-sms",
-    name: "Voice and SMS",
-    navLabel: "Voice and SMS",
-    href: "/services#voice-and-sms",
+    slug: "guest-communication",
+    name: "Guest communication",
+    navLabel: "Guest comms",
+    href: "/services#guest-communication",
     summary:
-      "Inbound phone and two-way SMS staffed by the same pod that knows the email history, so nobody explains their order twice.",
-    icon: "phone",
+      "Airbnb, Booking.com, Vrbo and Expedia messages from first enquiry to checkout, with review protection and cleaning coordination in between.",
+    icon: "house",
     metrics: [],
     scope: [],
     approach: [],
@@ -329,8 +333,8 @@ export const differentiators = [
     body: "Your helpdesk, your Shopify, your returns platform, your data. Nothing migrates into a black box you cannot audit or take back.",
   },
   {
-    title: "Paid to reduce your tickets",
-    body: "Every recurring driver we find becomes a site fix, a policy change or an automation. Volume going down is the goal, not a threat to the invoice.",
+    title: "We would rather you booked fewer hours",
+    body: "Every recurring driver we find becomes a site fix, a policy change or an automation. Fewer tickets means fewer hours billed, and we would rather shrink the invoice than protect it.",
   },
   {
     title: "Peak is a slider",
@@ -338,6 +342,11 @@ export const differentiators = [
   },
 ];
 
+/*
+  PLACEHOLDER, NOT IN USE. Invented quotes from invented people at invented
+  companies. The section that rendered these is disabled. Replace with real,
+  permissioned quotes before re-enabling <Voices /> on the home page.
+*/
 export const testimonials = [
   {
     quote:
@@ -365,63 +374,110 @@ export const testimonials = [
   },
 ];
 
-export type Plan = {
+export const rate = {
+  amount: "$4",
+  unit: "an hour",
+} as const;
+
+export type Commitment = {
   name: string;
-  price: string;
-  cadence: string;
-  blurb: string;
+  monthly: string;
+  measure: string;
+  equivalent: string;
+  /* Rendered as an accent line. Only the standard plan carries bonus hours. */
+  bonus?: string;
+  points: string[];
+  suits: string;
+  badge?: string;
   featured?: boolean;
-  volume: string;
-  channels: string;
-  coverage: string;
-  team: string;
-  reporting: string;
-  extras: string[];
 };
 
-export const plans: Plan[] = [
+/*
+  Priced off $4 an hour on a four week month, so every figure is exact:
+  10 hrs/wk = 40 billed = $160, 20 hrs/wk = 80 billed = $320, 40 hrs/wk = 160
+  billed = $640. The standard plan adds 20 hours at no charge, which brings its
+  effective rate to $3.20 an hour.
+*/
+export const commitments: Commitment[] = [
   {
-    name: "Starter",
-    price: "$1,450",
-    cadence: "per month",
-    blurb: "For brands under roughly 800 tickets a month who need the inbox handled properly.",
-    volume: "Up to 800 tickets a month",
-    channels: "Email",
-    coverage: "Business hours, one time zone",
-    team: "Shared pod, named lead",
-    reporting: "Monthly",
-    extras: ["Macro and tagging setup included", "Next business day escalation SLA"],
+    name: "Part time",
+    monthly: "$160",
+    measure: "10 hours a week",
+    equivalent: "40 hours a month",
+    points: [
+      "Email and WISMO",
+      "Business hours in one time zone",
+      "One named agent",
+    ],
+    suits: "A first pair of hands for a queue that is still small.",
   },
   {
-    name: "Growth",
-    price: "$3,900",
-    cadence: "per month",
-    blurb: "The usual starting point. Email, chat and WISMO owned by a pod that is yours.",
+    name: "Standard",
+    monthly: "$320",
+    measure: "20 hours a week",
+    equivalent: "80 hours billed a month",
+    bonus: "Plus 20 hours free, so 100 hours in total",
+    points: [
+      "Email, live chat and WISMO",
+      "One named agent who learns your catalogue",
+      "Works out at $3.20 an hour, not $4",
+    ],
+    suits: "The one most brands start on, and the best value on the page.",
+    badge: "Most sold",
     featured: true,
-    volume: "Up to 3,000 tickets a month",
-    channels: "Email, live chat, WISMO",
-    coverage: "Extended hours, weekends included",
-    team: "Dedicated named pod, team lead",
-    reporting: "Weekly, plus a monthly driver review",
-    extras: [
-      "Proactive delay alerts and carrier claims",
-      "Shared Slack channel with your team",
-    ],
   },
   {
-    name: "Scale",
-    price: "Custom",
-    cadence: "priced per seat",
-    blurb: "High volume, multi region or multi brand, with contractual SLAs to report against.",
-    volume: "Unlimited, priced per seat",
-    channels: "Every channel including voice, SMS and social",
-    coverage: "Around the clock or follow the sun",
-    team: "Named account manager and QA analyst",
-    reporting: "Weekly against contractual SLAs",
-    extras: [
-      "Multi brand and multi language",
-      "Security review, DPA and BAA on request",
+    name: "Full time",
+    monthly: "$640",
+    measure: "40 hours a week",
+    equivalent: "160 hours a month",
+    points: [
+      "Every channel we run",
+      "Extended hours, weekends included",
+      "Named agent plus a team lead",
     ],
+    suits: "Daily cover for a queue that keeps moving after five.",
+  },
+];
+
+/* Shown on the pricing page only, under the three commitments. */
+export const ticketBundle = {
+  name: "500 tickets",
+  monthly: "$200",
+  measure: "500 tickets a month",
+  equivalent: "about 50 hours",
+  body: "If you would rather think in tickets than hours, we price the queue instead of the clock. Anything over 500 bills at $4 an hour.",
+};
+
+/* No tiers, so this is what every hour includes regardless of commitment. */
+export const included = [
+  "Named agents assigned to your brand, not a rotating pool",
+  "We work inside your helpdesk, your Shopify and your returns platform",
+  "Macro library, tagging taxonomy and escalation rules built with you",
+  "Weekly QA against a rubric you can read",
+  "Weekly reporting on volume, drivers, CSAT and backlog",
+  "A monthly review of the contact drivers worth fixing upstream",
+];
+
+/* Shared by the contact page and the contact section on the home page. */
+export const callExpectations = [
+  "A read on your ticket volume and the drivers behind it",
+  "The hours you actually need and what that costs",
+  "A realistic go live date, usually about fourteen days out",
+];
+
+export const rateNotes = [
+  {
+    title: "One rate, every channel",
+    body: "Email, live chat, WISMO, returns, guest messaging and social all bill at the same hourly rate. There is no premium channel and nothing is gated behind a bigger plan.",
+  },
+  {
+    title: "Hours flex month to month",
+    body: "Forecast peak with us and add hours for the weeks you need them. Scale back after. You are not carrying a Black Friday headcount into January.",
+  },
+  {
+    title: "The bonus hours are a real discount",
+    body: "The standard plan bills 80 hours and delivers 100, which works out at $3.20 an hour rather than $4. It is the only plan with bonus hours, and it is why most brands land there.",
   },
 ];
 
@@ -436,11 +492,11 @@ export const faqs = [
   },
   {
     q: "How is pricing calculated?",
-    a: "Monthly retainers based on ticket volume, channel mix and coverage hours. We do not price per ticket, because that quietly rewards rushed replies. Above roughly 3,000 tickets a month it moves to per seat pricing, which usually works out cheaper.",
+    a: "One flat rate of $4 an hour, for every channel. You pick how many hours a week you need and pay for those. The standard plan adds 20 hours a month at no charge, which brings it to $3.20 an hour. We do not gate channels behind bigger plans.",
   },
   {
     q: "Who actually answers our tickets?",
-    a: "A named pod of two to six agents plus a team lead, assigned to your brand and nobody else's. You meet them, you can reach them in Slack, and they do not rotate between accounts.",
+    a: "Named agents assigned to your brand and nobody else's. Part time hours get one; past full time you get a pod of two to six plus a team lead. You meet them, you can reach them in Slack, and they do not rotate between accounts.",
   },
   {
     q: "What happens during peak season?",
@@ -452,7 +508,7 @@ export const faqs = [
   },
   {
     q: "Is there a long contract?",
-    a: "A three month initial term so the pod has time to learn your business properly, then rolling month to month with 30 days notice.",
+    a: "A three month initial term so the team has time to learn your business properly, then rolling month to month with 30 days notice. Your hours can change every month inside that.",
   },
   {
     q: "What if quality slips?",
@@ -463,19 +519,41 @@ export const faqs = [
 /* Simple Icons slugs. Rendered from cdn.simpleicons.org in a single neutral tone. */
 export const integrations = [
   { slug: "shopify", name: "Shopify" },
-  { slug: "hubspot", name: "HubSpot" },
+  { slug: "woocommerce", name: "WooCommerce" },
   { slug: "bigcommerce", name: "BigCommerce" },
-  { slug: "squarespace", name: "Squarespace" },
-  { slug: "wix", name: "Wix" },
   { slug: "etsy", name: "Etsy" },
   { slug: "zendesk", name: "Zendesk" },
-  { slug: "intercom", name: "Intercom" },
   { slug: "helpscout", name: "Help Scout" },
+  { slug: "intercom", name: "Intercom" },
+  { slug: "gmail", name: "Gmail" },
   { slug: "aftership", name: "AfterShip" },
-  { slug: "stripe", name: "Stripe" },
-  { slug: "mailchimp", name: "Mailchimp" },
+  { slug: "airbnb", name: "Airbnb" },
+  { slug: "bookingdotcom", name: "Booking.com" },
+  { slug: "expedia", name: "Expedia" },
   { slug: "trustpilot", name: "Trustpilot" },
-  { slug: "shopware", name: "Shopware" },
+];
+
+/*
+  Tools without a Simple Icons mark, so they are listed as text on /services
+  rather than shown in the logo strip.
+*/
+export const toolsByJob = [
+  {
+    job: "Helpdesks",
+    tools: ["Gorgias", "Freshdesk", "Zendesk", "Help Scout", "Richpanel", "Re:amaze", "Tawk.to", "Gmail", "Outlook"],
+  },
+  {
+    job: "Tracking",
+    tools: ["ParcelPanel", "Track123", "AfterShip", "17Track"],
+  },
+  {
+    job: "Rentals",
+    tools: ["Guesty", "Hostaway", "Smoobu", "Lodgify", "Hospitable", "Kross Booking"],
+  },
+  {
+    job: "Working with you",
+    tools: ["Slack", "Discord", "Lark", "Skype", "WhatsApp"],
+  },
 ];
 
 export const teamFacts = [

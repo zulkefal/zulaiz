@@ -23,7 +23,7 @@ export default function TermsPage() {
         },
         {
           heading: "Fees and payment",
-          prompt: "Invoicing cadence, payment window, what happens on overage above a volume band, and late payment.",
+          prompt: "Invoicing cadence, payment window, how booked hours are recorded and billed, what happens when hours run over, and late payment.",
         },
         {
           heading: "Service levels",

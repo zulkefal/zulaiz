@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { LinkedinLogoIcon, XLogoIcon } from "@phosphor-icons/react/dist/ssr";
+import { LinkedinLogoIcon } from "@phosphor-icons/react/dist/ssr";
 import { CTA, nav, services, site } from "@/lib/site";
 import { Container } from "@/components/ui";
 import { Logo } from "@/components/logo";
@@ -16,19 +16,19 @@ export function SiteFooter() {
               and WISMO, run by a team that learns your catalogue.
             </p>
             <div className="mt-5 flex items-center gap-3">
+              {/*
+                Leaves the site, so it opens in a new tab. noopener stops the
+                new page reaching back through window.opener, and noreferrer
+                withholds the referrer header.
+              */}
               <a
                 href={site.social.linkedin}
-                aria-label="Zulaiz on LinkedIn"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Zulaiz on LinkedIn, opens in a new tab"
                 className="grid size-9 place-items-center rounded-full border border-line text-muted transition-colors hover:border-accent hover:text-accent"
               >
                 <LinkedinLogoIcon weight="fill" className="size-4" />
-              </a>
-              <a
-                href={site.social.x}
-                aria-label="Zulaiz on X"
-                className="grid size-9 place-items-center rounded-full border border-line text-muted transition-colors hover:border-accent hover:text-accent"
-              >
-                <XLogoIcon weight="fill" className="size-4" />
               </a>
             </div>
           </div>
@@ -68,14 +68,6 @@ export function SiteFooter() {
                   className="text-sm text-muted transition-colors hover:text-accent"
                 >
                   {site.email}
-                </a>
-              </li>
-              <li>
-                <a
-                  href={`tel:${site.phone.replace(/[^+\d]/g, "")}`}
-                  className="font-mono text-sm text-muted transition-colors hover:text-accent"
-                >
-                  {site.phone}
                 </a>
               </li>
             </ul>
