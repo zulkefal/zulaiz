@@ -1,36 +1,71 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Zulaiz
 
-## Getting Started
+Marketing site for Zulaiz, an outsourced customer support team for ecommerce
+brands. Next.js 16 App Router, TypeScript, Tailwind v4, Motion.
 
-First, run the development server:
+## Running it
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev        # http://localhost:3000
+npm run build      # production build, all routes prerender
+npm run lint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Contact form
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The demo request form is a React server action in `src/lib/actions.ts` that
+sends through Resend. Copy `.env.example` to `.env.local` and fill in:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Variable | Purpose |
+| --- | --- |
+| `RESEND_API_KEY` | Resend API key. Without it the form still validates and succeeds, and the payload is logged to the server console instead of emailed. |
+| `CONTACT_TO_EMAIL` | Inbox that receives demo requests. Defaults to the address in `src/lib/site.ts`. |
+| `CONTACT_FROM_EMAIL` | Sender. Must be a domain verified in Resend. |
 
-## Learn More
+Validation lives in `src/lib/contact.ts` and runs on the server, so the schema
+is the single source of truth for both the field errors and the email body.
 
-To learn more about Next.js, take a look at the following resources:
+## Where the content lives
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Almost all copy is data, not markup. `src/lib/site.ts` holds the services,
+pricing plans, metrics, testimonials, FAQ and integration logos. Editing that
+file updates the home page, the services pages, pricing, the footer and the
+sitemap together.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Service detail pages are generated from the same array. A service with
+`featured: true` gets its own page at `/services/<slug>`; the others render as
+bolt-on capabilities on `/services` with anchor links.
 
-## Deploy on Vercel
+## Design system
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Defined once in `src/app/globals.css`:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Palette lock.** Cool grey neutrals plus one accent (burnt orange). Semantic
+  tokens (`--surface`, `--text`, `--accent`) swap under `[data-theme="dark"]`.
+  There is no second accent anywhere on the site.
+- **Radius lock.** Buttons and pills are fully round, cards and tiles are 16px
+  (`rounded-card`), inputs are 10px (`rounded-input`).
+- **Theme.** Follows `prefers-color-scheme`, with a manual toggle that persists
+  to `localStorage`. An inline script in `layout.tsx` sets the attribute before
+  paint so there is no flash.
+- **Icons.** Phosphor only, `duotone` or `bold`, imported from
+  `@phosphor-icons/react/dist/ssr` so they render in server components.
+- **Motion.** Motion (`motion/react`), isolated in client leaf components.
+  Scroll reveals use `whileInView` and collapse to static under
+  `prefers-reduced-motion`. No scroll event listeners.
+
+## Before launch
+
+1. **Replace the placeholder photography.** Every image is a `picsum.photos`
+   seed and is marked with a `TODO` comment. Real assets are needed for the
+   hero, the WISMO bento tile, the three service page banners, the about page
+   team photo, and the three testimonial portraits.
+2. **Write the legal pages.** `/privacy` and `/terms` are structural scaffolds
+   with a visible notice on them. They carry `robots: { index: false }` until
+   real reviewed copy replaces the prompts.
+3. **Confirm the numbers.** The metrics, prices and testimonials in
+   `src/lib/site.ts` are placeholders written to be plausible. Swap them for
+   figures you can stand behind.
+4. **Set the real domain.** `site.url` in `src/lib/site.ts` feeds
+   `metadataBase`, the sitemap and the robots file.

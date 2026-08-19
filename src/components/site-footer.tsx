@@ -1,0 +1,107 @@
+import Link from "next/link";
+import { LinkedinLogoIcon, XLogoIcon } from "@phosphor-icons/react/dist/ssr";
+import { CTA, nav, services, site } from "@/lib/site";
+import { Container } from "@/components/ui";
+import { Logo } from "@/components/logo";
+
+export function SiteFooter() {
+  return (
+    <footer className="mt-auto border-t border-line bg-sunken">
+      <Container className="py-14">
+        <div className="grid gap-10 md:grid-cols-[1.4fr_1fr_1fr] md:gap-8">
+          <div>
+            <Logo />
+            <p className="mt-4 max-w-[34ch] text-sm leading-relaxed text-muted">
+              Outsourced customer support for ecommerce brands. Email, live chat
+              and WISMO, run by a team that learns your catalogue.
+            </p>
+            <div className="mt-5 flex items-center gap-3">
+              <a
+                href={site.social.linkedin}
+                aria-label="Zulaiz on LinkedIn"
+                className="grid size-9 place-items-center rounded-full border border-line text-muted transition-colors hover:border-accent hover:text-accent"
+              >
+                <LinkedinLogoIcon weight="fill" className="size-4" />
+              </a>
+              <a
+                href={site.social.x}
+                aria-label="Zulaiz on X"
+                className="grid size-9 place-items-center rounded-full border border-line text-muted transition-colors hover:border-accent hover:text-accent"
+              >
+                <XLogoIcon weight="fill" className="size-4" />
+              </a>
+            </div>
+          </div>
+
+          <nav aria-label="Services">
+            <h2 className="text-sm font-semibold text-text">Services</h2>
+            <ul className="mt-4 grid gap-2.5">
+              {services.map((s) => (
+                <li key={s.slug}>
+                  <Link
+                    href={s.href}
+                    className="text-sm text-muted transition-colors hover:text-accent"
+                  >
+                    {s.navLabel}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          <nav aria-label="Company">
+            <h2 className="text-sm font-semibold text-text">Company</h2>
+            <ul className="mt-4 grid gap-2.5">
+              {nav.map((item) => (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    className="text-sm text-muted transition-colors hover:text-accent"
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+              <li>
+                <a
+                  href={`mailto:${site.email}`}
+                  className="text-sm text-muted transition-colors hover:text-accent"
+                >
+                  {site.email}
+                </a>
+              </li>
+              <li>
+                <a
+                  href={`tel:${site.phone.replace(/[^+\d]/g, "")}`}
+                  className="font-mono text-sm text-muted transition-colors hover:text-accent"
+                >
+                  {site.phone}
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+
+        <div className="mt-12 flex flex-col gap-4 border-t border-line pt-6 text-sm text-subtle sm:flex-row sm:items-center sm:justify-between">
+          <p>
+            &copy; {new Date().getFullYear()} {site.name}. All rights reserved.
+          </p>
+          <div className="flex items-center gap-5">
+            <Link href="/privacy" className="transition-colors hover:text-accent">
+              Privacy
+            </Link>
+            <Link href="/terms" className="transition-colors hover:text-accent">
+              Terms
+            </Link>
+            <Link
+              href={CTA.primaryHref}
+              className="font-semibold text-accent transition-colors hover:text-accent-hover"
+            >
+              {CTA.primary}
+            </Link>
+          </div>
+        </div>
+      </Container>
+    </footer>
+  );
+}
