@@ -1,6 +1,9 @@
 import type { MetadataRoute } from "next";
 import { featuredServices, site } from "@/lib/site";
 
+/* Emitted as a file at build time, since the site is a static export. */
+export const dynamic = "force-static";
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [
     "",
