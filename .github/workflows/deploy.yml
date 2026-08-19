@@ -30,10 +30,11 @@ jobs:
 
       - run: npm ci
 
-      # Catch type and lint errors here rather than shipping a broken build.
-      - run: npx tsc --noEmit
       - run: npx eslint .
 
+      # Also type-checks. A standalone `tsc --noEmit` cannot run before this,
+      # because LayoutProps and PageProps are route types Next generates into
+      # .next/types during the build, and a fresh CI checkout has no .next yet.
       # output: "export" in next.config.ts writes the static site to ./out
       - run: npm run build
 
