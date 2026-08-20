@@ -20,9 +20,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     paths 301s to its slashed form, and a sitemap full of redirects is a
     sitemap Google will not index.
   */
+  /*
+    No lastModified on purpose. new Date() here meant the build time, so every
+    page claimed to have changed on every deploy even when nothing had. Google
+    treats a lastmod that always moves as unreliable and starts ignoring it,
+    and it can surface as a misleading date beside the search result. Google's
+    own guidance is that omitting lastmod beats publishing an inaccurate one.
+  */
   return routes.map((route) => ({
     url: `${site.url}${canonicalPath(route)}`,
-    lastModified: new Date(),
     changeFrequency: "monthly",
     priority: route === "" ? 1 : 0.7,
   }));
