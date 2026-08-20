@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { CTA } from "@/lib/site";
+import { CTA, rate } from "@/lib/site";
 import { ButtonLink, Container, Heading } from "@/components/ui";
 
 export function Hero() {
@@ -13,8 +13,26 @@ export function Hero() {
             </Heading>
             <p className="mt-6 max-w-[48ch] text-lg leading-relaxed text-muted">
               Email, live chat, WISMO and guest messaging for ecommerce brands
-              and rental hosts. From $4 an hour.
+              and rental hosts.
             </p>
+
+            {/*
+              The price is the strongest thing this page has to say, so it is
+              display type rather than the tail of a sentence. The accent rule
+              anchors it to the left margin so it reads as its own statement
+              and not as a third paragraph. rate.amount keeps it in step with
+              the pricing page.
+            */}
+            <p className="mt-8 flex items-baseline gap-3 border-l-2 border-accent pl-5">
+              <span className="text-base font-medium text-muted">From</span>
+              <span className="font-mono text-5xl font-semibold tracking-tight text-accent sm:text-6xl">
+                {rate.amount}
+              </span>
+              <span className="text-lg font-medium text-muted">
+                {rate.unit}
+              </span>
+            </p>
+
             <div className="mt-9 flex flex-wrap items-center gap-3">
               <ButtonLink href={CTA.primaryHref}>{CTA.primary}</ButtonLink>
               <ButtonLink href={CTA.secondaryHref} variant="secondary">
