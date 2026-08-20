@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/seo";
+import { Breadcrumbs } from "@/components/breadcrumbs";
 import Link from "next/link";
 import { ArrowRightIcon } from "@phosphor-icons/react/dist/ssr";
 import { additionalServices, featuredServices, toolsByJob } from "@/lib/site";
@@ -19,6 +20,12 @@ export const metadata: Metadata = pageMetadata({
 export default function ServicesPage() {
   return (
     <>
+      <Breadcrumbs
+        trail={[
+          { name: "Home", path: "/" },
+          { name: "Services", path: "/services" },
+        ]}
+      />
       <PageHeader
         title="Six services. One team that knows your business."
         lead="Start with the channel that hurts most. Most brands begin with WISMO or email, then add chat once the queue is stable. Rental hosts usually start with guest messaging."

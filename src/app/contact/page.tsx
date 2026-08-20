@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/seo";
+import { Breadcrumbs } from "@/components/breadcrumbs";
 import { ClockIcon, EnvelopeSimpleIcon } from "@phosphor-icons/react/dist/ssr";
 import { callExpectations, site } from "@/lib/site";
 import { DemoForm } from "@/components/demo-form";
@@ -15,6 +16,13 @@ export const metadata: Metadata = pageMetadata({
 
 export default function ContactPage() {
   return (
+    <>
+      <Breadcrumbs
+        trail={[
+          { name: "Home", path: "/" },
+          { name: "Contact", path: "/contact" },
+        ]}
+      />
     <section className="accent-wash py-16 sm:py-20">
       <Container>
         <div className="grid gap-14 lg:grid-cols-12 lg:gap-16">
@@ -71,5 +79,6 @@ export default function ContactPage() {
         </div>
       </Container>
     </section>
+    </>
   );
 }

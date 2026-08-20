@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/seo";
+import { Breadcrumbs } from "@/components/breadcrumbs";
 import Image from "next/image";
 import { differentiators, teamFacts } from "@/lib/site";
 import { PageHeader } from "@/components/page-header";
@@ -17,6 +18,12 @@ export const metadata: Metadata = pageMetadata({
 export default function AboutPage() {
   return (
     <>
+      <Breadcrumbs
+        trail={[
+          { name: "Home", path: "/" },
+          { name: "About", path: "/about" },
+        ]}
+      />
       <PageHeader
         title="The support team we wanted to hire."
         lead="Two of us ran support at DTC brands and kept hiring agencies that treated replies as piecework. So we built the alternative."

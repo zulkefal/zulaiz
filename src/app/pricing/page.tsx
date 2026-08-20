@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/seo";
+import { Breadcrumbs } from "@/components/breadcrumbs";
 import { CheckIcon } from "@phosphor-icons/react/dist/ssr";
 import { CTA, commitments, faqs, included, rate, rateNotes, ticketBundle } from "@/lib/site";
 import { FaqAccordion } from "@/components/faq-accordion";
@@ -17,6 +18,12 @@ export const metadata: Metadata = pageMetadata({
 export default function PricingPage() {
   return (
     <>
+      <Breadcrumbs
+        trail={[
+          { name: "Home", path: "/" },
+          { name: "Pricing", path: "/pricing" },
+        ]}
+      />
       {/* The rate is the whole pitch, so it gets the hero rather than a table. */}
       <section className="accent-wash border-b border-line py-16 sm:py-20">
         <Container>

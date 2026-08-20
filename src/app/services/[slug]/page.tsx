@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { CheckIcon } from "@phosphor-icons/react/dist/ssr";
 import { featuredServices, getService } from "@/lib/site";
 import { pageMetadata } from "@/lib/seo";
+import { Breadcrumbs } from "@/components/breadcrumbs";
 import { PageHeader } from "@/components/page-header";
 import { FaqAccordion } from "@/components/faq-accordion";
 import { CtaBand } from "@/components/cta-band";
@@ -36,6 +37,13 @@ export default async function ServicePage({
 
   return (
     <>
+      <Breadcrumbs
+        trail={[
+          { name: "Home", path: "/" },
+          { name: "Services", path: "/services" },
+          { name: service.name, path: `/services/${service.slug}` },
+        ]}
+      />
       <PageHeader
         title={service.name}
         lead={service.summary}
