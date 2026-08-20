@@ -32,6 +32,19 @@ export const metadata: Metadata = {
       },
     ],
   },
+  /*
+    Declared explicitly rather than via the app-directory icon convention.
+    That convention appends a content hash to every icon URL and emits one
+    link per file, which left three competing rel="icon" tags on the page.
+    Google states that it supports one favicon per site and that the favicon
+    URL must stay stable, so these are served from public/ at fixed paths and
+    the ICO carries 16, 32, 48 and 96 pixel sizes in a single file.
+  */
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+  },
   twitter: {
     card: "summary_large_image",
     title: "Zulaiz | Customer support for ecommerce brands",
