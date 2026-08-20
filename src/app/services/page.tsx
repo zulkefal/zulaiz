@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import { ArrowRightIcon } from "@phosphor-icons/react/dist/ssr";
 import { additionalServices, featuredServices, toolsByJob } from "@/lib/site";
@@ -8,11 +9,12 @@ import { ServiceIcon } from "@/components/service-icon";
 import { Reveal } from "@/components/reveal";
 import { Container, Heading } from "@/components/ui";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Services",
   description:
     "Email support, live chat, WISMO, returns, guest messaging and social. Six services run by named agents inside your existing helpdesk.",
-};
+  path: "/services",
+});
 
 export default function ServicesPage() {
   return (

@@ -1,14 +1,16 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import { ClockIcon, EnvelopeSimpleIcon } from "@phosphor-icons/react/dist/ssr";
 import { callExpectations, site } from "@/lib/site";
 import { DemoForm } from "@/components/demo-form";
 import { Container, Heading } from "@/components/ui";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Book a demo",
   description:
     "Thirty minutes on your volume, channels and tooling. You leave with a staffing and cost estimate whether or not you hire us.",
-};
+  path: "/contact",
+});
 
 
 export default function ContactPage() {

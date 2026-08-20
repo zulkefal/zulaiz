@@ -3,6 +3,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { CheckIcon } from "@phosphor-icons/react/dist/ssr";
 import { featuredServices, getService } from "@/lib/site";
+import { pageMetadata } from "@/lib/seo";
 import { PageHeader } from "@/components/page-header";
 import { FaqAccordion } from "@/components/faq-accordion";
 import { CtaBand } from "@/components/cta-band";
@@ -19,7 +20,11 @@ export async function generateMetadata({
   const { slug } = await params;
   const service = getService(slug);
   if (!service) return {};
-  return { title: service.name, description: service.summary };
+  return pageMetadata({
+    title: service.name,
+    description: service.summary,
+    path: `/services/${service.slug}`,
+  });
 }
 
 export default async function ServicePage({

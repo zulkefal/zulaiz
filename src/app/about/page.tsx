@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Image from "next/image";
 import { differentiators, teamFacts } from "@/lib/site";
 import { PageHeader } from "@/components/page-header";
@@ -6,11 +7,12 @@ import { CtaBand } from "@/components/cta-band";
 import { Reveal } from "@/components/reveal";
 import { Container, Heading } from "@/components/ui";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "About",
   description:
     "Zulaiz has run ecommerce support since 2019. Named pods, your helpdesk, and a mandate to make your ticket count go down.",
-};
+  path: "/about",
+});
 
 export default function AboutPage() {
   return (

@@ -128,7 +128,7 @@ export const services: Service[] = [
       alt: "Three support specialists at spaced desks in a sunlit open-plan office",
     },
     metrics: [
-      { value: "41 min", label: "Median first response across accounts" },
+      { value: "20 min", label: "Median first response across accounts" },
       { value: "79%", label: "Tickets resolved in a single reply" },
       { value: "4.8", label: "Average CSAT out of 5" },
     ],
@@ -297,7 +297,7 @@ export function getService(slug: string) {
 }
 
 export const headlineStats = [
-  { value: "41 min", label: "Median first response" },
+  { value: "20 min", label: "Median first response" },
   { value: "4.8", label: "Average CSAT out of 5" },
   { value: "58%", label: "WISMO tickets deflected" },
   { value: "14 days", label: "Kickoff to live queue" },

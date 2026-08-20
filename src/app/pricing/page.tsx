@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import { CheckIcon } from "@phosphor-icons/react/dist/ssr";
 import { CTA, commitments, faqs, included, rate, rateNotes, ticketBundle } from "@/lib/site";
 import { FaqAccordion } from "@/components/faq-accordion";
@@ -6,11 +7,12 @@ import { CtaBand } from "@/components/cta-band";
 import { Reveal } from "@/components/reveal";
 import { ButtonLink, Container, Heading } from "@/components/ui";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Pricing",
   description:
-    "Six dollars an hour, one rate for every channel. Buy it as hours a week or as a fixed 500 ticket bundle from $300 a month.",
-};
+    "Four dollars an hour, one rate for every channel. Hours a week from $160 a month, or a fixed 500 ticket bundle at $200.",
+  path: "/pricing",
+});
 
 export default function PricingPage() {
   return (

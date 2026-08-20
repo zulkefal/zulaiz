@@ -1,4 +1,6 @@
-import { faqs } from "@/lib/site";
+import type { Metadata } from "next";
+import { faqs, site } from "@/lib/site";
+import { pageMetadata } from "@/lib/seo";
 import { Hero } from "@/components/home/hero";
 import { IntegrationStrip } from "@/components/home/integration-strip";
 import { StatBand } from "@/components/home/stat-band";
@@ -8,6 +10,12 @@ import { PricingPreview } from "@/components/home/pricing-preview";
 import { ContactSection } from "@/components/home/contact-section";
 import { FaqAccordion } from "@/components/faq-accordion";
 import { Container, Heading, TextLink } from "@/components/ui";
+
+export const metadata: Metadata = pageMetadata({
+  title: "Customer support for ecommerce brands and rental hosts",
+  description: site.description,
+  path: "/",
+});
 
 export default function HomePage() {
   return (
