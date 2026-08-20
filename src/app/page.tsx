@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { faqs, site } from "@/lib/site";
+import { faqs } from "@/lib/site";
 import { pageMetadata } from "@/lib/seo";
 import { Hero } from "@/components/home/hero";
 import { IntegrationStrip } from "@/components/home/integration-strip";
@@ -12,8 +12,9 @@ import { FaqAccordion } from "@/components/faq-accordion";
 import { Container, Heading, TextLink } from "@/components/ui";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Customer support for ecommerce brands and rental hosts",
-  description: site.description,
+  title: "Zulaiz | Customer support for ecommerce and rentals",
+  description:
+    "Outsourced customer support for ecommerce brands and rental hosts. Email, live chat, WISMO and guest messaging by named agents, from $4 an hour.",
   path: "/",
 });
 
