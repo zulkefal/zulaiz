@@ -3,7 +3,8 @@ import { LegalPage } from "@/components/legal-page";
 
 export const metadata: Metadata = {
   title: "Terms",
-  description: "The terms that govern use of the Zulaiz website and the services we provide.",
+  description:
+    "The terms that govern use of the zulaiz.com website and the customer support services Zulaiz provides to clients.",
   alternates: { canonical: "/terms/" },
   robots: { index: false },
 };

@@ -3,7 +3,8 @@ import { LegalPage } from "@/components/legal-page";
 
 export const metadata: Metadata = {
   title: "Privacy",
-  description: "How Zulaiz handles personal data belonging to visitors and to our clients' customers.",
+  description:
+    "How Zulaiz collects, uses and retains personal data from this website and from the client helpdesks we work inside.",
   alternates: { canonical: "/privacy/" },
   robots: { index: false },
 };

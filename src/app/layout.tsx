@@ -13,14 +13,14 @@ const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"]
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: "Zulaiz | Customer support for ecommerce brands",
+    default: "Zulaiz | Outsourced customer support for ecommerce",
     template: "%s | Zulaiz",
   },
   description: site.description,
   openGraph: {
     type: "website",
     siteName: site.name,
-    title: "Zulaiz | Customer support for ecommerce brands",
+    title: "Zulaiz | Outsourced customer support for ecommerce",
     description: site.description,
     url: site.url,
     images: [
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Zulaiz | Customer support for ecommerce brands",
+    title: "Zulaiz | Outsourced customer support for ecommerce",
     description: site.description,
     images: ["/images/og.jpg"],
   },

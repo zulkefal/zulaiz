@@ -1,7 +1,12 @@
 export const site = {
   name: "Zulaiz",
+  /*
+    Kept under 155 characters. This is the fallback description and the one
+    used for Open Graph and Twitter, and Google truncates the snippet around
+    that length. The previous copy ran to 173 and was cut mid-clause.
+  */
   description:
-    "Zulaiz runs customer support for ecommerce brands and short-term rental hosts. Email, live chat, WISMO and guest messaging owned end to end by named agents, from $4 an hour.",
+    "Zulaiz runs customer support for ecommerce brands and rental hosts. Named agents handle email, live chat, WISMO and guest messaging from $4 an hour.",
   url: "https://zulaiz.com",
   email: "hello@zulaiz.com",
   social: {
@@ -31,6 +36,13 @@ export type Service = {
   navLabel: string;
   href: string;
   summary: string;
+  /*
+    Written for the search snippet, not the page. The summary reads as body
+    copy mid-scroll, where the brand and the channel are already established;
+    a snippet has neither, so it needs the service named in the first few
+    words and has to stop under 155 characters.
+  */
+  metaDescription?: string;
   /* Phosphor icon name, resolved in components/service-icon.tsx */
   icon: "envelope" | "chats" | "package" | "arrows" | "star" | "house";
   image?: { src: string; alt: string };
@@ -53,6 +65,8 @@ export const services: Service[] = [
     href: "/services/wismo",
     summary:
       "Where is my order is usually half your inbox. We answer it in minutes, then remove it with proactive delay alerts and carrier escalations.",
+    metaDescription:
+      "WISMO support that answers in minutes and then removes the ticket. Live carrier lookups, proactive delay alerts and same day claims, from $4 an hour.",
     icon: "package",
     image: {
       src: "/images/banner-wismo.jpg",
@@ -122,6 +136,8 @@ export const services: Service[] = [
     href: "/services/email-support",
     summary:
       "A trained pod owns your shared inbox. Triage, replies, escalations and reporting, in a voice your customers will not notice is outsourced.",
+    metaDescription:
+      "Outsourced email support for ecommerce. A named pod owns your shared inbox and replies in your voice, with a 20 minute median first response.",
     icon: "envelope",
     image: {
       src: "/images/banner-email-support.jpg",
@@ -187,6 +203,8 @@ export const services: Service[] = [
     href: "/services/live-chat",
     summary:
       "Staffed chat during the hours your traffic converts, answering the sizing, stock and shipping questions that decide whether the cart survives.",
+    metaDescription:
+      "Live chat support staffed for the hours your traffic converts. Sizing, stock and delivery answers in 22 seconds, evenings and weekends included.",
     icon: "chats",
     image: {
       src: "/images/banner-live-chat.jpg",

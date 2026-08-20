@@ -13,7 +13,7 @@ import { Container, Heading } from "@/components/ui";
 export const metadata: Metadata = pageMetadata({
   title: "Services",
   description:
-    "Email support, live chat, WISMO, returns, guest messaging and social. Six services run by named agents inside your existing helpdesk.",
+    "Six support services run by named agents inside your helpdesk: email, live chat, WISMO, returns, guest messaging and social. One rate, $4 an hour.",
   path: "/services",
 });
 

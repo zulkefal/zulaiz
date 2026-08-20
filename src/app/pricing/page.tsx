@@ -11,7 +11,7 @@ import { ButtonLink, Container, Heading } from "@/components/ui";
 export const metadata: Metadata = pageMetadata({
   title: "Pricing",
   description:
-    "Four dollars an hour, one rate for every channel. Hours a week from $160 a month, or a fixed 500 ticket bundle at $200.",
+    "One flat rate of $4 an hour for every channel. From $160 a month for 10 hours a week, $320 for 20 hours plus 20 free, or 500 tickets for $200.",
   path: "/pricing",
 });
 

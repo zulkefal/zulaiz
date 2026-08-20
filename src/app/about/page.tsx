@@ -11,7 +11,7 @@ import { Container, Heading } from "@/components/ui";
 export const metadata: Metadata = pageMetadata({
   title: "About",
   description:
-    "Zulaiz has run ecommerce support since 2019. Named pods, your helpdesk, and a mandate to make your ticket count go down.",
+    "Zulaiz has answered ecommerce and rental tickets since 2019. Sixty specialists across three time zones, working as named pods inside your own helpdesk.",
   path: "/about",
 });
 
