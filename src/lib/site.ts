@@ -6,7 +6,7 @@ export const site = {
     that length. The previous copy ran to 173 and was cut mid-clause.
   */
   description:
-    "Zulaiz runs customer support for ecommerce brands and rental hosts. Named agents handle email, live chat, WISMO and guest messaging from $4 an hour.",
+    "Zulaiz runs customer support for ecommerce brands and rental hosts. Named agents handle email, live chat, WISMO and guest messaging from $7 an hour.",
   url: "https://zulaiz.com",
   email: "hello@zulaiz.com",
   social: {
@@ -66,7 +66,7 @@ export const services: Service[] = [
     summary:
       "Where is my order is usually half your inbox. We answer it in minutes, then remove it with proactive delay alerts and carrier escalations.",
     metaDescription:
-      "WISMO support that answers in minutes and then removes the ticket. Live carrier lookups, proactive delay alerts and same day claims, from $4 an hour.",
+      "WISMO support that answers in minutes and then removes the ticket. Live carrier lookups, proactive delay alerts and same day claims, from $7 an hour.",
     icon: "package",
     image: {
       src: "/images/banner-wismo.jpg",
@@ -393,7 +393,7 @@ export const testimonials = [
 ];
 
 export const rate = {
-  amount: "$4",
+  amount: "$7",
   unit: "an hour",
 } as const;
 
@@ -411,15 +411,15 @@ export type Commitment = {
 };
 
 /*
-  Priced off $4 an hour on a four week month, so every figure is exact:
-  10 hrs/wk = 40 billed = $160, 20 hrs/wk = 80 billed = $320, 40 hrs/wk = 160
-  billed = $640. The standard plan adds 20 hours at no charge, which brings its
-  effective rate to $3.20 an hour.
+  Priced off $7 an hour on a four week month, so every figure is exact:
+  10 hrs/wk = 40 billed = $280, 20 hrs/wk = 80 billed = $560, 40 hrs/wk = 160
+  billed = $1,120. The standard plan adds 20 hours at no charge, which brings its
+  effective rate to $5.60 an hour.
 */
 export const commitments: Commitment[] = [
   {
     name: "Part time",
-    monthly: "$160",
+    monthly: "$280",
     measure: "10 hours a week",
     equivalent: "40 hours a month",
     points: [
@@ -431,14 +431,14 @@ export const commitments: Commitment[] = [
   },
   {
     name: "Standard",
-    monthly: "$320",
+    monthly: "$560",
     measure: "20 hours a week",
     equivalent: "80 hours billed a month",
     bonus: "Plus 20 hours free, so 100 hours in total",
     points: [
       "Email, live chat and WISMO",
       "One named agent who learns your catalogue",
-      "Works out at $3.20 an hour, not $4",
+      "Works out at $5.60 an hour, not $7",
     ],
     suits: "The one most brands start on, and the best value on the page.",
     badge: "Most sold",
@@ -446,7 +446,7 @@ export const commitments: Commitment[] = [
   },
   {
     name: "Full time",
-    monthly: "$640",
+    monthly: "$1,120",
     measure: "40 hours a week",
     equivalent: "160 hours a month",
     points: [
@@ -461,10 +461,10 @@ export const commitments: Commitment[] = [
 /* Shown on the pricing page only, under the three commitments. */
 export const ticketBundle = {
   name: "500 tickets",
-  monthly: "$200",
+  monthly: "$350",
   measure: "500 tickets a month",
   equivalent: "about 50 hours",
-  body: "If you would rather think in tickets than hours, we price the queue instead of the clock. Anything over 500 bills at $4 an hour.",
+  body: "If you would rather think in tickets than hours, we price the queue instead of the clock. Anything over 500 bills at $7 an hour.",
 };
 
 /* No tiers, so this is what every hour includes regardless of commitment. */
@@ -495,7 +495,7 @@ export const rateNotes = [
   },
   {
     title: "The bonus hours are a real discount",
-    body: "The standard plan bills 80 hours and delivers 100, which works out at $3.20 an hour rather than $4. It is the only plan with bonus hours, and it is why most brands land there.",
+    body: "The standard plan bills 80 hours and delivers 100, which works out at $5.60 an hour rather than $7. It is the only plan with bonus hours, and it is why most brands land there.",
   },
 ];
 
@@ -510,7 +510,7 @@ export const faqs = [
   },
   {
     q: "How is pricing calculated?",
-    a: "One flat rate of $4 an hour, for every channel. You pick how many hours a week you need and pay for those. The standard plan adds 20 hours a month at no charge, which brings it to $3.20 an hour. We do not gate channels behind bigger plans.",
+    a: "One flat rate of $7 an hour, for every channel. You pick how many hours a week you need and pay for those. The standard plan adds 20 hours a month at no charge, which brings it to $5.60 an hour. We do not gate channels behind bigger plans.",
   },
   {
     q: "Who actually answers our tickets?",
