@@ -17,39 +17,20 @@ That limit is also the reason Umami needs no cookie banner. It sets no
 cookies and collects no personal data, so the consent rules that force banners
 in the EU and UK do not apply.
 
-## Turning it on
+## Status: live
 
-### 1. Get a website id
+The website id `d0cded98-55d1-4055-9433-8f88618e2cae` is committed in
+[src/components/analytics.tsx](src/components/analytics.tsx). Umami ids are
+public by design, so committing it means analytics works from a clean clone
+with no GitHub settings to configure.
 
-Sign up at [cloud.umami.is](https://cloud.umami.is) (the free tier is
-generous), add `zulaiz.com` as a website, and copy the **Website ID** from
-Settings > Websites. It looks like `4f1a2b3c-...`.
+To point a staging build at a different Umami site, or to move to a
+self-hosted instance, set `NEXT_PUBLIC_UMAMI_WEBSITE_ID` or
+`NEXT_PUBLIC_UMAMI_SCRIPT_URL`. Because this is a static export those are
+inlined at build time, so they must be set in CI, not only in a local
+`.env.local`. The workflow already passes both through.
 
-Self-hosting works too. Only the script URL changes.
-
-### 2. Add it to GitHub
-
-**Settings > Secrets and variables > Actions > Variables > New repository
-variable.**
-
-| Name | Value |
-| --- | --- |
-| `NEXT_PUBLIC_UMAMI_WEBSITE_ID` | the id you copied |
-| `NEXT_PUBLIC_UMAMI_SCRIPT_URL` | only if self-hosting |
-
-A **variable**, not a secret. Both values are public: the script runs in every
-visitor's browser and the id travels with each request, so hiding them buys
-nothing and secrets are awkward to read in a build.
-
-This matters because the site is a static export. `NEXT_PUBLIC_` values are
-inlined when the site is built, so a `.env.local` on your machine has no
-effect on what GitHub Pages serves. The value has to exist in CI.
-
-### 3. Redeploy
-
-Actions > Deploy to GitHub Pages > Run workflow. Or just push anything.
-
-### 4. Check it
+### Checking it works
 
 Load `https://zulaiz.com` and view source. You should see one line:
 
@@ -106,9 +87,8 @@ on every CTA or only the hero. Ask and I will add it.
 
 ## Verified
 
-- With no website id set, the build emits zero references to umami. The site
-  is byte-for-byte what it is today.
-- With an id set, exactly one script tag appears, once per page, across the
-  home page, pricing, service pages and contact.
+- The tag appears on all 12 pages of the build, none missing.
+- The emitted markup matches the snippet Umami gave, exactly.
 - Setting `NEXT_PUBLIC_UMAMI_SCRIPT_URL` correctly swaps the cloud script for
   a self-hosted one.
+- Removing the id entirely emits no script at all, so the fallback is safe.

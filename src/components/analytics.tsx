@@ -5,14 +5,18 @@
   UK. It reports counts, pages, referrers, countries and devices. It does not
   identify individual people, and nothing here attempts to.
 
-  Both values are public by design: the script is fetched by every visitor's
-  browser and the website id travels with each request. They are NEXT_PUBLIC_
-  because this is a static export, so they are baked in at build time. That
-  means they must be present in CI, not just on your machine. See DEPLOY.md.
+  The website id is committed rather than configured. It is public by design:
+  the script is fetched by every visitor's browser and the id travels with
+  each request, so hiding it buys nothing, and committing it means analytics
+  works from a clean clone with no setup. Same reasoning as the Formspree form
+  id in src/lib/formspree.ts.
 
-  If neither is set, nothing renders and the site runs exactly as before.
+  The env vars stay as overrides, for pointing a staging build at a separate
+  Umami site or at a self-hosted instance.
 */
-const WEBSITE_ID = process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID;
+const WEBSITE_ID =
+  process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID ??
+  "d0cded98-55d1-4055-9433-8f88618e2cae";
 const SCRIPT_URL =
   process.env.NEXT_PUBLIC_UMAMI_SCRIPT_URL ?? "https://cloud.umami.is/script.js";
 
