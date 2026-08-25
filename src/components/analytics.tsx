@@ -14,11 +14,18 @@
   The env vars stay as overrides, for pointing a staging build at a separate
   Umami site or at a self-hosted instance.
 */
+/*
+  || rather than ??. The workflow passes these through as
+  ${{ vars.NEXT_PUBLIC_UMAMI_WEBSITE_ID }}, and when that repository variable
+  is not set GitHub substitutes an empty string rather than leaving the value
+  undefined. ?? only falls back on null and undefined, so an empty string won
+  and the build shipped with no website id and an empty script src.
+*/
 const WEBSITE_ID =
-  process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID ??
+  process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID ||
   "d0cded98-55d1-4055-9433-8f88618e2cae";
 const SCRIPT_URL =
-  process.env.NEXT_PUBLIC_UMAMI_SCRIPT_URL ?? "https://cloud.umami.is/script.js";
+  process.env.NEXT_PUBLIC_UMAMI_SCRIPT_URL || "https://cloud.umami.is/script.js";
 
 export function Analytics() {
   if (!WEBSITE_ID) return null;
