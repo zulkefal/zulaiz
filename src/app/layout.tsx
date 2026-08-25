@@ -4,6 +4,7 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { themeScript } from "@/components/theme-toggle";
 import { StructuredData } from "@/components/structured-data";
+import { Analytics } from "@/components/analytics";
 import { site } from "@/lib/site";
 import "./globals.css";
 
@@ -79,6 +80,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         */}
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         <StructuredData />
+        <Analytics />
       </head>
       <body className="flex min-h-full flex-col">
         <a

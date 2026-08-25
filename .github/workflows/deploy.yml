@@ -36,7 +36,17 @@ jobs:
       # because LayoutProps and PageProps are route types Next generates into
       # .next/types during the build, and a fresh CI checkout has no .next yet.
       # output: "export" in next.config.ts writes the static site to ./out
+      #
+      # NEXT_PUBLIC_ values are inlined at build time, so a static export has
+      # no way to read them later. They have to be present here. Set them under
+      # Settings > Secrets and variables > Actions > Variables. They are
+      # repository variables rather than secrets because both are public: the
+      # analytics script runs in the visitor's browser. If unset, the build
+      # still succeeds and no analytics script is emitted.
       - run: npm run build
+        env:
+          NEXT_PUBLIC_UMAMI_WEBSITE_ID: ${{ vars.NEXT_PUBLIC_UMAMI_WEBSITE_ID }}
+          NEXT_PUBLIC_UMAMI_SCRIPT_URL: ${{ vars.NEXT_PUBLIC_UMAMI_SCRIPT_URL }}
 
       # Stops Pages running Jekyll, which would drop the _next directory
       # because its name starts with an underscore.
