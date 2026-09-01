@@ -14,7 +14,7 @@ import { Container, Heading, TextLink } from "@/components/ui";
 export const metadata: Metadata = pageMetadata({
   title: "Zulaiz | Outsourced customer support for ecommerce",
   description:
-    "Outsourced ecommerce customer support from $7 an hour. Named agents run your email, live chat, WISMO and returns inside your own helpdesk. Live in 7 days.",
+    "Outsourced customer support for ecommerce, rentals and course creators. Email, live chat, WISMO and student enquiries by named agents, from $7 an hour.",
   path: "/",
 });
 
