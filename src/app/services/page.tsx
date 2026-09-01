@@ -27,8 +27,8 @@ export default function ServicesPage() {
         ]}
       />
       <PageHeader
-        title="Six services. One team that knows your business."
-        lead="Start with the channel that hurts most. Most brands begin with WISMO or email, then add chat once the queue is stable. Rental hosts usually start with guest messaging."
+        title="Seven services. One team that knows your business."
+        lead="Start with the channel that hurts most. Ecommerce brands usually begin with WISMO or email, rental hosts with guest messaging, and course creators with student enquiries."
       />
 
       {/* Grouped rows rather than tiles: the numbers are the argument here. */}

@@ -2,6 +2,7 @@ import {
   ArrowsClockwiseIcon,
   ChatsCircleIcon,
   EnvelopeSimpleIcon,
+  GraduationCapIcon,
   HouseLineIcon,
   PackageIcon,
   StarIcon,
@@ -17,6 +18,7 @@ const map: Record<Service["icon"], Icon> = {
   arrows: ArrowsClockwiseIcon,
   star: StarIcon,
   house: HouseLineIcon,
+  graduation: GraduationCapIcon,
 };
 
 export function ServiceIcon({

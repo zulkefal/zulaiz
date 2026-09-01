@@ -7,8 +7,8 @@ import { ServiceIcon } from "@/components/service-icon";
 import { Reveal } from "@/components/reveal";
 
 /*
-  Six services, six cells. Sizes vary deliberately, and three cells carry a
-  visual rather than type alone.
+  Seven services, seven cells. Sizes vary deliberately, and the grid stays
+  exact: 24 units across four full rows of six, with no empty cell.
 */
 const layout: Record<string, string> = {
   wismo: "lg:col-span-4 lg:row-span-2",
@@ -16,7 +16,8 @@ const layout: Record<string, string> = {
   "live-chat": "lg:col-span-2",
   "returns-and-exchanges": "lg:col-span-2",
   "guest-communication": "lg:col-span-2",
-  "reviews-and-social": "lg:col-span-2",
+  "student-support": "lg:col-span-2",
+  "reviews-and-social": "lg:col-span-6",
 };
 
 export function ServicesBento() {

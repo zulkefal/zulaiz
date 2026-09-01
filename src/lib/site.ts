@@ -6,7 +6,7 @@ export const site = {
     that length. The previous copy ran to 173 and was cut mid-clause.
   */
   description:
-    "Zulaiz runs customer support for ecommerce brands and rental hosts. Named agents handle email, live chat, WISMO and guest messaging from $7 an hour.",
+    "Zulaiz runs customer support for ecommerce brands, rental hosts and course creators. Named agents handle email, live chat, WISMO, guest messaging and student enquiries from $7 an hour.",
   url: "https://zulaiz.com",
   email: "hello@zulaiz.com",
   social: {
@@ -44,7 +44,14 @@ export type Service = {
   */
   metaDescription?: string;
   /* Phosphor icon name, resolved in components/service-icon.tsx */
-  icon: "envelope" | "chats" | "package" | "arrows" | "star" | "house";
+  icon:
+    | "envelope"
+    | "chats"
+    | "package"
+    | "arrows"
+    | "star"
+    | "house"
+    | "graduation";
   image?: { src: string; alt: string };
   /* Only WISMO has one: the home page bento tile uses a different crop. */
   tileImage?: { src: string; alt: string };
@@ -285,6 +292,20 @@ export const services: Service[] = [
     summary:
       "Airbnb, Booking.com, Vrbo and Expedia messages from first enquiry to checkout, with review protection and cleaning coordination in between.",
     icon: "house",
+    metrics: [],
+    scope: [],
+    approach: [],
+    faq: [],
+    featured: false,
+  },
+  {
+    slug: "student-support",
+    name: "Student and member support",
+    navLabel: "Student support",
+    href: "/services#student-support",
+    summary:
+      "Enrolment questions, login and access problems, and in-policy refund requests for coaches and course platforms, handled before a stuck student gives up.",
+    icon: "graduation",
     metrics: [],
     scope: [],
     approach: [],
@@ -549,6 +570,9 @@ export const integrations = [
   { slug: "bookingdotcom", name: "Booking.com" },
   { slug: "expedia", name: "Expedia" },
   { slug: "trustpilot", name: "Trustpilot" },
+  { slug: "circle", name: "Circle" },
+  { slug: "calendly", name: "Calendly" },
+  { slug: "zoom", name: "Zoom" },
 ];
 
 /*
@@ -567,6 +591,10 @@ export const toolsByJob = [
   {
     job: "Rentals",
     tools: ["Guesty", "Hostaway", "Smoobu", "Lodgify", "Hospitable", "Kross Booking"],
+  },
+  {
+    job: "Coaching and courses",
+    tools: ["Teachable", "Thinkific", "Kajabi", "Skool", "Podia", "Circle", "Calendly", "Zoom"],
   },
   {
     job: "Working with you",

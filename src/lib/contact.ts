@@ -14,6 +14,7 @@ export const channelOptions = [
   "WISMO and tracking",
   "Returns and exchanges",
   "Guest messaging",
+  "Student and member support",
   "Reviews and social",
 ] as const;
 
