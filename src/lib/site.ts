@@ -302,15 +302,64 @@ export const services: Service[] = [
     slug: "student-support",
     name: "Student and member support",
     navLabel: "Student support",
-    href: "/services#student-support",
+    href: "/services/student-support",
     summary:
       "Enrolment questions, login and access problems, and in-policy refund requests for coaches and course platforms, handled before a stuck student gives up.",
+    metaDescription:
+      "Student support for coaches and course platforms. Enrolment questions, access problems and refund requests answered inside Teachable, Kajabi, Thinkific or Skool.",
     icon: "graduation",
-    metrics: [],
-    scope: [],
-    approach: [],
-    faq: [],
-    featured: false,
+    metrics: [
+      { value: "Same day", label: "Access and login problems cleared" },
+      { value: "In policy", label: "Refund decisions made without waiting on you" },
+      { value: "Every launch", label: "Cohort and launch weeks staffed up" },
+    ],
+    scope: [
+      {
+        group: "Before they enrol",
+        items: [
+          "Course content, prerequisites and format questions answered properly",
+          "Pricing, payment plan and bundle queries",
+          "Cohort dates, time zones and what happens if they fall behind",
+        ],
+      },
+      {
+        group: "After they enrol",
+        items: [
+          "Login, access and video playback problems fixed or escalated same day",
+          "Refund and cancellation requests handled inside the window you set",
+          "Community moderation in Circle, Discord or Slack to your house rules",
+        ],
+      },
+    ],
+    approach: [
+      {
+        title: "Learn the curriculum",
+        body: "Agents take the course themselves before answering a single ticket. You cannot answer a question about module four without having seen module four.",
+      },
+      {
+        title: "Clear the blockers",
+        body: "Most student tickets are access, not curriculum. We fix what we can inside your platform and escalate the rest with the detail your developer actually needs.",
+      },
+      {
+        title: "Protect the cohort",
+        body: "Launch weeks and cohort starts are where the volume lands. We staff those in advance rather than discovering them on the day.",
+      },
+    ],
+    faq: [
+      {
+        q: "Which platforms do you work in?",
+        a: "Teachable, Thinkific, Kajabi, Skool, Podia and Circle, plus Calendly and Zoom for anything with live sessions. As with every other service we work inside your account as named users, so nothing moves to a system you cannot audit.",
+      },
+      {
+        q: "Can you approve refunds?",
+        a: "Inside the window and the reasons you set. You define the policy, we execute it, and anything outside comes to you with a recommendation rather than sitting in the queue.",
+      },
+    ],
+    cta: {
+      title: "Want your student inbox handled?",
+      body: "Book thirty minutes. We will read your recent student tickets and tell you how much of it is access rather than curriculum.",
+    },
+    featured: true,
   },
   {
     slug: "reviews-and-social",

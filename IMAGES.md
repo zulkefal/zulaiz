@@ -1,7 +1,8 @@
 # Image asset spec
 
-**Status: all seven photographs are generated, optimised and wired in.** The
-prompts are kept below so they can be re-run if an image needs replacing.
+**Status: seven of eight photographs are generated, optimised and wired in.**
+The one outstanding is the student support banner, section 5b. The prompts are
+kept below so any of them can be re-run if an image needs replacing.
 
 The testimonial section is now disabled, so there are no placeholder images
 rendered anywhere on the site. See section 8.
@@ -144,6 +145,31 @@ warm-neutral grade, desaturated. Pale stone counter, warm shadows. Intimate and
 ordinary, a real shopper at home rather than a product advert. No face, no text,
 no logos, no readable UI, no shopping bags or gift props. Very wide 21:9
 letterbox composition.
+```
+
+---
+
+## 5b. Student support service page banner
+
+**Not yet generated.** This is the one service page without a banner, so it
+looks lighter than its three siblings.
+
+- **File:** `public/images/banner-student-support.jpg`
+- **Generate at:** **2560 x 1097** (21:9). Same 16:9-and-crop fallback as above.
+- **Appears in:** `/services/student-support`
+- **Then tell me** and I will wire it into the `student-support` entry in
+  `src/lib/site.ts`, which is the only change needed.
+
+```
+Ultra-wide cinematic photograph of one person partway through an online
+course at a kitchen table at night, seen from behind and to the side so the
+laptop screen is visible but its content is indistinct. Notebook and a cooling
+mug beside them. Figure positioned left of centre with wide empty space to the
+right, everything centred vertically so a 21:9 crop is safe. Warm low lamp
+light against a dim room, muted warm-neutral grade, desaturated. Studious and
+calm rather than stressed or triumphant. No face toward camera, no text, no
+logos, no readable screen content, no lecture hall, no stock-photo graduation
+imagery, no stacks of books. Very wide 21:9 letterbox composition.
 ```
 
 ---
