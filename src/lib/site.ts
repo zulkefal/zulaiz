@@ -77,7 +77,7 @@ export const services: Service[] = [
       alt: "A fulfilment warehouse aisle with parcels on a conveyor",
     },
     metrics: [
-      { value: "58%", label: "Typical WISMO deflection by month three" },
+      { value: "Up to 30%", label: "WISMO deflection by month three" },
       { value: "Same day", label: "Carrier claims filed for lost parcels" },
       { value: "47%", label: "Median share of an inbox before we start" },
     ],
@@ -317,8 +317,8 @@ export function getService(slug: string) {
 export const headlineStats = [
   { value: "20 min", label: "Median first response" },
   { value: "4.8", label: "Average CSAT out of 5" },
-  { value: "58%", label: "WISMO tickets deflected" },
-  { value: "14 days", label: "Kickoff to live queue" },
+  { value: "Up to 30%", label: "WISMO tickets deflected" },
+  { value: "7 days", label: "Kickoff to live queue" },
 ];
 
 /* Verb labels, not "Step 1 / Step 2". */
@@ -481,7 +481,7 @@ export const included = [
 export const callExpectations = [
   "A read on your ticket volume and the drivers behind it",
   "The hours you actually need and what that costs",
-  "A realistic go live date, usually about fourteen days out",
+  "A realistic go live date, usually about a week out",
 ];
 
 export const rateNotes = [
@@ -502,7 +502,7 @@ export const rateNotes = [
 export const faqs = [
   {
     q: "How fast can we go live?",
-    a: "Fourteen days is typical for email and WISMO, covering the audit, voice guide, macros, access and training. Chat usually follows a week later once agents are confident on the catalogue. Urgent peak season onboarding compresses to about a week.",
+    a: "Seven days is typical for email and WISMO, covering the audit, voice guide, macros, access and training. Live chat usually follows a few days later, once agents are confident on the catalogue. If you are mid peak and need cover sooner, say so on the call and we will tell you honestly whether we can do it well.",
   },
   {
     q: "Do we have to switch helpdesks?",

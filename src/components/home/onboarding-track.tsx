@@ -14,7 +14,7 @@ export function OnboardingTrack() {
           <div className="lg:col-span-5">
             <div className="lg:sticky lg:top-28">
               <Heading className="max-w-[16ch]">
-                Fourteen days from call to live queue.
+                Seven days from call to live queue.
               </Heading>
               <p className="mt-5 max-w-[42ch] text-base leading-relaxed text-muted">
                 No six week discovery phase. We read your tickets, write the
