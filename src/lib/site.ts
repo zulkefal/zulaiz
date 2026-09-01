@@ -308,6 +308,10 @@ export const services: Service[] = [
     metaDescription:
       "Student support for coaches and course platforms. Enrolment questions, access problems and refund requests answered inside Teachable, Kajabi, Thinkific or Skool.",
     icon: "graduation",
+    image: {
+      src: "/images/banner-student-support.jpg",
+      alt: "A student working through an online course at a kitchen table at night",
+    },
     metrics: [
       { value: "Same day", label: "Access and login problems cleared" },
       { value: "In policy", label: "Refund decisions made without waiting on you" },
