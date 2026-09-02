@@ -12,9 +12,9 @@ import { FaqAccordion } from "@/components/faq-accordion";
 import { Container, Heading, TextLink } from "@/components/ui";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Zulaiz | Outsourced customer support for ecommerce",
+  title: "Zulaiz | Customer support for ecommerce, rentals and courses",
   description:
-    "Outsourced customer support for ecommerce, rentals and course creators. Email, live chat, WISMO and student enquiries by named agents, from $7 an hour.",
+    "Customer support for ecommerce brands, rental hosts and course creators. Email, live chat, WISMO and student enquiries by named agents, from $7 an hour.",
   path: "/",
 });
 

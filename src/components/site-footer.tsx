@@ -12,8 +12,8 @@ export function SiteFooter() {
           <div>
             <Logo />
             <p className="mt-4 max-w-[34ch] text-sm leading-relaxed text-muted">
-              Outsourced customer support for ecommerce brands, rental hosts
-              and course creators, run by a team that learns your business.
+              Customer support for ecommerce brands, rental hosts and course
+              creators, run by a team that learns your business.
             </p>
             <div className="mt-5 flex items-center gap-3">
               {/*

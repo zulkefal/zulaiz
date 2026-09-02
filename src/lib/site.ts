@@ -142,9 +142,9 @@ export const services: Service[] = [
     navLabel: "Email support",
     href: "/services/email-support",
     summary:
-      "A trained pod owns your shared inbox. Triage, replies, escalations and reporting, in a voice your customers will not notice is outsourced.",
+      "A trained pod owns your shared inbox. Triage, replies, escalations and reporting, in a voice indistinguishable from your own team.",
     metaDescription:
-      "Outsourced email support for ecommerce. A named pod owns your shared inbox and replies in your voice, with a 20 minute median first response.",
+      "Email support for ecommerce brands. A named pod owns your shared inbox and replies in your voice, with a 20 minute median first response.",
     icon: "envelope",
     image: {
       src: "/images/banner-email-support.jpg",
