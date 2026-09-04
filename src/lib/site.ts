@@ -392,7 +392,7 @@ export const headlineStats = [
   { value: "20 min", label: "Median first response" },
   { value: "4.8", label: "Average CSAT out of 5" },
   { value: "Up to 30%", label: "WISMO tickets deflected" },
-  { value: "7 days", label: "Kickoff to live queue" },
+  { value: "2 days", label: "Kickoff to live queue" },
 ];
 
 /* Verb labels, not "Step 1 / Step 2". */
@@ -576,7 +576,7 @@ export const rateNotes = [
 export const faqs = [
   {
     q: "How fast can we go live?",
-    a: "Seven days is typical for email and WISMO, covering the audit, voice guide, macros, access and training. Live chat usually follows a few days later, once agents are confident on the catalogue. If you are mid peak and need cover sooner, say so on the call and we will tell you honestly whether we can do it well.",
+    a: "Two days is typical for email and WISMO, covering the audit, voice guide, macros, access and training. Live chat usually follows a few days later, once agents are confident on the catalogue. If you are mid peak and need cover sooner, say so on the call and we will tell you honestly whether we can do it well.",
   },
   {
     q: "Do we have to switch helpdesks?",
@@ -629,30 +629,56 @@ export const integrations = [
 ];
 
 /*
-  Tools without a Simple Icons mark, so they are listed as text on /services
-  rather than shown in the logo strip.
+  Tools the team works in, grouped for the services page. `logo` points at a
+  brand mark in public/images/tools, pulled from each vendor's own site or an
+  open logo collection; entries without one render a monogram. `orbit` marks
+  the curated 23 of the 31 that fit on the three rings without overlapping.
+  The others are still tools we work in.
 */
-export const toolsByJob = [
-  {
-    job: "Helpdesks",
-    tools: ["Gorgias", "Freshdesk", "Zendesk", "Help Scout", "Richpanel", "Re:amaze", "Tawk.to", "Gmail", "Outlook"],
-  },
-  {
-    job: "Tracking",
-    tools: ["ParcelPanel", "Track123", "AfterShip", "17Track"],
-  },
-  {
-    job: "Rentals",
-    tools: ["Guesty", "Hostaway", "Smoobu", "Lodgify", "Hospitable", "Kross Booking"],
-  },
-  {
-    job: "Coaching and courses",
-    tools: ["Teachable", "Thinkific", "Kajabi", "Skool", "Podia", "Circle", "Calendly", "Zoom"],
-  },
-  {
-    job: "Working with you",
-    tools: ["Slack", "Discord", "Lark", "Skype", "WhatsApp"],
-  },
+export type Tool = {
+  name: string;
+  logo?: string;
+  group: string;
+  orbit?: boolean;
+};
+
+export const tools: Tool[] = [
+  // Helpdesks
+  { name: "Gorgias", logo: "/images/tools/gorgias.svg", group: "Helpdesks", orbit: true },
+  { name: "Freshdesk", logo: "/images/tools/freshdesk.svg", group: "Helpdesks", orbit: true },
+  { name: "Zendesk", logo: "/images/tools/zendesk.svg", group: "Helpdesks", orbit: true },
+  { name: "Help Scout", logo: "/images/tools/helpscout.svg", group: "Helpdesks", orbit: true },
+  { name: "Richpanel", group: "Helpdesks" },
+  { name: "Re:amaze", group: "Helpdesks" },
+  { name: "Tawk.to", group: "Helpdesks" },
+  { name: "Gmail", logo: "/images/tools/gmail.svg", group: "Helpdesks", orbit: true },
+  { name: "Outlook", logo: "/images/tools/outlook.svg", group: "Helpdesks", orbit: true },
+  // Tracking
+  { name: "ParcelPanel", logo: "/images/tools/parcelpanel.svg", group: "Tracking", orbit: true },
+  { name: "Track123", group: "Tracking" },
+  { name: "AfterShip", logo: "/images/tools/aftership.svg", group: "Tracking", orbit: true },
+  { name: "17Track", group: "Tracking" },
+  // Rentals
+  { name: "Guesty", logo: "/images/tools/guesty.svg", group: "Rentals", orbit: true },
+  { name: "Hostaway", logo: "/images/tools/hostaway.png", group: "Rentals", orbit: true },
+  { name: "Smoobu", logo: "/images/tools/smoobu.png", group: "Rentals", orbit: true },
+  { name: "Lodgify", logo: "/images/tools/lodgify.svg", group: "Rentals", orbit: true },
+  { name: "Hospitable", logo: "/images/tools/hospitable.png", group: "Rentals", orbit: true },
+  { name: "Kross Booking", group: "Rentals" },
+  // Coaching and courses
+  { name: "Teachable", logo: "/images/tools/teachable.png", group: "Coaching and courses", orbit: true },
+  { name: "Thinkific", logo: "/images/tools/thinkific.svg", group: "Coaching and courses", orbit: true },
+  { name: "Kajabi", logo: "/images/tools/kajabi.svg", group: "Coaching and courses", orbit: true },
+  { name: "Skool", logo: "/images/tools/skool.svg", group: "Coaching and courses", orbit: true },
+  { name: "Podia", group: "Coaching and courses" },
+  { name: "Circle", logo: "/images/tools/circle.svg", group: "Coaching and courses", orbit: true },
+  { name: "Calendly", logo: "/images/tools/calendly.svg", group: "Coaching and courses", orbit: true },
+  { name: "Zoom", logo: "/images/tools/zoom.svg", group: "Coaching and courses", orbit: true },
+  // Working with you
+  { name: "Slack", logo: "/images/tools/slack.svg", group: "Working with you", orbit: true },
+  { name: "Discord", logo: "/images/tools/discord.svg", group: "Working with you", orbit: true },
+  { name: "Lark", group: "Working with you" },
+  { name: "WhatsApp", logo: "/images/tools/whatsapp.svg", group: "Working with you", orbit: true },
 ];
 
 export const teamFacts = [

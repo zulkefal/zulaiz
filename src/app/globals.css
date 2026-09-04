@@ -122,6 +122,24 @@
     animation: track 42s linear infinite;
   }
 
+  /* Orbit rings: the ring turns one way, each chip turns the other so it
+     stays upright. Durations are set inline per ring.
+
+     Rotate only. Centring is done by Tailwind's -translate-x-1/2 classes,
+     which in v4 use the standalone `translate` property. Putting a translate
+     in these keyframes as well applied it twice and shifted every ring and
+     chip up-left by half its own size. */
+  @keyframes orbit {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+  @keyframes orbit-reverse {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(-360deg); }
+  }
+  .animate-orbit         { animation: orbit 60s linear infinite; }
+  .animate-orbit-reverse { animation: orbit-reverse 60s linear infinite; }
+
   .mask-edges {
     mask-image: linear-gradient(
       to right,
@@ -139,7 +157,9 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .animate-track {
+    .animate-track,
+    .animate-orbit,
+    .animate-orbit-reverse {
       animation: none;
     }
     *,

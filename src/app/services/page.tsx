@@ -3,7 +3,8 @@ import { pageMetadata } from "@/lib/seo";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import Link from "next/link";
 import { ArrowRightIcon } from "@phosphor-icons/react/dist/ssr";
-import { additionalServices, featuredServices, toolsByJob } from "@/lib/site";
+import { additionalServices, featuredServices, tools } from "@/lib/site";
+import { ToolOrbit } from "@/components/tool-orbit";
 import { PageHeader } from "@/components/page-header";
 import { CtaBand } from "@/components/cta-band";
 import { ServiceIcon } from "@/components/service-icon";
@@ -114,14 +115,10 @@ export default function ServicesPage() {
         </Container>
       </section>
 
-      {/*
-        Grouped chunks rather than one long list. Nineteen tool names as a flat
-        <ul> would be the lazy layout, and nobody reads it.
-      */}
-      <section className="border-b border-line bg-sunken py-20 sm:py-24">
+      <section className="border-b border-line bg-sunken py-20 sm:py-28">
         <Container>
-          <div className="grid gap-10 lg:grid-cols-12 lg:gap-16">
-            <div className="lg:col-span-4">
+          <div className="grid items-center gap-14 lg:grid-cols-12 lg:gap-16">
+            <div className="lg:col-span-5">
               <Heading className="max-w-[16ch]">
                 We work in your tools, not ours.
               </Heading>
@@ -130,22 +127,8 @@ export default function ServicesPage() {
                 inside it. Nothing migrates to a system you cannot audit.
               </p>
             </div>
-            <div className="grid gap-8 sm:grid-cols-2 lg:col-span-8">
-              {toolsByJob.map((group) => (
-                <div key={group.job}>
-                  <h3 className="text-sm font-semibold text-text">{group.job}</h3>
-                  <ul className="mt-3 flex flex-wrap gap-2">
-                    {group.tools.map((tool) => (
-                      <li
-                        key={tool}
-                        className="rounded-full border border-line bg-raised px-3 py-1 text-sm text-muted"
-                      >
-                        {tool}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
+            <div className="lg:col-span-7">
+              <ToolOrbit tools={tools.filter((t) => t.orbit)} />
             </div>
           </div>
         </Container>

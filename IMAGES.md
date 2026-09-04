@@ -37,6 +37,35 @@ Three constraints worth keeping if any of these are ever replaced:
   and the service name and description sit on top in white, so the bottom 55%
   of the frame must stay visually quiet or the copy becomes unreadable.
 
+## Tool logos
+
+Twenty-three brand marks in `public/images/tools/`, one per chip on the
+services page orbit. Each is the vendor's own mark, used as-is to say "we
+work in this tool". None were redrawn or recoloured beyond what is noted.
+
+| File | Source |
+| --- | --- |
+| `zendesk`, `helpscout`, `gmail`, `aftership`, `circle`, `calendly`, `discord`, `whatsapp` (svg) | Simple Icons, in each brand's own colour |
+| `zoom.svg` | svgl.app collection, Zoom app icon |
+| `slack.svg` | gilbarbara/logos collection, Slack icon |
+| `outlook.svg` | microsoft.com, Outlook-Icon-FY26 |
+| `freshdesk.svg` | freshdesk.com, product icon |
+| `lodgify.svg` | lodgify.com, favicon-light |
+| `gorgias`, `kajabi`, `guesty`, `thinkific`, `skool` (svg) | Each vendor's header logo, cropped to the mark (Skool to the "sk") |
+| `parcelpanel.svg` | parcelpanel.com header logo, cropped to the ring and filled near-black. The Shopify App Store icon confirms this ring is the product's current mark |
+| `hostaway.png` | hostaway.com apple-touch-icon, 192px, transparent |
+| `hospitable.png` | hospitable.com apple-touch-icon, 541px, rounded tile |
+| `teachable.png` | teachable.com favicon, 256px, corners rounded to match its app icon |
+| `smoobu.png` | smoobu.com favicon; the white S lifted off the blue tile and recoloured in that blue, 109px |
+
+Two rules the component relies on: chips are white in both themes because
+these marks are drawn for white, and files render at 22px on desktop and
+16px on phones, so anything above roughly 70px is enough resolution.
+
+The eight tools not on the orbit (Richpanel, Re:amaze, Tawk.to, Track123,
+17Track, Kross Booking, Podia, Lark) are not displayed anywhere and have no
+files.
+
 ## Not needed
 
 **Testimonial portraits.** The testimonial section is disabled, because the
