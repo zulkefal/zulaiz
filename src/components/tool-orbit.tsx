@@ -2,17 +2,24 @@ import Image from "next/image";
 import type { Tool } from "@/lib/site";
 
 /*
-  Every tool orbiting a centre mark on three concentric rings, like a small
-  solar system. Each ring is a centred square with a circular border that
-  rotates; each chip sits on the ring's circumference by angle and runs the
-  inverse rotation so it stays upright while it travels. Rings turn at
-  different speeds and alternate direction so the cluster never reads as one
-  rigid wheel.
+  Tools orbiting a centre mark on concentric rings, like a small solar
+  system. Each ring is a centred square with a circular border that rotates;
+  each chip sits on the ring's circumference by angle and runs the inverse
+  rotation so it stays upright while it travels. Rings turn at different
+  speeds and alternate direction so the cluster never reads as one rigid
+  wheel.
 
-  Logos are the brands' own marks, served from /images/tools; the
-  rest show a monogram in the accent, so nothing is dropped for lack of an
-  SVG. Sizes are percentages of the container so the whole thing scales with
-  the viewport. Motion is switched off under prefers-reduced-motion.
+  The overview at /services passes all 23 curated tools and gets three
+  rings. A service page passes only the tools for that job, eight to ten,
+  and gets a single ring: split over two, the inner ring held three chips
+  and the whole thing read as scattered. Eleven or twelve get two rings.
+  The split is decided by count alone, so callers never think about rings.
+  `compact` shrinks the container so a small set sits closer together.
+
+  Logos are the brands' own marks, served from /images/tools; anything
+  without one shows a monogram in the accent, so nothing is dropped for lack
+  of an SVG. Sizes are percentages of the container so the whole thing scales
+  with the viewport. Motion is switched off under prefers-reduced-motion.
 */
 function monogram(name: string) {
   const words = name.split(/\s+/).filter(Boolean);
@@ -20,31 +27,58 @@ function monogram(name: string) {
   return /^\d/.test(name) ? name.slice(0, 2) : name[0].toUpperCase();
 }
 
-/* chips per ring, diameter as % of the container, seconds per revolution */
-const RINGS = [
+/* chips on the ring, diameter as % of the container, seconds per revolution */
+type RingSpec = { count: number; diameter: number; duration: number; reverse: boolean };
+
+const THREE_RINGS: RingSpec[] = [
   { count: 6, diameter: 40, duration: 48, reverse: false },
   { count: 8, diameter: 69, duration: 76, reverse: true },
   { count: 10, diameter: 96, duration: 104, reverse: false },
 ];
 
-/* Start index of each ring, derived without mutating anything during
-   render. Any tools beyond the rings' total capacity fall on the outer ring. */
-const OFFSETS = RINGS.map((_, i) =>
-  RINGS.slice(0, i).reduce((n, r) => n + r.count, 0),
-);
+function layoutFor(total: number): RingSpec[] {
+  if (total > 12) return THREE_RINGS;
+  if (total <= 10) {
+    return [{ count: total, diameter: 86, duration: 64, reverse: false }];
+  }
+  /* Roughly a third inside, the rest outside. Never fewer than three inside
+     or the inner ring reads as a pair of stragglers. */
+  const inner = Math.min(total, Math.max(3, Math.round(total * 0.35)));
+  return [
+    { count: inner, diameter: 46, duration: 48, reverse: false },
+    { count: total - inner, diameter: 92, duration: 76, reverse: true },
+  ];
+}
 
-export function ToolOrbit({ tools }: { tools: Tool[] }) {
-  const rings = RINGS.map((r, i) => ({
-    ...r,
-    items:
-      i === RINGS.length - 1
-        ? tools.slice(OFFSETS[i])
-        : tools.slice(OFFSETS[i], OFFSETS[i] + r.count),
-  }));
+/* Deal the tools onto the rings in order. The last ring takes any overflow,
+   and a ring left with nothing is dropped rather than drawn empty. */
+function dealRings(tools: Tool[], specs: RingSpec[]) {
+  return specs
+    .map((spec, i) => {
+      const start = specs.slice(0, i).reduce((n, r) => n + r.count, 0);
+      const items =
+        i === specs.length - 1
+          ? tools.slice(start)
+          : tools.slice(start, start + spec.count);
+      return { ...spec, items };
+    })
+    .filter((ring) => ring.items.length > 0);
+}
+
+export function ToolOrbit({
+  tools,
+  compact = false,
+}: {
+  tools: Tool[];
+  compact?: boolean;
+}) {
+  const rings = dealRings(tools, layoutFor(tools.length));
 
   return (
     <div
-      className="relative mx-auto aspect-square w-full max-w-[640px]"
+      className={`relative mx-auto aspect-square w-full ${
+        compact ? "max-w-[460px]" : "max-w-[640px]"
+      }`}
       role="img"
       aria-label={`Tools we work in: ${tools.map((t) => t.name).join(", ")}`}
     >

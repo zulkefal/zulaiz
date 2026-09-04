@@ -2,12 +2,13 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { CheckIcon } from "@phosphor-icons/react/dist/ssr";
-import { featuredServices, getService } from "@/lib/site";
+import { featuredServices, getService, toolsNamed } from "@/lib/site";
 import { pageMetadata } from "@/lib/seo";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { PageHeader } from "@/components/page-header";
 import { FaqAccordion } from "@/components/faq-accordion";
 import { CtaBand } from "@/components/cta-band";
+import { ToolsSection } from "@/components/tools-section";
 import { Reveal } from "@/components/reveal";
 import { Container, Heading } from "@/components/ui";
 
@@ -135,7 +136,20 @@ export default async function ServicePage({
         </Container>
       </section>
 
-      <section className="border-b border-line py-20 sm:py-24">
+      {/*
+        Only this service's tools, so a course creator is not shown Guesty.
+        Plain background between the sunken "What is included" and the
+        sunken FAQ keeps the page alternating.
+      */}
+      {service.tools ? (
+        <ToolsSection
+          tools={toolsNamed(service.tools)}
+          body={service.toolsNote}
+          tone="plain"
+        />
+      ) : null}
+
+      <section className="border-b border-line bg-sunken py-20 sm:py-24">
         <Container>
           <div className="grid gap-10 lg:grid-cols-12 lg:gap-16">
             <Heading className="max-w-[14ch] lg:col-span-4">
