@@ -107,7 +107,7 @@ Against the real `./out` served by a static file server:
 - All 17 routes return 200; an unknown path returns the custom 404.
 - 28 images decode, none broken.
 - The contact form still posts to `https://formspree.io/f/xoeaporq`.
-- Dark mode is the default and the theme toggle persists across reloads.
+- Light mode is the default and the theme toggle persists across reloads.
 - `sitemap.xml` and `robots.txt` generate with the correct absolute URLs.
 
 ## Gotchas

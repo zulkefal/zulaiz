@@ -54,9 +54,9 @@ export const metadata: Metadata = {
   },
 };
 
-/* Tells the browser to render native controls dark-first, matching the site. */
+/* Tells the browser to render native controls light-first, matching the site. */
 export const viewport: Viewport = {
-  colorScheme: "dark light",
+  colorScheme: "light dark",
   themeColor: [
     { media: "(prefers-color-scheme: dark)", color: "#0a0d12" },
     { media: "(prefers-color-scheme: light)", color: "#f1f3f5" },
