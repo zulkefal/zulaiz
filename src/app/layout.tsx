@@ -82,7 +82,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <StructuredData />
         <Analytics />
       </head>
-      <body className="flex min-h-full flex-col">
+      {/*
+        suppressHydrationWarning on body: browser extensions such as ColorZilla
+        and Grammarly add attributes to <body> before React hydrates, which
+        trips the dev overlay with a mismatch that is not ours to fix.
+      */}
+      <body className="flex min-h-full flex-col" suppressHydrationWarning>
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-accent focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-accent-contrast"
