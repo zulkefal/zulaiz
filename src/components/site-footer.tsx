@@ -20,15 +20,19 @@ export function SiteFooter() {
                 Leaves the site, so it opens in a new tab. noopener stops the
                 new page reaching back through window.opener, and noreferrer
                 withholds the referrer header.
+
+                Drawn as LinkedIn's own tile, white mark on LinkedIn blue, so it
+                reads as LinkedIn at a glance. A third-party brand colour, like
+                the tool logos, so it sits outside the one-accent rule.
               */}
               <a
                 href={site.social.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Zulaiz on LinkedIn, opens in a new tab"
-                className="grid size-9 place-items-center rounded-full border border-line text-muted transition-colors hover:border-accent hover:text-accent"
+                className="grid size-11 place-items-center rounded-[10px] bg-[#0a66c2] text-white shadow-[0_10px_24px_-14px_rgba(10,102,194,0.8)] transition-[background-color,transform] duration-200 hover:-translate-y-0.5 hover:bg-[#004182]"
               >
-                <LinkedinLogoIcon weight="fill" className="size-4" />
+                <LinkedinLogoIcon weight="fill" className="size-6" />
               </a>
             </div>
           </div>

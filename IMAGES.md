@@ -39,13 +39,15 @@ Three constraints worth keeping if any of these are ever replaced:
 
 ## Tool logos
 
-Twenty-three brand marks in `public/images/tools/`, one per chip on the
-services page orbit. Each is the vendor's own mark, used as-is to say "we
+Thirty-two brand marks in `public/images/tools/`: one per chip on the
+services page orbit, plus nine that only appear in the homepage strip, which
+uses the same white chips. Each is the vendor's own mark, used as-is to say "we
 work in this tool". None were redrawn or recoloured beyond what is noted.
 
 | File | Source |
 | --- | --- |
 | `zendesk`, `helpscout`, `gmail`, `aftership`, `circle`, `calendly`, `discord`, `whatsapp` (svg) | Simple Icons, in each brand's own colour |
+| `shopify`, `woo`, `bigcommerce`, `etsy`, `intercom`, `airbnb`, `bookingdotcom`, `expedia`, `trustpilot` (svg) | Simple Icons, in each brand's own colour. Homepage strip only. `woo` is the Woo bubble rather than the WooCommerce wordmark, which is unreadable at chip size. `intercom` is filled near-black, as on intercom.com, because Simple Icons' pale cyan disappears on white |
 | `zoom.svg` | svgl.app collection, Zoom app icon |
 | `slack.svg` | gilbarbara/logos collection, Slack icon |
 | `outlook.svg` | microsoft.com, Outlook-Icon-FY26 |

@@ -61,6 +61,14 @@ export type Service = {
   approach: { title: string; body: string }[];
   faq: { q: string; a: string }[];
   cta?: { title: string; body: string };
+  /*
+    Names from `tools`, in display order, for the orbit on this service's
+    page. The overview at /services shows every tool; a page shows only the
+    ones that matter for that job so the section reads as specific, not
+    boilerplate. `toolsNote` is the one sentence under the heading there.
+  */
+  tools?: string[];
+  toolsNote?: string;
   featured: boolean;
 };
 
@@ -134,6 +142,9 @@ export const services: Service[] = [
       title: "Want WISMO off your plate?",
       body: "Book thirty minutes. We will read your recent tracking tickets and come back with a deflection estimate.",
     },
+    tools: ["Shopify", "WooCommerce", "BigCommerce", "Etsy", "ParcelPanel", "AfterShip", "Gorgias", "Zendesk", "Gmail", "Outlook"],
+    toolsNote:
+      "Your Shopify orders, your ParcelPanel or AfterShip tracking, your Gorgias or Zendesk inbox. Every reply carries the live tracking status because we answer from inside the tools that hold it.",
     featured: true,
   },
   {
@@ -201,6 +212,9 @@ export const services: Service[] = [
       title: "Want your inbox handled properly?",
       body: "Book thirty minutes. We will read 500 of your recent tickets and come back with a pod size and a number.",
     },
+    tools: ["Gorgias", "Freshdesk", "Zendesk", "Help Scout", "Gmail", "Outlook", "Slack", "WhatsApp"],
+    toolsNote:
+      "Your helpdesk, your shared inbox, your macros. We log in as named agents in Gorgias, Zendesk, Freshdesk, Help Scout or plain Gmail and Outlook, so every reply stays in your history.",
     featured: true,
   },
   {
@@ -268,6 +282,9 @@ export const services: Service[] = [
       title: "Want chat staffed when it actually matters?",
       body: "Book thirty minutes. We will map your traffic by hour and tell you which windows are worth covering.",
     },
+    tools: ["Gorgias", "Zendesk", "Freshdesk", "Help Scout", "Intercom", "Shopify", "Slack", "WhatsApp"],
+    toolsNote:
+      "The chat widget stays yours. We staff Gorgias, Zendesk, Freshdesk, Help Scout or Intercom under named agent logins, and hand off in Slack or WhatsApp when a conversation needs an owner.",
     featured: true,
   },
   {
@@ -363,6 +380,9 @@ export const services: Service[] = [
       title: "Want your student inbox handled?",
       body: "Book thirty minutes. We will read your recent student tickets and tell you how much of it is access rather than curriculum.",
     },
+    tools: ["Teachable", "Thinkific", "Kajabi", "Skool", "Circle", "Discord", "Calendly", "Zoom", "Gmail", "Slack"],
+    toolsNote:
+      "Your Teachable, Thinkific, Kajabi or Skool admin, your Circle or Discord community, your Calendly and Zoom. We work as named team members inside them, so students never meet a third-party ticket system.",
     featured: true,
   },
   {
@@ -608,32 +628,38 @@ export const faqs = [
   },
 ];
 
-/* Simple Icons slugs. Rendered from cdn.simpleicons.org in a single neutral tone. */
+/*
+  Homepage logo strip. Brand marks in their own colours, served from
+  /images/tools like the orbit on /services (Simple Icons files, plus the
+  Zoom app icon). Each sits on a white chip so the dark ones stay legible in
+  dark mode.
+*/
 export const integrations = [
-  { slug: "shopify", name: "Shopify" },
-  { slug: "woocommerce", name: "WooCommerce" },
-  { slug: "bigcommerce", name: "BigCommerce" },
-  { slug: "etsy", name: "Etsy" },
-  { slug: "zendesk", name: "Zendesk" },
-  { slug: "helpscout", name: "Help Scout" },
-  { slug: "intercom", name: "Intercom" },
-  { slug: "gmail", name: "Gmail" },
-  { slug: "aftership", name: "AfterShip" },
-  { slug: "airbnb", name: "Airbnb" },
-  { slug: "bookingdotcom", name: "Booking.com" },
-  { slug: "expedia", name: "Expedia" },
-  { slug: "trustpilot", name: "Trustpilot" },
-  { slug: "circle", name: "Circle" },
-  { slug: "calendly", name: "Calendly" },
-  { slug: "zoom", name: "Zoom" },
+  { name: "Shopify", logo: "/images/tools/shopify.svg" },
+  { name: "WooCommerce", logo: "/images/tools/woo.svg" },
+  { name: "BigCommerce", logo: "/images/tools/bigcommerce.svg" },
+  { name: "Etsy", logo: "/images/tools/etsy.svg" },
+  { name: "Zendesk", logo: "/images/tools/zendesk.svg" },
+  { name: "Help Scout", logo: "/images/tools/helpscout.svg" },
+  { name: "Intercom", logo: "/images/tools/intercom.svg" },
+  { name: "Gmail", logo: "/images/tools/gmail.svg" },
+  { name: "AfterShip", logo: "/images/tools/aftership.svg" },
+  { name: "Airbnb", logo: "/images/tools/airbnb.svg" },
+  { name: "Booking.com", logo: "/images/tools/bookingdotcom.svg" },
+  { name: "Expedia", logo: "/images/tools/expedia.svg" },
+  { name: "Trustpilot", logo: "/images/tools/trustpilot.svg" },
+  { name: "Circle", logo: "/images/tools/circle.svg" },
+  { name: "Calendly", logo: "/images/tools/calendly.svg" },
+  { name: "Zoom", logo: "/images/tools/zoom.svg" },
 ];
 
 /*
   Tools the team works in, grouped for the services page. `logo` points at a
   brand mark in public/images/tools, pulled from each vendor's own site or an
   open logo collection; entries without one render a monogram. `orbit` marks
-  the curated 23 of the 31 that fit on the three rings without overlapping.
-  The others are still tools we work in.
+  the curated 23 of the 36 that fit on the three rings without overlapping.
+  The others are still tools we work in, and several appear on the service
+  pages, which orbit only the tools relevant to that job.
 */
 export type Tool = {
   name: string;
@@ -648,11 +674,18 @@ export const tools: Tool[] = [
   { name: "Freshdesk", logo: "/images/tools/freshdesk.svg", group: "Helpdesks", orbit: true },
   { name: "Zendesk", logo: "/images/tools/zendesk.svg", group: "Helpdesks", orbit: true },
   { name: "Help Scout", logo: "/images/tools/helpscout.svg", group: "Helpdesks", orbit: true },
+  { name: "Intercom", logo: "/images/tools/intercom.svg", group: "Helpdesks" },
   { name: "Richpanel", group: "Helpdesks" },
   { name: "Re:amaze", group: "Helpdesks" },
   { name: "Tawk.to", group: "Helpdesks" },
   { name: "Gmail", logo: "/images/tools/gmail.svg", group: "Helpdesks", orbit: true },
   { name: "Outlook", logo: "/images/tools/outlook.svg", group: "Helpdesks", orbit: true },
+  // Storefronts. Off the overview orbit, which is support tooling, but on
+  // the WISMO and live chat pages where the order data lives.
+  { name: "Shopify", logo: "/images/tools/shopify.svg", group: "Storefronts" },
+  { name: "WooCommerce", logo: "/images/tools/woo.svg", group: "Storefronts" },
+  { name: "BigCommerce", logo: "/images/tools/bigcommerce.svg", group: "Storefronts" },
+  { name: "Etsy", logo: "/images/tools/etsy.svg", group: "Storefronts" },
   // Tracking
   { name: "ParcelPanel", logo: "/images/tools/parcelpanel.svg", group: "Tracking", orbit: true },
   { name: "Track123", group: "Tracking" },
@@ -680,6 +713,12 @@ export const tools: Tool[] = [
   { name: "Lark", group: "Working with you" },
   { name: "WhatsApp", logo: "/images/tools/whatsapp.svg", group: "Working with you", orbit: true },
 ];
+
+/* Tools by name, in the order given. An unknown name is dropped rather than
+   rendered as a monogram, so a typo in a service list cannot ship a blank chip. */
+export function toolsNamed(names: string[]): Tool[] {
+  return names.flatMap((n) => tools.filter((t) => t.name === n));
+}
 
 export const teamFacts = [
   {
