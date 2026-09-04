@@ -8,8 +8,9 @@ If an image ever needs regenerating, the house style is at the bottom.
 
 ## Already done
 
-Eight images, all in `public/images/`, converted to JPEG and sized for the
-web. Masters and pre-crop originals are in `source-images/`, gitignored.
+Eleven images, all in `public/images/`, converted to JPEG and sized for the
+web. The two newest arrived as 1.8 MB PNGs and were converted with sips at
+quality 84, which brought them under 300 KB each. Masters and pre-crop originals are in `source-images/`, gitignored.
 
 | File | Where it appears | Dimensions |
 | --- | --- | --- |
@@ -20,6 +21,9 @@ web. Masters and pre-crop originals are in `source-images/`, gitignored.
 | `banner-live-chat.jpg` | `/services/live-chat` | 1915 x 821 |
 | `about-team.jpg` | About page | 1448 x 1086 |
 | `banner-student-support.jpg` | `/services/student-support` | 1463 x 627 |
+| `banner-virtual-assistance.jpg` | `/services/virtual-assistance` | 1915 x 821 |
+| `banner-ecommerce-support.jpg` | `/services/ecommerce-support` | 1915 x 821 |
+| `banner-guest-communication.jpg` | `/services/guest-communication` | 1915 x 821 |
 | `og.jpg` | Open Graph and Twitter cards | 1730 x 909 |
 
 Three constraints worth keeping if any of these are ever replaced:
