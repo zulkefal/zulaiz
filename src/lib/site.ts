@@ -6,11 +6,12 @@ export const site = {
     that length. The previous copy ran to 173 and was cut mid-clause.
   */
   description:
-    "Zulaiz runs customer support for ecommerce brands, rental hosts and course creators. Named agents handle email, live chat, WISMO, guest messaging and student enquiries from $7 an hour.",
+    "Zulaiz runs customer support for ecommerce brands, rental hosts and course creators. Named human agents handle email, live chat, WISMO, guest messaging and student enquiries from $7 an hour.",
   url: "https://zulaiz.com",
   email: "hello@zulaiz.com",
   social: {
     linkedin: "https://www.linkedin.com/company/zulaiz",
+    instagram: "https://www.instagram.com/zulaiz.zulaiz/",
   },
 } as const;
 
@@ -30,8 +31,31 @@ export const nav = [
   { href: "/contact", label: "Contact" },
 ] as const;
 
+/*
+  Who a service is for. The site is organised by these four groups. A
+  service without a parent is a "door" for its group: ecommerce, rentals and
+  courses each have one bundle door, and "everyone" holds the channels any
+  business uses (email, live chat) plus Virtual Assistance. The
+  ecommerce door lists the detailed pages underneath it as parts, and email
+  and live chat appear there too, since a store needs them as much as a
+  course creator does.
+*/
+export type MarketId = "ecommerce" | "rentals" | "courses" | "everyone";
+export type Market = { id: MarketId; label: string };
+export const markets: Market[] = [
+  { id: "ecommerce", label: "For ecommerce brands" },
+  { id: "rentals", label: "For rental hosts" },
+  { id: "courses", label: "For course creators" },
+  { id: "everyone", label: "For everyone" },
+];
+
 export type Service = {
   slug: string;
+  market: MarketId;
+  /* A bundle page lists these services as its parts, in this order. */
+  parts?: string[];
+  /* A part points back at its bundle, for breadcrumbs. */
+  parent?: string;
   name: string;
   navLabel: string;
   href: string;
@@ -51,9 +75,11 @@ export type Service = {
     | "arrows"
     | "star"
     | "house"
-    | "graduation";
+    | "graduation"
+    | "clipboard"
+    | "storefront";
   image?: { src: string; alt: string };
-  /* Only WISMO has one: the home page bento tile uses a different crop. */
+  /* Only the ecommerce door has one: the home page bento tile uses a different crop. */
   tileImage?: { src: string; alt: string };
   metrics: { value: string; label: string }[];
   /* Grouped so the detail page never renders a flat list of more than five rows. */
@@ -74,7 +100,105 @@ export type Service = {
 
 export const services: Service[] = [
   {
+    slug: "ecommerce-support",
+    market: "ecommerce",
+    parts: ["wismo", "email-support", "live-chat", "returns-and-exchanges", "reviews-and-social"],
+    name: "Ecommerce support",
+    navLabel: "Ecommerce support",
+    href: "/services/ecommerce-support",
+    summary:
+      "Email, live chat, where-is-my-order, returns and reviews for online stores, run as one team inside your helpdesk and your Shopify, so a customer gets one answer whichever way they ask.",
+    metaDescription:
+      "Ecommerce customer support: email, live chat, WISMO, returns and reviews as one team inside your Shopify and helpdesk. Named human agents from $7 an hour.",
+    icon: "storefront",
+    image: {
+      src: "/images/banner-ecommerce-support.jpg",
+      alt: "Two people in a small brand's packing room, one sealing a parcel at a table of tissue paper and boxes while the other checks an order on a laptop",
+    },
+    tileImage: {
+      src: "/images/wismo-tile.jpg",
+      alt: "A fulfilment warehouse aisle with parcels on a conveyor",
+    },
+    metrics: [
+      { value: "20 min", label: "Median first response across every channel" },
+      { value: "Up to 30%", label: "WISMO tickets removed with proactive updates" },
+      { value: "One team", label: "Orders, returns, chat and reviews with no handoffs between vendors" },
+    ],
+    scope: [
+      {
+        group: "Orders and delivery",
+        items: [
+          "Where is my order answered with the live tracking status, not a template",
+          "Proactive delay alerts before the customer has to ask",
+          "Carrier escalations, lost parcels and address changes chased to a resolution",
+        ],
+      },
+      {
+        group: "Email and live chat",
+        items: [
+          "Pre-purchase questions on sizing, stock and shipping that decide the sale",
+          "Order edits, cancellations and discount codes applied inside your store",
+          "Every reply in your voice guide, from the same named human agents every day",
+        ],
+      },
+      {
+        group: "Returns and exchanges",
+        items: [
+          "Return authorisations and labels issued inside your policy",
+          "Exchange offers before refunds, so the revenue stays where it can",
+          "Every return reason coded so merchandising can act on it",
+        ],
+      },
+      {
+        group: "Reviews and social",
+        items: [
+          "Product and marketplace reviews answered on your tone",
+          "Instagram and Facebook DMs handled as support, not left to marketing",
+          "A bad day caught before it becomes a public one",
+        ],
+      },
+    ],
+    approach: [
+      {
+        title: "One queue, one voice",
+        body: "Every channel lands in your helpdesk and is answered by the same team from the same voice guide, so a customer who emails, then chats, then leaves a review meets one brand, not three vendors.",
+      },
+      {
+        title: "Fix the drivers, not just the tickets",
+        body: "Every ticket is tagged with why they wrote. Once a month you get the top drivers with a recommendation attached: a site fix, a policy change, an automation. Fewer tickets means fewer hours billed, and we would rather shrink the invoice.",
+      },
+      {
+        title: "Peak is a slider",
+        body: "Black Friday, a viral video, a delayed container. We staff up in days and back down after, with no severance and no idle seats in January.",
+      },
+    ],
+    faq: [
+      {
+        q: "Do we have to buy all of it?",
+        a: "No. Most stores start with the channel that hurts most, usually WISMO or email, and add live chat, returns and reviews as the team earns it. Everything bills at the same rate, so adding a channel is a conversation, not a new contract.",
+      },
+      {
+        q: "Which stores and helpdesks do you work in?",
+        a: "Shopify, WooCommerce, BigCommerce and Etsy on the store side. Gorgias, Zendesk, Freshdesk, Help Scout and plain Gmail or Outlook for the inbox. ParcelPanel and AfterShip for tracking. All of it inside your accounts as named human agents.",
+      },
+      {
+        q: "Can you actually process refunds and edit orders?",
+        a: "Yes, inside the policy you set. You define the limits, we work within them and bring anything outside to you with a recommendation. That is the difference between resolving a ticket and relaying it.",
+      },
+    ],
+    cta: {
+      title: "Want the whole inbox handled?",
+      body: "Book thirty minutes and send your last three months of tickets. We will tell you how they split across orders, returns, chat and reviews, and what one team to cover all of it costs.",
+    },
+    tools: ["Shopify", "WooCommerce", "BigCommerce", "Etsy", "Gorgias", "Zendesk", "Freshdesk", "Help Scout", "ParcelPanel", "AfterShip", "Gmail", "Outlook"],
+    toolsNote:
+      "Your Shopify, WooCommerce or BigCommerce admin, your Gorgias or Zendesk, your ParcelPanel or AfterShip. One team works across all of them as named human agents, so an order question, a return and a review get the same answer.",
+    featured: true,
+  },
+  {
     slug: "wismo",
+    market: "ecommerce",
+    parent: "ecommerce-support",
     name: "WISMO and order tracking",
     navLabel: "WISMO",
     href: "/services/wismo",
@@ -86,10 +210,6 @@ export const services: Service[] = [
     image: {
       src: "/images/banner-wismo.jpg",
       alt: "Cardboard parcels moving along a sorting conveyor in a fulfilment warehouse",
-    },
-    tileImage: {
-      src: "/images/wismo-tile.jpg",
-      alt: "A fulfilment warehouse aisle with parcels on a conveyor",
     },
     metrics: [
       { value: "Up to 30%", label: "WISMO deflection by month three" },
@@ -149,6 +269,7 @@ export const services: Service[] = [
   },
   {
     slug: "email-support",
+    market: "everyone",
     name: "Email support",
     navLabel: "Email support",
     href: "/services/email-support",
@@ -170,7 +291,7 @@ export const services: Service[] = [
       {
         group: "The team",
         items: [
-          "Named agents trained on your catalogue, policies and tone",
+          "Named human agents trained on your catalogue, policies and tone",
           "A team lead who owns quality and talks to you directly",
           "Weekly QA against a rubric you can read",
         ],
@@ -214,16 +335,17 @@ export const services: Service[] = [
     },
     tools: ["Gorgias", "Freshdesk", "Zendesk", "Help Scout", "Gmail", "Outlook", "Slack", "WhatsApp"],
     toolsNote:
-      "Your helpdesk, your shared inbox, your macros. We log in as named agents in Gorgias, Zendesk, Freshdesk, Help Scout or plain Gmail and Outlook, so every reply stays in your history.",
+      "Your helpdesk, your shared inbox, your macros. We log in as named human agents in Gorgias, Zendesk, Freshdesk, Help Scout or plain Gmail and Outlook, so every reply stays in your history.",
     featured: true,
   },
   {
     slug: "live-chat",
+    market: "everyone",
     name: "Live chat",
     navLabel: "Live chat",
     href: "/services/live-chat",
     summary:
-      "Staffed chat during the hours your traffic converts, answering the sizing, stock and shipping questions that decide whether the cart survives.",
+      "Staffed chat during the hours your traffic converts, answering the questions that decide whether someone buys, books or enrols.",
     metaDescription:
       "Live chat support staffed for the hours your traffic converts. Sizing, stock and delivery answers in 22 seconds, evenings and weekends included.",
     icon: "chats",
@@ -261,7 +383,7 @@ export const services: Service[] = [
       },
       {
         title: "Convert",
-        body: "Agents work from a real product knowledge base, and are measured on resolution and assisted revenue rather than chat count.",
+        body: "Human agents work from a real product knowledge base, and are measured on resolution and assisted revenue rather than chat count.",
       },
       {
         title: "Compound",
@@ -274,8 +396,8 @@ export const services: Service[] = [
         a: "Yes. The team spans US, UK and APAC time zones, so extended and around the clock coverage is a staffing decision rather than an engineering project.",
       },
       {
-        q: "Will agents actually know our products?",
-        a: "Every agent works from a knowledge base we build with your team, and new launches are briefed before they go live rather than after the first confused customer.",
+        q: "Will your human agents actually know our products?",
+        a: "Every human agent works from a knowledge base we build with your team, and new launches are briefed before they go live rather than after the first confused customer.",
       },
     ],
     cta: {
@@ -284,11 +406,13 @@ export const services: Service[] = [
     },
     tools: ["Gorgias", "Zendesk", "Freshdesk", "Help Scout", "Intercom", "Shopify", "Slack", "WhatsApp"],
     toolsNote:
-      "The chat widget stays yours. We staff Gorgias, Zendesk, Freshdesk, Help Scout or Intercom under named agent logins, and hand off in Slack or WhatsApp when a conversation needs an owner.",
+      "The chat widget stays yours. We staff Gorgias, Zendesk, Freshdesk, Help Scout or Intercom under named logins for each human agent, and hand off in Slack or WhatsApp when a conversation needs an owner.",
     featured: true,
   },
   {
     slug: "returns-and-exchanges",
+    market: "ecommerce",
+    parent: "ecommerce-support",
     name: "Returns and exchanges",
     navLabel: "Returns",
     href: "/services#returns-and-exchanges",
@@ -303,20 +427,90 @@ export const services: Service[] = [
   },
   {
     slug: "guest-communication",
+    market: "rentals",
     name: "Guest communication",
-    navLabel: "Guest comms",
-    href: "/services#guest-communication",
+    navLabel: "Guest communication",
+    href: "/services/guest-communication",
     summary:
       "Airbnb, Booking.com, Vrbo and Expedia messages from first enquiry to checkout, with review protection and cleaning coordination in between.",
+    metaDescription:
+      "Guest communication for short-term rental hosts. Airbnb, Booking.com, Vrbo and Expedia messages, enquiry to checkout. Named human agents from $7 an hour.",
     icon: "house",
-    metrics: [],
-    scope: [],
-    approach: [],
-    faq: [],
-    featured: false,
+    image: {
+      src: "/images/banner-guest-communication.jpg",
+      alt: "The entry hall of a bright rental apartment, with a welcome card, a bowl of fruit, keys and a phone on a wooden table and the front door open to morning light",
+    },
+    metrics: [
+      { value: "Each stay", label: "Check-in details, house rules and checkout reminders sent on time" },
+      { value: "In policy", label: "Refund and early checkout decisions made without waiting on you" },
+      { value: "One inbox", label: "Airbnb, Booking.com, Vrbo and Expedia answered from your PMS" },
+    ],
+    scope: [
+      {
+        group: "Before they book",
+        items: [
+          "Enquiries answered inside the hour that keeps your response rate up",
+          "Availability, pricing, pets, parking and house rules explained per listing",
+          "Special requests checked with you and confirmed to the guest",
+        ],
+      },
+      {
+        group: "During the stay",
+        items: [
+          "Check-in instructions, Wi-Fi and appliance questions handled from the house manual",
+          "Problems escalated to your cleaner, handyman or co-host with the detail they need",
+          "Noise, party and late checkout situations handled to your rules",
+        ],
+      },
+      {
+        group: "After checkout",
+        items: [
+          "Review requests and replies, including the difficult ones",
+          "Damage and lost property documented and raised within the platform windows",
+          "Cleaning confirmed and the next arrival's details sent",
+        ],
+      },
+    ],
+    approach: [
+      {
+        title: "Learn the property",
+        body: "A house manual per listing before the first message: the lockbox, the parking, the boiler that needs a reset. Guests ask the same twelve things and every answer should be right the first time.",
+      },
+      {
+        title: "Answer inside your PMS",
+        body: "Guesty, Hostaway, Smoobu, Lodgify or Hospitable, with every channel already in one inbox. We work there as named human agents, so the platform's response-rate clock is answered on time and every thread stays on your record.",
+      },
+      {
+        title: "Protect the review",
+        body: "Most bad reviews are a slow reply during the stay, not a bad property. Issues get a fast acknowledgement and a real escalation, and every review gets an answer on your tone.",
+      },
+    ],
+    faq: [
+      {
+        q: "Which platforms do you work in?",
+        a: "Guesty, Hostaway, Smoobu, Lodgify, Hospitable and Kross Booking on the PMS side, with Airbnb, Booking.com, Vrbo and Expedia threads inside them. Direct bookings by email or WhatsApp are covered too. All of it inside your accounts, nothing moved to a system of ours.",
+      },
+      {
+        q: "Can you cover a 2am message?",
+        a: "Extended hours cover evenings and weekends on the Full time package. True around-the-clock cover needs agents rotating through the night and is quoted rather than listed, as on the pricing page.",
+      },
+      {
+        q: "Do you coordinate cleaners and maintenance?",
+        a: "Yes, with the contacts you give us. We message them, confirm the job is done and tell the guest, and anything that needs money spent comes to you first.",
+      },
+    ],
+    cta: {
+      title: "Want your guest inbox handled?",
+      body: "Book thirty minutes. We will read a month of your guest threads and tell you how many were check-in questions a better house manual would have answered, and how many needed a person.",
+    },
+    tools: ["Guesty", "Hostaway", "Smoobu", "Lodgify", "Hospitable", "Airbnb", "Booking.com", "Expedia", "WhatsApp", "Gmail"],
+    toolsNote:
+      "Your Guesty, Hostaway, Smoobu, Lodgify or Hospitable inbox, with the Airbnb, Booking.com and Expedia threads inside it. We work as named human agents in your account, so every guest message and every reply stays on your record.",
+    featured: true,
   },
   {
     slug: "student-support",
+    market: "courses",
     name: "Student and member support",
     navLabel: "Student support",
     href: "/services/student-support",
@@ -355,7 +549,7 @@ export const services: Service[] = [
     approach: [
       {
         title: "Learn the curriculum",
-        body: "Agents take the course themselves before answering a single ticket. You cannot answer a question about module four without having seen module four.",
+        body: "Our human agents take the course themselves before answering a single ticket. You cannot answer a question about module four without having seen module four.",
       },
       {
         title: "Clear the blockers",
@@ -387,6 +581,8 @@ export const services: Service[] = [
   },
   {
     slug: "reviews-and-social",
+    market: "ecommerce",
+    parent: "ecommerce-support",
     name: "Reviews and social",
     navLabel: "Reviews and social",
     href: "/services#reviews-and-social",
@@ -399,6 +595,97 @@ export const services: Service[] = [
     faq: [],
     featured: false,
   },
+  {
+    slug: "virtual-assistance",
+    market: "everyone",
+    name: "Virtual Assistance",
+    navLabel: "Virtual Assistance",
+    href: "/services/virtual-assistance",
+    summary:
+      "The daily admin that never makes it to the top of your list: data entry, spreadsheets, inbox and calendar, listing updates and research, done by a named assistant inside your own tools.",
+    metaDescription:
+      "Virtual Assistance for data entry, spreadsheets, inbox and calendar, listing updates and research. Named assistants inside your own tools from $7 an hour.",
+    icon: "clipboard",
+    image: {
+      src: "/images/banner-virtual-assistance.jpg",
+      alt: "A virtual assistant at a desk working through a spreadsheet on a laptop, with a calendar on a second screen",
+    },
+    metrics: [
+      { value: "Daily", label: "Written handover of what got done and what is waiting" },
+      { value: "2 days", label: "From first call to the first task list" },
+      { value: "$7/hr", label: "Same rate and packages as every other service" },
+    ],
+    scope: [
+      {
+        group: "Data and spreadsheets",
+        items: [
+          "Data entry and clean-up in Sheets, Excel or Airtable, checked against the source",
+          "Moving records between systems, CRM updates and deduplication",
+          "Weekly reports and dashboards refreshed on the day you expect them",
+        ],
+      },
+      {
+        group: "Inbox and calendar",
+        items: [
+          "Your inbox triaged into reply, delegate and ignore, with drafts ready for the first pile",
+          "Scheduling, rescheduling and confirmations across time zones",
+          "Meeting notes and follow-ups sent the same day",
+        ],
+      },
+      {
+        group: "Store and listing admin",
+        items: [
+          "Product uploads, catalogue edits, price and stock changes in Shopify or WooCommerce",
+          "Rental listing updates, calendar sync checks and photo swaps across channels",
+          "Course platform housekeeping: enrolments, coupons, drip schedules",
+        ],
+      },
+      {
+        group: "Research and lists",
+        items: [
+          "Supplier, competitor and pricing research written up with sources",
+          "Prospect and partner lists built to your criteria and verified before you see them",
+          "Invoices logged and expenses coded in QuickBooks or Xero, ready for your accountant",
+        ],
+      },
+    ],
+    approach: [
+      {
+        title: "Start with the list",
+        body: "The first call is spent writing down the recurring work: what, how often, where it lives and what done looks like. Each task gets a short procedure before anyone touches it, so the second time is as good as the first.",
+      },
+      {
+        title: "Work in your systems",
+        body: "Named logins with the least access needed, your two-factor, your Sheets, your Notion. Nothing is copied into a tool of ours, so if we ever part ways nothing needs handing back.",
+      },
+      {
+        title: "Report every day",
+        body: "A short written handover at the end of each day: what got done, what is blocked, what needs a decision from you. Questions are batched rather than sent one at a time, so you are interrupted once, not twenty times.",
+      },
+    ],
+    faq: [
+      {
+        q: "What will a virtual assistant not do?",
+        a: "Anything that needs a professional sign-off or your money. We log invoices and code expenses, your accountant closes the books. We prepare payments, you approve them. We draft the reply, you send anything contractual. Everything else on a recurring admin list is fair game.",
+      },
+      {
+        q: "How do you handle access and sensitive data?",
+        a: "Named logins per assistant, never shared credentials, and only the access the task needs. Two-factor stays on your devices. Every assistant is under a signed confidentiality agreement, and access is removed the day an engagement ends.",
+      },
+      {
+        q: "Can I mix support and admin hours?",
+        a: "Yes. Virtual Assistance hours bill at the same rate and come out of the same Part time, Standard or Full time package, so a brand can split a week between the inbox and the back office and change the split as the month goes.",
+      },
+    ],
+    cta: {
+      title: "Got a list of things you keep not getting to?",
+      body: "Send it over or book thirty minutes. We will tell you which of it we can take, how many hours it needs and what it costs, in writing, before you commit to anything.",
+    },
+    tools: ["Google Sheets", "Google Docs", "Gmail", "Excel", "Outlook", "Notion", "Airtable", "Trello", "Asana", "ClickUp", "Shopify", "HubSpot", "QuickBooks", "Xero"],
+    toolsNote:
+      "Your Sheets and Docs, your Excel and Outlook, your Notion, Airtable, Trello or Asana boards, your Shopify admin, your HubSpot, your QuickBooks or Xero. We work inside them as named users, so the record of the work stays yours.",
+    featured: true,
+  },
 ];
 
 export const featuredServices = services.filter((s) => s.featured);
@@ -406,6 +693,17 @@ export const additionalServices = services.filter((s) => !s.featured);
 
 export function getService(slug: string) {
   return services.find((s) => s.slug === slug && s.featured);
+}
+
+/* The top-level services of a group, in data order: every service in that
+   market that is not a part of something else. */
+export function doorsFor(market: Market): Service[] {
+  return services.filter((s) => s.market === market.id && !s.parent);
+}
+
+/* A bundle's parts in its declared order. Empty for a service without any. */
+export function partsOf(service: Service): Service[] {
+  return (service.parts ?? []).map((slug) => services.find((s) => s.slug === slug)!);
 }
 
 export const headlineStats = [
@@ -438,11 +736,11 @@ export const onboarding = [
 export const differentiators = [
   {
     title: "A pod, not a call centre",
-    body: "The same small named team every day. They learn your catalogue, your edge cases and your regulars, which is why quality holds when volume triples.",
+    body: "The same small team of named human agents every day. They learn your catalogue, your edge cases and your regulars, which is why quality holds when volume triples.",
   },
   {
     title: "We work inside your stack",
-    body: "Your helpdesk, your Shopify, your returns platform, your data. Nothing migrates into a black box you cannot audit or take back.",
+    body: "Your helpdesk, your Shopify, your returns platform, your data. Nothing migrates into a black box you cannot audit or take back, and everything we write for you stays yours.",
   },
   {
     title: "We would rather you booked fewer hours",
@@ -517,9 +815,9 @@ export const commitments: Commitment[] = [
     measure: "10 hours a week",
     equivalent: "40 hours a month",
     points: [
-      "Email and WISMO",
+      "Every channel we run",
       "Business hours in one time zone",
-      "One named agent",
+      "One named human agent",
     ],
     suits: "A first pair of hands for a queue that is still small.",
   },
@@ -530,8 +828,8 @@ export const commitments: Commitment[] = [
     equivalent: "80 hours billed a month",
     bonus: "Plus 20 hours free, so 100 hours in total",
     points: [
-      "Email, live chat and WISMO",
-      "One named agent who learns your catalogue",
+      "Every channel we run",
+      "One named human agent who learns your catalogue",
       "Works out at $5.60 an hour, not $7",
     ],
     suits: "The one most brands start on, and the best value on the page.",
@@ -546,7 +844,7 @@ export const commitments: Commitment[] = [
     points: [
       "Every channel we run",
       "Extended hours, weekends included",
-      "Named agent plus a team lead",
+      "Named human agent plus a team lead",
     ],
     suits: "Daily cover for a queue that keeps moving after five.",
   },
@@ -563,9 +861,11 @@ export const ticketBundle = {
 
 /* No tiers, so this is what every hour includes regardless of commitment. */
 export const included = [
-  "Named agents assigned to your brand, not a rotating pool",
+  "Named human agents assigned to your brand, not a rotating pool or a bot",
   "We work inside your helpdesk, your Shopify and your returns platform",
-  "Macro library, tagging taxonomy and escalation rules built with you",
+  "Every ticket tagged with why they wrote, on a taxonomy built with you",
+  "Hours you can split between support and admin, and re-split monthly",
+  "The voice guide, macros and procedures we write are yours to keep, even if you leave",
   "Weekly QA against a rubric you can read",
   "Weekly reporting on volume, drivers, CSAT and backlog",
   "A monthly review of the contact drivers worth fixing upstream",
@@ -574,8 +874,8 @@ export const included = [
 /* Shared by the contact page and the contact section on the home page. */
 export const callExpectations = [
   "A read on your ticket volume and the drivers behind it",
-  "The hours you actually need and what that costs",
-  "A realistic go live date, usually about a week out",
+  "The hours you actually need and what that costs, priced from your real tickets",
+  "A realistic go live date, usually two days out",
 ];
 
 export const rateNotes = [
@@ -588,6 +888,14 @@ export const rateNotes = [
     body: "Forecast peak with us and add hours for the weeks you need them. Scale back after. You are not carrying a Black Friday headcount into January.",
   },
   {
+    title: "One package, inbox and back office",
+    body: "Support hours and Virtual Assistance hours come out of the same package at the same rate. Split a week between the queue and the admin however you like, and change the split as the month goes.",
+  },
+  {
+    title: "Start with a two-week pilot",
+    body: "Two weeks on the Part time package at the same rate, then decide. Stop and you keep everything we built. Carry on and the fortnight counts toward the initial term.",
+  },
+  {
     title: "The bonus hours are a real discount",
     body: "The standard plan bills 80 hours and delivers 100, which works out at $5.60 an hour rather than $7. It is the only plan with bonus hours, and it is why most brands land there.",
   },
@@ -596,7 +904,19 @@ export const rateNotes = [
 export const faqs = [
   {
     q: "How fast can we go live?",
-    a: "Two days is typical for email and WISMO, covering the audit, voice guide, macros, access and training. Live chat usually follows a few days later, once agents are confident on the catalogue. If you are mid peak and need cover sooner, say so on the call and we will tell you honestly whether we can do it well.",
+    a: "Two days is typical for email and WISMO, covering the audit, voice guide, macros, access and training. Live chat usually follows a few days later, once the human agents are confident on the catalogue. If you are mid peak and need cover sooner, say so on the call and we will tell you honestly whether we can do it well.",
+  },
+  {
+    q: "Can we try it before committing?",
+    a: "Yes. Start with a two-week pilot on the Part time package, billed at the same rate. Stop at the end of it and you keep the voice guide and macros we wrote and owe nothing more. Carry on and the two weeks count toward the initial term.",
+  },
+  {
+    q: "What happens if we stop?",
+    a: "You keep everything we built: the voice guide, the macro library, the tagging taxonomy and every written procedure, all of it already sitting in your own tools. Notice is 30 days after the initial three months, and nothing needs handing back because nothing ever left.",
+  },
+  {
+    q: "Do Virtual Assistance hours cost the same?",
+    a: "Yes. Admin work bills at the same rate as support and comes out of the same package, so you can split a week between the inbox and the back office and move the split as the month goes.",
   },
   {
     q: "Do we have to switch helpdesks?",
@@ -608,7 +928,7 @@ export const faqs = [
   },
   {
     q: "Who actually answers our tickets?",
-    a: "Named agents assigned to your brand and nobody else's. Part time hours get one; past full time you get a pod of two to six plus a team lead. You meet them, you can reach them in Slack, and they do not rotate between accounts.",
+    a: "Named human agents assigned to your brand and nobody else's. Part time hours get one; past full time you get a pod of two to six plus a team lead. You meet them, you can reach them in Slack, and they do not rotate between accounts.",
   },
   {
     q: "What happens during peak season?",
@@ -657,7 +977,7 @@ export const integrations = [
   Tools the team works in, grouped for the services page. `logo` points at a
   brand mark in public/images/tools, pulled from each vendor's own site or an
   open logo collection; entries without one render a monogram. `orbit` marks
-  the curated 23 of the 36 that fit on the three rings without overlapping.
+  the curated 23 of the 50 that fit on the three rings without overlapping.
   The others are still tools we work in, and several appear on the service
   pages, which orbit only the tools relevant to that job.
 */
@@ -698,6 +1018,10 @@ export const tools: Tool[] = [
   { name: "Lodgify", logo: "/images/tools/lodgify.svg", group: "Rentals", orbit: true },
   { name: "Hospitable", logo: "/images/tools/hospitable.png", group: "Rentals", orbit: true },
   { name: "Kross Booking", group: "Rentals" },
+  // Booking channels. Off the overview orbit; on the guest communication page.
+  { name: "Airbnb", logo: "/images/tools/airbnb.svg", group: "Booking channels" },
+  { name: "Booking.com", logo: "/images/tools/bookingdotcom.svg", group: "Booking channels" },
+  { name: "Expedia", logo: "/images/tools/expedia.svg", group: "Booking channels" },
   // Coaching and courses
   { name: "Teachable", logo: "/images/tools/teachable.png", group: "Coaching and courses", orbit: true },
   { name: "Thinkific", logo: "/images/tools/thinkific.svg", group: "Coaching and courses", orbit: true },
@@ -707,6 +1031,19 @@ export const tools: Tool[] = [
   { name: "Circle", logo: "/images/tools/circle.svg", group: "Coaching and courses", orbit: true },
   { name: "Calendly", logo: "/images/tools/calendly.svg", group: "Coaching and courses", orbit: true },
   { name: "Zoom", logo: "/images/tools/zoom.svg", group: "Coaching and courses", orbit: true },
+  // Admin and back office. Off the overview orbit; shown on the virtual
+  // assistant page.
+  { name: "Google Sheets", logo: "/images/tools/googlesheets.svg", group: "Admin and back office" },
+  { name: "Google Docs", logo: "/images/tools/googledocs.svg", group: "Admin and back office" },
+  { name: "Excel", logo: "/images/tools/excel.svg", group: "Admin and back office" },
+  { name: "Notion", logo: "/images/tools/notion.svg", group: "Admin and back office" },
+  { name: "Airtable", logo: "/images/tools/airtable.svg", group: "Admin and back office" },
+  { name: "Trello", logo: "/images/tools/trello.svg", group: "Admin and back office" },
+  { name: "Asana", logo: "/images/tools/asana.svg", group: "Admin and back office" },
+  { name: "ClickUp", logo: "/images/tools/clickup.svg", group: "Admin and back office" },
+  { name: "HubSpot", logo: "/images/tools/hubspot.svg", group: "Admin and back office" },
+  { name: "QuickBooks", logo: "/images/tools/quickbooks.svg", group: "Admin and back office" },
+  { name: "Xero", logo: "/images/tools/xero.svg", group: "Admin and back office" },
   // Working with you
   { name: "Slack", logo: "/images/tools/slack.svg", group: "Working with you", orbit: true },
   { name: "Discord", logo: "/images/tools/discord.svg", group: "Working with you", orbit: true },

@@ -10,7 +10,7 @@ import { Container, Heading } from "@/components/ui";
   `tone` lets a page keep its light-dark alternation of section backgrounds.
 */
 const GENERAL =
-  "Whatever you already run, we log in as named users and work inside it. Nothing migrates to a system you cannot audit.";
+  "Whatever you already run, we log in as named users and work inside it. Nothing migrates to a system you cannot audit, and the voice guide and macros we write stay yours.";
 
 export function ToolsSection({
   tools,
@@ -21,9 +21,15 @@ export function ToolsSection({
   body?: string;
   tone?: "sunken" | "plain";
 }) {
+  /*
+    overflow-x-clip on the section: each ring is a square element rotating,
+    and its corners sweep past the viewport edge on phones as it turns, which
+    gave the page a few pixels of sideways scroll that came and went. The
+    corners are transparent, so clipping them loses nothing visible.
+  */
   return (
     <section
-      className={`border-b border-line py-20 sm:py-28 ${
+      className={`overflow-x-clip border-b border-line py-20 sm:py-28 ${
         tone === "sunken" ? "bg-sunken" : ""
       }`}
     >

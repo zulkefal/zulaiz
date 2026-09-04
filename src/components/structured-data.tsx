@@ -15,7 +15,7 @@ export function StructuredData() {
     image: `${site.url}/images/og.jpg`,
     description: site.description,
     email: site.email,
-    sameAs: [site.social.linkedin],
+    sameAs: [site.social.linkedin, site.social.instagram],
     areaServed: "Worldwide",
     knowsAbout: [
       "Ecommerce customer support",
@@ -23,6 +23,8 @@ export function StructuredData() {
       "Order tracking and WISMO",
       "Returns and exchanges",
       "Short-term rental guest communication",
+      "Student and member support",
+      "Virtual Assistance and back-office admin",
     ],
   };
 

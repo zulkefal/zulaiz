@@ -69,7 +69,7 @@ export default function AboutPage() {
                   shrinks, because nobody upstream ever hears why it exists.
                 </p>
                 <p>
-                  We do the same job from the other end. Agents answer fast, and
+                  We do the same job from the other end. Human agents answer fast, and
                   the team lead brings the recurring drivers back to your ops,
                   product and merchandising people every month with a
                   recommendation attached.

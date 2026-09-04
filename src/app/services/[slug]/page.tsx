@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { CheckIcon } from "@phosphor-icons/react/dist/ssr";
-import { featuredServices, getService, toolsNamed } from "@/lib/site";
+import { ArrowUpRightIcon, CheckIcon } from "@phosphor-icons/react/dist/ssr";
+import { featuredServices, getService, partsOf, services, toolsNamed } from "@/lib/site";
 import { pageMetadata } from "@/lib/seo";
 import { Breadcrumbs } from "@/components/breadcrumbs";
+import Link from "next/link";
+import { ServiceIcon } from "@/components/service-icon";
+import { ScrollCue } from "@/components/scroll-cue";
 import { PageHeader } from "@/components/page-header";
 import { FaqAccordion } from "@/components/faq-accordion";
 import { CtaBand } from "@/components/cta-band";
@@ -35,6 +38,10 @@ export default async function ServicePage({
   const { slug } = await params;
   const service = getService(slug);
   if (!service) notFound();
+  const parent = service.parent
+    ? services.find((s) => s.slug === service.parent)
+    : undefined;
+  const parts = partsOf(service);
 
   return (
     <>
@@ -42,6 +49,9 @@ export default async function ServicePage({
         trail={[
           { name: "Home", path: "/" },
           { name: "Services", path: "/services" },
+          ...(parent
+            ? [{ name: parent.name, path: `/services/${parent.slug}` }]
+            : []),
           { name: service.name, path: `/services/${service.slug}` },
         ]}
       />
@@ -67,9 +77,16 @@ export default async function ServicePage({
         }
       />
 
+      {/*
+        The banner keeps 21:9 on phones, where it ends above the fold. On
+        laptops it is capped at 40% of the viewport so the section below
+        starts on screen, and the pinned arrow below covers anyone it does
+        not. The photographs put their subject in the left two-thirds and
+        the middle band, so the shorter crop keeps what matters.
+      */}
       {service.image ? (
         <div className="border-b border-line">
-          <div className="relative aspect-[21/9] w-full">
+          <div className="relative aspect-[21/9] w-full lg:aspect-auto lg:h-[clamp(280px,40vh,520px)]">
             <Image
               src={service.image.src}
               alt={service.image.alt}
@@ -82,7 +99,73 @@ export default async function ServicePage({
         </div>
       ) : null}
 
-      <section className="border-b border-line py-20 sm:py-24">
+      {/* Pinned to the screen, not the photo; slides away on first scroll. */}
+      <ScrollCue target={parts.length ? "#inside" : "#how"} />
+
+      {parts.length ? (
+        <section id="inside" className="scroll-mt-20 border-b border-line bg-sunken pb-20 pt-14 sm:pb-24 sm:pt-16">
+          <Container>
+            <Heading className="max-w-[20ch]">
+              Five jobs. One team, one rate.
+            </Heading>
+            <p className="mt-4 max-w-[58ch] text-base leading-relaxed text-muted">
+              One team covers all five, and you buy hours, not services. Start
+              with the one that hurts most and add the rest whenever you are
+              ready, at the same rate. Each has its own page for the detail.
+            </p>
+            {/*
+              Parts with a page link to it; the two without one are described
+              here in full, since this page is where they live now.
+            */}
+            {/* Three across, then two wider: five cards with no empty cell. */}
+            <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-6">
+              {parts.map((part, i) => {
+                const inner = (
+                  <>
+                    <ServiceIcon name={part.icon} className="size-6 text-accent" />
+                    <h3 className="mt-4 text-lg font-semibold">{part.name}</h3>
+                    <p className="mt-2.5 text-sm leading-relaxed text-muted">
+                      {part.summary}
+                    </p>
+                    {part.featured ? (
+                      <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-accent">
+                        How we run it
+                        <ArrowUpRightIcon
+                          weight="bold"
+                          className="size-4 transition-transform duration-200 ease-[var(--ease-out-soft)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                        />
+                      </span>
+                    ) : null}
+                  </>
+                );
+                const shell = `group flex h-full flex-col rounded-card border border-line bg-raised p-6 transition-colors duration-300 ${
+                  i < 3 ? "lg:col-span-2" : "lg:col-span-3"
+                }`;
+                return part.featured ? (
+                  <Link
+                    key={part.slug}
+                    href={part.href}
+                    className={`${shell} hover:border-accent-line`}
+                  >
+                    {inner}
+                  </Link>
+                ) : (
+                  <div key={part.slug} id={part.slug} className={shell}>
+                    {inner}
+                  </div>
+                );
+              })}
+            </div>
+          </Container>
+        </section>
+      ) : null}
+
+      <section
+        id="how"
+        className={`scroll-mt-20 border-b border-line ${
+          parts.length ? "py-20 sm:py-24" : "pb-20 pt-14 sm:pb-24 sm:pt-16"
+        }`}
+      >
         <Container>
           <Heading className="max-w-[18ch]">How the work actually runs.</Heading>
           <ol className="mt-10">
@@ -107,7 +190,11 @@ export default async function ServicePage({
         </Container>
       </section>
 
-      <section className="border-b border-line bg-sunken py-20 sm:py-24">
+      <section
+        className={`border-b border-line py-20 sm:py-24 ${
+          parts.length ? "" : "bg-sunken"
+        }`}
+      >
         <Container>
           <Heading className="max-w-[18ch]">What is included.</Heading>
           <div className="mt-10 grid gap-10 sm:grid-cols-2 sm:gap-12">
@@ -145,11 +232,15 @@ export default async function ServicePage({
         <ToolsSection
           tools={toolsNamed(service.tools)}
           body={service.toolsNote}
-          tone="plain"
+          tone={parts.length ? "sunken" : "plain"}
         />
       ) : null}
 
-      <section className="border-b border-line bg-sunken py-20 sm:py-24">
+      <section
+        className={`border-b border-line py-20 sm:py-24 ${
+          parts.length ? "" : "bg-sunken"
+        }`}
+      >
         <Container>
           <div className="grid gap-10 lg:grid-cols-12 lg:gap-16">
             <Heading className="max-w-[14ch] lg:col-span-4">

@@ -3,7 +3,7 @@ import { ButtonLink, Container, Heading } from "@/components/ui";
 
 export function CtaBand({
   title = "Tell us what your inbox looks like.",
-  body = "Thirty minutes, a real read on your ticket volume, and a staffing estimate you can keep whether or not you hire us.",
+  body = "Thirty minutes and your recent tickets. You get an hours estimate priced from real volume, not a guess, and you keep it whether or not you hire us.",
 }: {
   title?: string;
   body?: string;

@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { LinkedinLogoIcon } from "@phosphor-icons/react/dist/ssr";
-import { CTA, nav, services, site } from "@/lib/site";
+import { InstagramLogoIcon, LinkedinLogoIcon } from "@phosphor-icons/react/dist/ssr";
+import { CTA, doorsFor, markets, nav, partsOf, site } from "@/lib/site";
 import { Container } from "@/components/ui";
 import { Logo } from "@/components/logo";
 
@@ -34,22 +34,50 @@ export function SiteFooter() {
               >
                 <LinkedinLogoIcon weight="fill" className="size-6" />
               </a>
+              {/* Instagram's own gradient, for the same reason as the blue above. */}
+              <a
+                href={site.social.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Zulaiz on Instagram, opens in a new tab"
+                className="grid size-11 place-items-center rounded-[10px] bg-[linear-gradient(45deg,#f9ce34_0%,#ee2a7b_50%,#6228d7_100%)] text-white shadow-[0_10px_24px_-14px_rgba(238,42,123,0.8)] transition-[transform,filter] duration-200 hover:-translate-y-0.5 hover:brightness-110"
+              >
+                <InstagramLogoIcon weight="regular" className="size-6" />
+              </a>
             </div>
           </div>
 
           <nav aria-label="Services">
             <h2 className="text-sm font-semibold text-text">Services</h2>
+            {/* Every door, with the ecommerce parts tucked under theirs. */}
             <ul className="mt-4 grid gap-2.5">
-              {services.map((s) => (
-                <li key={s.slug}>
-                  <Link
-                    href={s.href}
-                    className="text-sm text-muted transition-colors hover:text-accent"
-                  >
-                    {s.navLabel}
-                  </Link>
-                </li>
-              ))}
+              {markets.flatMap((market) => doorsFor(market)).map((door) => {
+                const parts = partsOf(door);
+                return (
+                  <li key={door.slug}>
+                    <Link
+                      href={door.href}
+                      className="text-sm text-muted transition-colors hover:text-accent"
+                    >
+                      {door.navLabel}
+                    </Link>
+                    {parts.length ? (
+                      <ul className="mt-2 grid gap-1.5 border-l border-line pl-3">
+                        {parts.map((part) => (
+                          <li key={part.slug}>
+                            <Link
+                              href={part.href}
+                              className="text-sm text-subtle transition-colors hover:text-accent"
+                            >
+                              {part.navLabel}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    ) : null}
+                  </li>
+                );
+              })}
             </ul>
           </nav>
 

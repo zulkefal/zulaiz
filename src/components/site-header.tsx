@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { useMotionValueEvent, useScroll } from "motion/react";
 import { CaretDownIcon, ListIcon, XIcon } from "@phosphor-icons/react/dist/ssr";
-import { CTA, nav, services } from "@/lib/site";
+import { CTA, doorsFor, markets, nav } from "@/lib/site";
 import { Logo } from "@/components/logo";
 import { ServiceIcon } from "@/components/service-icon";
 import { ThemeToggle } from "@/components/theme-toggle";
@@ -106,19 +106,29 @@ function ServicesMenu({ active }: { active: boolean }) {
             id="services-menu"
             role="menu"
             aria-label="Services"
-            className="w-72 rounded-card border border-line bg-raised p-2 shadow-[0_24px_60px_-28px_hsl(var(--shadow-tint)/0.55)]"
+            className="w-80 rounded-card border border-line bg-raised p-2 shadow-[0_24px_60px_-28px_hsl(var(--shadow-tint)/0.55)]"
           >
-          {services.map((s) => (
-            <Link
-              key={s.slug}
-              href={s.href}
-              role="menuitem"
-              onClick={() => setOpen(false)}
-              className="flex items-center gap-3 rounded-input px-3 py-2.5 text-sm text-text transition-colors hover:bg-sunken"
-            >
-              <ServiceIcon name={s.icon} className="size-5 shrink-0 text-accent" />
-              <span>{s.name}</span>
-            </Link>
+          {/* One group per kind of customer, doors only. The ecommerce parts
+              are listed on the ecommerce page, not here. */}
+          {markets.map((market, mi) => (
+            <div key={market.id} className={mi > 0 ? "mt-1 border-t border-line pt-1" : ""}>
+              <p className="px-3 pb-1 pt-2 text-[11px] font-semibold uppercase tracking-wide text-subtle">
+                {market.label}
+              </p>
+              {doorsFor(market).map((door) => (
+                <div key={door.slug}>
+                  <Link
+                    href={door.href}
+                    role="menuitem"
+                    onClick={() => setOpen(false)}
+                    className="flex items-center gap-3 rounded-input px-3 py-2 text-sm font-medium text-text transition-colors hover:bg-sunken"
+                  >
+                    <ServiceIcon name={door.icon} className="size-5 shrink-0 text-accent" />
+                    <span>{door.name}</span>
+                  </Link>
+                </div>
+              ))}
+            </div>
           ))}
           <div className="mt-1 border-t border-line pt-1">
             <Link
@@ -235,19 +245,22 @@ export function SiteHeader() {
                 </Link>
                 {item.href === SERVICES_HREF ? (
                   <div className="mb-1 ml-3 grid gap-0.5 border-l border-line pl-3">
-                    {services.map((s) => (
-                      <Link
-                        key={s.slug}
-                        href={s.href}
-                        className="flex items-center gap-2.5 rounded-[10px] px-3 py-2 text-sm text-muted hover:bg-sunken hover:text-text"
-                      >
-                        <ServiceIcon
-                          name={s.icon}
-                          className="size-4 shrink-0 text-accent"
-                        />
-                        {s.navLabel}
-                      </Link>
-                    ))}
+                    {markets.flatMap((market) =>
+                      doorsFor(market).map((door) => (
+                        <div key={door.slug}>
+                          <Link
+                            href={door.href}
+                            className="flex items-center gap-2.5 rounded-[10px] px-3 py-2 text-sm font-medium text-text hover:bg-sunken"
+                          >
+                            <ServiceIcon
+                              name={door.icon}
+                              className="size-4 shrink-0 text-accent"
+                            />
+                            {door.navLabel}
+                          </Link>
+                        </div>
+                      )),
+                    )}
                   </div>
                 ) : null}
               </div>

@@ -1,11 +1,13 @@
 import {
   ArrowsClockwiseIcon,
   ChatsCircleIcon,
+  ClipboardTextIcon,
   EnvelopeSimpleIcon,
   GraduationCapIcon,
   HouseLineIcon,
   PackageIcon,
   StarIcon,
+  StorefrontIcon,
 } from "@phosphor-icons/react/dist/ssr";
 import type { Icon } from "@phosphor-icons/react";
 import type { Service } from "@/lib/site";
@@ -19,6 +21,8 @@ const map: Record<Service["icon"], Icon> = {
   star: StarIcon,
   house: HouseLineIcon,
   graduation: GraduationCapIcon,
+  clipboard: ClipboardTextIcon,
+  storefront: StorefrontIcon,
 };
 
 export function ServiceIcon({

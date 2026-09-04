@@ -104,7 +104,7 @@ npx serve out        # serve it exactly as a static host would
 Against the real `./out` served by a static file server:
 
 - All 13 internal links navigate and render the right page.
-- All 17 routes return 200; an unknown path returns the custom 404.
+- All 20 routes return 200; an unknown path returns the custom 404.
 - 28 images decode, none broken.
 - The contact form still posts to `https://formspree.io/f/xoeaporq`.
 - Light mode is the default and the theme toggle persists across reloads.

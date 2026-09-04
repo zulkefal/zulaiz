@@ -41,6 +41,8 @@ export default function PricingPage() {
               <p className="mt-5 max-w-[52ch] text-lg leading-relaxed text-muted">
                 Every channel bills at the same rate. Buy it as hours a week or
                 as a fixed bundle of tickets, and change that when it changes.
+                Before you commit, we price it from your real tickets, not a
+                guess.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <ButtonLink href={CTA.primaryHref}>{CTA.primary}</ButtonLink>
@@ -73,11 +75,11 @@ export default function PricingPage() {
       <section className="border-b border-line py-16 sm:py-20">
         <Container>
           <Heading className="max-w-[22ch]">
-            What that looks like in practice.
+            Pay for 80 hours. Get 100.
           </Heading>
           <p className="mt-4 max-w-[58ch] text-base leading-relaxed text-muted">
-            The same rate, packaged three ways. Most brands land on Standard,
-            which bills 80 hours and delivers 100.
+            The same rate, packaged three ways. Standard bills 80 hours and
+            delivers 100, which is why most brands land there.
           </p>
 
           {/*
@@ -221,7 +223,7 @@ export default function PricingPage() {
                 Around the clock, multi brand or multi language?
               </h2>
               <p className="mt-2.5 max-w-[60ch] text-base leading-relaxed text-muted">
-                Coverage that never sleeps needs enough agents to rotate through
+                Coverage that never sleeps needs enough human agents to rotate through
                 the night, so it is quoted rather than listed. Contractual SLAs,
                 a named account manager, security review, DPA and BAA are all on
                 the table.
@@ -246,8 +248,8 @@ export default function PricingPage() {
       </section>
 
       <CtaBand
-        title="Not sure how many hours you need?"
-        body="Send us three months of ticket exports. We will come back with an hours estimate and what it costs, in writing, before you commit to anything."
+        title="Not sure? Start with a two-week pilot."
+        body="Two weeks on the Part time package at the same rate. Stop at the end and keep the voice guide and macros. Or send us three months of ticket exports first and we will come back with an hours estimate and what it costs, in writing."
       />
     </>
   );

@@ -12,7 +12,7 @@ import type { Tool } from "@/lib/site";
   The overview at /services passes all 23 curated tools and gets three
   rings. A service page passes only the tools for that job, eight to ten,
   and gets a single ring: split over two, the inner ring held three chips
-  and the whole thing read as scattered. Eleven or twelve get two rings.
+  and the whole thing read as scattered. Eleven to sixteen get two rings.
   The split is decided by count alone, so callers never think about rings.
   `compact` shrinks the container so a small set sits closer together.
 
@@ -37,7 +37,9 @@ const THREE_RINGS: RingSpec[] = [
 ];
 
 function layoutFor(total: number): RingSpec[] {
-  if (total > 12) return THREE_RINGS;
+  /* Three rings only from seventeen up. Below that the outer ring of the
+     three-ring layout would hold one or two stragglers. */
+  if (total > 16) return THREE_RINGS;
   if (total <= 10) {
     return [{ count: total, diameter: 86, duration: 64, reverse: false }];
   }

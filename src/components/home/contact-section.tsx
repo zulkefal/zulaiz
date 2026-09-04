@@ -18,8 +18,9 @@ export function ContactSection() {
               Tell us what your inbox looks like.
             </Heading>
             <p className="mt-5 max-w-[52ch] text-lg leading-relaxed text-muted">
-              Thirty minutes, a real read on your volume, and an hours estimate
-              you can keep whether or not you hire us.
+              Thirty minutes and your last three months of tickets. You get an
+              hours estimate priced from real volume, not a guess, and you keep
+              it whether or not you hire us.
             </p>
             <div className="mt-10 rounded-card border border-line bg-raised p-6 sm:p-8">
               <DemoForm />

@@ -19,8 +19,9 @@ export function PricingPreview() {
               {rate.amount} {rate.unit}. That is the whole price list.
             </Heading>
             <p className="mt-5 max-w-[52ch] text-lg leading-relaxed text-muted">
-              One rate for every channel. Pick the hours your queue needs, and
-              change that when the queue changes.
+              One rate for every channel, and for the back office too. Standard
+              pays for 80 hours and gets 100, and you can start with a two-week
+              pilot before committing to anything.
             </p>
           </div>
           <TextLink href="/pricing">See what moves the number</TextLink>
