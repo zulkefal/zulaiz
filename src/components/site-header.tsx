@@ -2,13 +2,140 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useMotionValueEvent, useScroll } from "motion/react";
-import { ListIcon, XIcon } from "@phosphor-icons/react/dist/ssr";
-import { CTA, featuredServices, nav } from "@/lib/site";
+import { CaretDownIcon, ListIcon, XIcon } from "@phosphor-icons/react/dist/ssr";
+import { CTA, nav, services } from "@/lib/site";
 import { Logo } from "@/components/logo";
+import { ServiceIcon } from "@/components/service-icon";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { ButtonLink } from "@/components/ui";
+
+const SERVICES_HREF = "/services";
+
+/*
+  Desktop "Services" entry. The label stays a real link to the overview page,
+  and a caret beside it opens a panel listing every service. Opens on hover
+  for mouse users and on click for keyboard and touch. Closes on Escape, on a
+  click anywhere outside, and on navigation.
+*/
+function ServicesMenu({ active }: { active: boolean }) {
+  const [open, setOpen] = useState(false);
+  const wrapRef = useRef<HTMLDivElement>(null);
+  const toggleRef = useRef<HTMLButtonElement>(null);
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  /* A short grace period on leave, cancelled on re-enter, so a diagonal
+     mouse path from the label into the panel does not slam it shut. */
+  const cancelClose = () => {
+    if (closeTimer.current) {
+      clearTimeout(closeTimer.current);
+      closeTimer.current = null;
+    }
+  };
+  const scheduleClose = () => {
+    cancelClose();
+    closeTimer.current = setTimeout(() => setOpen(false), 160);
+  };
+  useEffect(() => cancelClose, []);
+
+  useEffect(() => {
+    if (!open) return;
+    const onPointerDown = (e: MouseEvent) => {
+      if (wrapRef.current && !wrapRef.current.contains(e.target as Node)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", onPointerDown);
+    return () => document.removeEventListener("mousedown", onPointerDown);
+  }, [open]);
+
+  return (
+    <div
+      ref={wrapRef}
+      className="relative"
+      onMouseEnter={() => {
+        cancelClose();
+        setOpen(true);
+      }}
+      onMouseLeave={scheduleClose}
+      onKeyDown={(e) => {
+        if (e.key === "Escape" && open) {
+          setOpen(false);
+          toggleRef.current?.focus();
+        }
+      }}
+    >
+      <div
+        className={`flex items-center rounded-full transition-colors ${
+          active ? "text-accent" : "text-muted hover:text-text"
+        }`}
+      >
+        <Link
+          href={SERVICES_HREF}
+          aria-current={active ? "page" : undefined}
+          className="py-2 pl-3.5 pr-1 text-sm font-medium"
+        >
+          Services
+        </Link>
+        <button
+          ref={toggleRef}
+          type="button"
+          onClick={() => {
+            cancelClose();
+            setOpen(true);
+          }}
+          aria-expanded={open}
+          aria-controls="services-menu"
+          aria-label="Show all services"
+          className="grid size-7 place-items-center rounded-full"
+        >
+          <CaretDownIcon
+            weight="bold"
+            aria-hidden
+            className={`size-3.5 transition-transform duration-200 ${
+              open ? "rotate-180" : ""
+            }`}
+          />
+        </button>
+      </div>
+
+      {open ? (
+        <div className="absolute left-0 top-full z-50 pt-2">
+          <div
+            id="services-menu"
+            role="menu"
+            aria-label="Services"
+            className="w-72 rounded-card border border-line bg-raised p-2 shadow-[0_24px_60px_-28px_hsl(var(--shadow-tint)/0.55)]"
+          >
+          {services.map((s) => (
+            <Link
+              key={s.slug}
+              href={s.href}
+              role="menuitem"
+              onClick={() => setOpen(false)}
+              className="flex items-center gap-3 rounded-input px-3 py-2.5 text-sm text-text transition-colors hover:bg-sunken"
+            >
+              <ServiceIcon name={s.icon} className="size-5 shrink-0 text-accent" />
+              <span>{s.name}</span>
+            </Link>
+          ))}
+          <div className="mt-1 border-t border-line pt-1">
+            <Link
+              href={SERVICES_HREF}
+              role="menuitem"
+              onClick={() => setOpen(false)}
+              className="block rounded-input px-3 py-2 text-sm font-semibold text-accent transition-colors hover:bg-sunken"
+            >
+              All services
+            </Link>
+          </div>
+          </div>
+        </div>
+      ) : null}
+    </div>
+  );
+}
 
 export function SiteHeader() {
   const pathname = usePathname();
@@ -16,8 +143,9 @@ export function SiteHeader() {
   const [openedOn, setOpenedOn] = useState(pathname);
   const [lifted, setLifted] = useState(false);
 
-  /* Close the menu when the route changes, adjusted during render rather
-     than in an effect. */
+  /* Close the mobile menu when the route changes, adjusted during render
+     rather than in an effect. The desktop services panel closes itself on
+     item click, and remounts on navigation anyway. */
   if (openedOn !== pathname) {
     setOpenedOn(pathname);
     setOpen(false);
@@ -44,6 +172,11 @@ export function SiteHeader() {
               item.href === "/"
                 ? pathname === "/"
                 : pathname.startsWith(item.href);
+
+            if (item.href === SERVICES_HREF) {
+              return <ServicesMenu key={item.href} active={active} />;
+            }
+
             return (
               <Link
                 key={item.href}
@@ -93,25 +226,32 @@ export function SiteHeader() {
         >
           <nav aria-label="Mobile" className="flex flex-col">
             {nav.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="rounded-[10px] px-3 py-2.5 text-base font-medium text-text hover:bg-sunken"
-              >
-                {item.label}
-              </Link>
-            ))}
-            <div className="mt-3 grid gap-1 border-t border-line pt-3">
-              {featuredServices.map((s) => (
+              <div key={item.href}>
                 <Link
-                  key={s.slug}
-                  href={s.href}
-                  className="rounded-[10px] px-3 py-2 text-sm text-muted hover:bg-sunken hover:text-text"
+                  href={item.href}
+                  className="block rounded-[10px] px-3 py-2.5 text-base font-medium text-text hover:bg-sunken"
                 >
-                  {s.navLabel}
+                  {item.label}
                 </Link>
-              ))}
-            </div>
+                {item.href === SERVICES_HREF ? (
+                  <div className="mb-1 ml-3 grid gap-0.5 border-l border-line pl-3">
+                    {services.map((s) => (
+                      <Link
+                        key={s.slug}
+                        href={s.href}
+                        className="flex items-center gap-2.5 rounded-[10px] px-3 py-2 text-sm text-muted hover:bg-sunken hover:text-text"
+                      >
+                        <ServiceIcon
+                          name={s.icon}
+                          className="size-4 shrink-0 text-accent"
+                        />
+                        {s.navLabel}
+                      </Link>
+                    ))}
+                  </div>
+                ) : null}
+              </div>
+            ))}
             <ButtonLink href={CTA.primaryHref} className="mt-4 w-full">
               {CTA.primary}
             </ButtonLink>
