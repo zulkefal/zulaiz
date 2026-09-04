@@ -9,11 +9,12 @@ export function Hero() {
         <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-14">
           <div className="lg:col-span-7">
             <Heading as="h1" size="xl" className="max-w-[20ch]">
-              Support people actually rate.
+              We don’t just answer messages. We take care of people.
             </Heading>
-            <p className="mt-6 max-w-[48ch] text-lg leading-relaxed text-muted">
-              Email, live chat, WISMO, guest messaging and student enquiries,
-              for ecommerce brands, rental hosts and course creators.
+            <p className="mt-6 max-w-[52ch] text-lg leading-relaxed text-muted">
+              Real people handling your emails, live chats, WISMO, guest
+              messages and student enquiries, so your customers get the help
+              they need without everything landing on your plate.
             </p>
 
             {/*

@@ -104,7 +104,7 @@ export function DemoForm() {
         <CheckCircleIcon weight="duotone" aria-hidden className="size-9 text-accent" />
         <h2 className="mt-4 text-2xl font-semibold">Request received</h2>
         <p className="mt-3 max-w-[46ch] text-base leading-relaxed text-muted">
-          Thanks. We will reply within one business day with two or three times
+          Thanks. We will reply within a few hours with two or three times
           that work, plus the ticket audit questions we like to ask up front.
         </p>
       </div>

@@ -31,8 +31,8 @@ export default function ContactPage() {
               Book a demo
             </Heading>
             <p className="mt-4 max-w-[52ch] text-lg leading-relaxed text-muted">
-              Tell us what your inbox looks like today. We reply within one
-              business day with times that work.
+              Tell us what your inbox looks like today. We reply within a few
+              hours with times that work.
             </p>
             <div className="mt-10 rounded-card border border-line bg-raised p-6 sm:p-8">
               <DemoForm />
@@ -71,7 +71,7 @@ export default function ContactPage() {
                     aria-hidden
                     className="size-5 text-accent"
                   />
-                  Replies within one business day
+                  Replies within a few hours
                 </p>
               </div>
             </div>

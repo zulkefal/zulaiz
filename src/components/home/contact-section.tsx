@@ -58,7 +58,7 @@ export function ContactSection() {
                     aria-hidden
                     className="size-5 text-accent"
                   />
-                  Replies within one business day
+                  Replies within a few hours
                 </p>
               </div>
             </div>
