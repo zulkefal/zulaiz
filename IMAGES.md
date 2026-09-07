@@ -8,7 +8,7 @@ If an image ever needs regenerating, the house style is at the bottom.
 
 ## Already done
 
-Eleven images, all in `public/images/`, converted to JPEG and sized for the
+Twelve images, all in `public/images/`, converted to JPEG and sized for the
 web. The two newest arrived as 1.8 MB PNGs and were converted with sips at
 quality 84, which brought them under 300 KB each. Masters and pre-crop originals are in `source-images/`, gitignored.
 
@@ -24,6 +24,7 @@ quality 84, which brought them under 300 KB each. Masters and pre-crop originals
 | `banner-virtual-assistance.jpg` | `/services/virtual-assistance` | 1915 x 821 |
 | `banner-ecommerce-support.jpg` | `/services/ecommerce-support` | 1915 x 821 |
 | `banner-guest-communication.jpg` | `/services/guest-communication` | 1915 x 821 |
+| `banner-notary-support.jpg` | `/services/notary-support` | 1915 x 821 |
 | `og.jpg` | Open Graph and Twitter cards | 1730 x 909 |
 
 Three constraints worth keeping if any of these are ever replaced:
@@ -63,6 +64,8 @@ work in this tool". None were redrawn or recoloured beyond what is noted.
 | `hospitable.png` | hospitable.com apple-touch-icon, 541px, rounded tile |
 | `teachable.png` | teachable.com favicon, 256px, corners rounded to match its app icon |
 | `smoobu.png` | smoobu.com favicon; the white S lifted off the blue tile and recoloured in that blue, 109px |
+| `snapdocs.svg` | snapdocs.com, Snapdocs-Mark-Main.svg |
+| `notarygadget.png` | notarygadget.com apple-touch-icon, 180px, corners rounded. Notary Cafe and Pavaso have no usable mark and show monograms |
 
 Two rules the component relies on: chips are white in both themes because
 these marks are drawn for white, and files render at 22px on desktop and

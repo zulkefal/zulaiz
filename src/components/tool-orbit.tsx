@@ -17,8 +17,8 @@ import type { Tool } from "@/lib/site";
   `compact` shrinks the container so a small set sits closer together.
 
   Logos are the brands' own marks, served from /images/tools; anything
-  without one shows a monogram in the accent, so nothing is dropped for lack
-  of an SVG. Sizes are percentages of the container so the whole thing scales
+  without one shows a monogram, filled in the brand's colour when `tone` is
+  set and in the accent otherwise, so nothing is dropped for lack of an SVG. Sizes are percentages of the container so the whole thing scales
   with the viewport. Motion is switched off under prefers-reduced-motion.
 */
 function monogram(name: string) {
@@ -118,7 +118,10 @@ export function ToolOrbit({
                       do not fit a 350px circle without overlapping. The
                       logo or monogram still identifies each one, and the
                       full list is in the aria-label. */}
-                  <span className="grid size-8 place-items-center rounded-full border border-line bg-white shadow-[0_10px_24px_-14px_hsl(var(--shadow-tint)/0.5)] dark:border-white/15 sm:size-11">
+                  <span
+                    className="grid size-8 place-items-center rounded-full border border-line bg-white shadow-[0_10px_24px_-14px_hsl(var(--shadow-tint)/0.5)] dark:border-white/15 sm:size-11"
+                    style={!t.logo && t.tone ? { backgroundColor: t.tone, borderColor: t.tone } : undefined}
+                  >
                     {t.logo ? (
                       <Image
                         src={t.logo}
@@ -130,7 +133,11 @@ export function ToolOrbit({
                         className="size-4 object-contain sm:size-[22px]"
                       />
                     ) : (
-                      <span className="text-[10px] font-semibold tracking-tight text-accent sm:text-xs">
+                      <span
+                        className={`text-[10px] font-semibold tracking-tight sm:text-xs ${
+                          t.tone ? "text-white" : "text-accent"
+                        }`}
+                      >
                         {monogram(t.name)}
                       </span>
                     )}

@@ -51,7 +51,10 @@ export function SiteFooter() {
             <h2 className="text-sm font-semibold text-text">Services</h2>
             {/* Every door, with the ecommerce parts tucked under theirs. */}
             <ul className="mt-4 grid gap-2.5">
-              {markets.flatMap((market) => doorsFor(market)).map((door) => {
+              {markets
+                .flatMap((market) => doorsFor(market))
+                .filter((door) => door.placement?.footer !== false)
+                .map((door) => {
                 const parts = partsOf(door);
                 return (
                   <li key={door.slug}>

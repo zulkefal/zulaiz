@@ -33,6 +33,14 @@ export function pageMetadata({
     title,
     description,
     alternates: { canonical: url },
-    openGraph: { title, description, url },
+    /*
+      Next replaces a parent's openGraph object rather than merging into it,
+      so without images here every page lost the og:image the root layout
+      sets. The site card is repeated so link previews keep their picture.
+    */
+    openGraph: { title, description, url, images: ["/images/og.jpg"] },
+    /* Same story for the Twitter card: set per page or every page shows the
+       site-level title and description. */
+    twitter: { card: "summary_large_image", title, description, images: ["/images/og.jpg"] },
   };
 }

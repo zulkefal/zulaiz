@@ -6,6 +6,7 @@ import {
   GraduationCapIcon,
   HouseLineIcon,
   PackageIcon,
+  SignatureIcon,
   StarIcon,
   StorefrontIcon,
 } from "@phosphor-icons/react/dist/ssr";
@@ -23,6 +24,7 @@ const map: Record<Service["icon"], Icon> = {
   graduation: GraduationCapIcon,
   clipboard: ClipboardTextIcon,
   storefront: StorefrontIcon,
+  signature: SignatureIcon,
 };
 
 export function ServiceIcon({

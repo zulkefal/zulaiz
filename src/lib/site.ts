@@ -40,13 +40,14 @@ export const nav = [
   and live chat appear there too, since a store needs them as much as a
   course creator does.
 */
-export type MarketId = "ecommerce" | "rentals" | "courses" | "everyone";
+export type MarketId = "ecommerce" | "rentals" | "courses" | "everyone" | "notaries";
 export type Market = { id: MarketId; label: string };
 export const markets: Market[] = [
   { id: "ecommerce", label: "For ecommerce brands" },
   { id: "rentals", label: "For rental hosts" },
   { id: "courses", label: "For course creators" },
   { id: "everyone", label: "For everyone" },
+  { id: "notaries", label: "For notaries and signing agents" },
 ];
 
 export type Service = {
@@ -56,6 +57,34 @@ export type Service = {
   parts?: string[];
   /* A part points back at its bundle, for breadcrumbs. */
   parent?: string;
+  /*
+    Where a door appears besides its own page and the services dropdown.
+    Both default to true; a niche landing page can opt out of the homepage
+    tiles and the footer column and still be a full page in the menu.
+  */
+  placement?: { home?: boolean; footer?: boolean };
+  /*
+    A page with its own rate. Rendered as a pricing section on that page;
+    the site-wide pricing page stays as it is.
+  */
+  pricing?: {
+    rate: string;
+    unit: string;
+    intro: string;
+    note: string;
+    tiers: {
+      name: string;
+      monthly: string;
+      measure: string;
+      equivalent: string;
+      bonus?: string;
+      badge?: string;
+      featured?: boolean;
+      suits: string;
+    }[];
+  };
+  /* A short block pointing at a related page, shown before the closing CTA. */
+  related?: { title: string; body: string; href: string; label: string };
   name: string;
   navLabel: string;
   href: string;
@@ -77,7 +106,8 @@ export type Service = {
     | "house"
     | "graduation"
     | "clipboard"
-    | "storefront";
+    | "storefront"
+    | "signature";
   image?: { src: string; alt: string };
   /* Only the ecommerce door has one: the home page bento tile uses a different crop. */
   tileImage?: { src: string; alt: string };
@@ -681,9 +711,130 @@ export const services: Service[] = [
       title: "Got a list of things you keep not getting to?",
       body: "Send it over or book thirty minutes. We will tell you which of it we can take, how many hours it needs and what it costs, in writing, before you commit to anything.",
     },
+    related: {
+      title: "Notary or signing agent?",
+      body: "There is a page written for you: Notary Cafe, SnapDocs and Pavaso profiles kept current, completion reports filed after every signing, and every appointment invoiced and logged.",
+      href: "/services/notary-support",
+      label: "Virtual Assistance for notaries",
+    },
     tools: ["Google Sheets", "Google Docs", "Gmail", "Excel", "Outlook", "Notion", "Airtable", "Trello", "Asana", "ClickUp", "Shopify", "HubSpot", "QuickBooks", "Xero"],
     toolsNote:
       "Your Sheets and Docs, your Excel and Outlook, your Notion, Airtable, Trello or Asana boards, your Shopify admin, your HubSpot, your QuickBooks or Xero. We work inside them as named users, so the record of the work stays yours.",
+    featured: true,
+  },
+  {
+    slug: "notary-support",
+    market: "notaries",
+    placement: { home: false, footer: false },
+    name: "Virtual Assistance for Notaries and Signing Agents",
+    navLabel: "Notaries and signing agents",
+    href: "/services/notary-support",
+    summary:
+      "The admin between signings, handled by a named human assistant: your Notary Cafe, SnapDocs and Pavaso profiles kept current, completion reports filed after every signing, and every appointment invoiced and logged.",
+    metaDescription:
+      "Virtual assistant for notary signing agents: Notary Cafe, SnapDocs and Pavaso profiles, completion reports and invoicing handled. From $10 an hour.",
+    icon: "signature",
+    image: {
+      src: "/images/banner-notary-support.jpg",
+      alt: "A mobile notary's car parked outside a house at golden hour, a leather folio of signed documents, a stamp, a pen and a phone on the passenger seat",
+    },
+    metrics: [
+      { value: "Same day", label: "Completion reports filed after every signing" },
+      { value: "2 days", label: "From first call to your first task list" },
+    ],
+    scope: [
+      {
+        group: "Signing platform profiles",
+        items: [
+          "Notary Cafe, SnapDocs and Pavaso profiles kept current: availability, coverage area and fees",
+          "Commission, E&O, background check and certification dates tracked and renewed before they lapse",
+          "New platform sign-ups completed with your documents, so you appear where the orders are",
+        ],
+      },
+      {
+        group: "Completion reports",
+        items: [
+          "Completion confirmations submitted to the platform or the hiring party after every signing",
+          "Tracking numbers, drop-off times and signing notes recorded where the hiring party expects them",
+          "Missing or rejected reports chased the same day, before they hold up your fee",
+        ],
+      },
+      {
+        group: "Invoicing and payment logging",
+        items: [
+          "Every signing invoiced to the client or signing service within 24 hours, at your fee schedule",
+          "Payments logged against invoices, and overdue fees chased on a schedule you approve",
+          "Mileage, fees and expenses recorded in QuickBooks, Xero or a sheet, ready for your accountant",
+        ],
+      },
+    ],
+    approach: [
+      {
+        title: "Start with your platforms",
+        body: "The first call lists every platform you are on, the fee schedule you work to and the documents each one asks for. Your assistant gets a named login where the platform allows it and a written procedure per platform before touching anything.",
+      },
+      {
+        title: "Work the trail after each signing",
+        body: "Every signing leaves the same three things behind: a completion report, an invoice and a payment to watch for. Your assistant clears that trail every working day, so you finish one signing and drive to the next.",
+      },
+      {
+        title: "Report every week",
+        body: "A short written note each week: signings invoiced, fees outstanding, profiles renewed, dates coming up. Questions are batched, so you are interrupted once, not between every appointment.",
+      },
+    ],
+    faq: [
+      {
+        q: "Which platforms do you work in?",
+        a: "Notary Cafe, SnapDocs and Pavaso for profiles and completion reports, plus whatever the agencies you work with use for confirmations. Invoicing and payments in QuickBooks, Xero, Notary Gadget or a shared sheet, whichever you already run.",
+      },
+      {
+        q: "Do you handle the documents themselves?",
+        a: "No. Documents stay with you, and nothing from a signer's file is ever copied into a tool of ours. The assistant works the administrative trail around a signing: profiles, reports, invoices and payment logs.",
+      },
+      {
+        q: "How do you access my platform accounts safely?",
+        a: "Where a platform supports team or delegate access, your assistant gets a named login with the least access needed. Where it does not, we agree in writing what is shared and how, two-factor stays on your device, and access is removed the day an engagement ends.",
+      },
+    ],
+    cta: {
+      title: "Want the admin between signings handled?",
+      body: "Book thirty minutes and tell us which platforms you are on and how many signings you do a week. We will come back with the hours it needs and what it costs, in writing.",
+    },
+    pricing: {
+      rate: "$10",
+      unit: "an hour",
+      intro: "The same three packages as every other service, at the notary rate. Hours flex month to month, and a two-week pilot on Part time is there if you would rather try it first.",
+      note: "Prices exclude tax. Three month initial term, then rolling monthly with 30 days notice, and you can move between the three at any point.",
+      tiers: [
+        {
+          name: "Part time",
+          monthly: "$400",
+          measure: "10 hours a week",
+          equivalent: "40 hours a month",
+          suits: "One signing agent doing a handful of appointments a week.",
+        },
+        {
+          name: "Standard",
+          monthly: "$800",
+          measure: "20 hours a week",
+          equivalent: "80 hours billed a month",
+          bonus: "Plus 20 hours free, so 100 hours in total",
+          badge: "Most sold",
+          featured: true,
+          suits: "A busy solo agent, or two agents sharing one assistant.",
+        },
+        {
+          name: "Full time",
+          monthly: "$1,600",
+          measure: "40 hours a week",
+          equivalent: "160 hours a month",
+          suits: "A signing service running a roster of notaries.",
+        },
+      ],
+    },
+    tools: ["Notary Cafe", "SnapDocs", "Pavaso", "Notary Gadget", "QuickBooks", "Xero", "Google Sheets", "Google Docs", "Gmail", "Outlook"],
+    toolsNote:
+      "Your Notary Cafe, SnapDocs and Pavaso profiles, your QuickBooks or Xero, your Sheets and your inbox. Your assistant works inside them as a named user, so the record of every signing stays yours.",
     featured: true,
   },
 ];
@@ -907,6 +1058,10 @@ export const faqs = [
     a: "Two days is typical for email and WISMO, covering the audit, voice guide, macros, access and training. Live chat usually follows a few days later, once the human agents are confident on the catalogue. If you are mid peak and need cover sooner, say so on the call and we will tell you honestly whether we can do it well.",
   },
   {
+    q: "Is everything really $7 an hour?",
+    a: "Everything except Virtual Assistance for notaries and signing agents, which is $10 an hour because the work is platform-specific and a missed report or wrong invoice costs a signing fee. Same three packages, different rate, and it has its own page.",
+  },
+  {
     q: "Can we try it before committing?",
     a: "Yes. Start with a two-week pilot on the Part time package, billed at the same rate. Stop at the end of it and you keep the voice guide and macros we wrote and owe nothing more. Carry on and the two weeks count toward the initial term.",
   },
@@ -977,13 +1132,15 @@ export const integrations = [
   Tools the team works in, grouped for the services page. `logo` points at a
   brand mark in public/images/tools, pulled from each vendor's own site or an
   open logo collection; entries without one render a monogram. `orbit` marks
-  the curated 23 of the 50 that fit on the three rings without overlapping.
+  the curated 23 of the 54 that fit on the three rings without overlapping.
   The others are still tools we work in, and several appear on the service
   pages, which orbit only the tools relevant to that job.
 */
 export type Tool = {
   name: string;
   logo?: string;
+  /** Fill colour for a monogram chip, so a tool without a mark still reads as a brand. */
+  tone?: string;
   group: string;
   orbit?: boolean;
 };
@@ -1044,6 +1201,13 @@ export const tools: Tool[] = [
   { name: "HubSpot", logo: "/images/tools/hubspot.svg", group: "Admin and back office" },
   { name: "QuickBooks", logo: "/images/tools/quickbooks.svg", group: "Admin and back office" },
   { name: "Xero", logo: "/images/tools/xero.svg", group: "Admin and back office" },
+  // Notary platforms. Off the overview orbit; on the notary page. Notary
+  // Cafe and Pavaso have no usable mark yet and render as filled monograms
+  // in the colours of their own favicons: coffee brown and navy.
+  { name: "Notary Cafe", tone: "#5b3a29", group: "Notary platforms" },
+  { name: "SnapDocs", logo: "/images/tools/snapdocs.svg", group: "Notary platforms" },
+  { name: "Pavaso", tone: "#1f3b73", group: "Notary platforms" },
+  { name: "Notary Gadget", logo: "/images/tools/notarygadget.png", group: "Notary platforms" },
   // Working with you
   { name: "Slack", logo: "/images/tools/slack.svg", group: "Working with you", orbit: true },
   { name: "Discord", logo: "/images/tools/discord.svg", group: "Working with you", orbit: true },

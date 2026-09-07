@@ -25,6 +25,7 @@ export function StructuredData() {
       "Short-term rental guest communication",
       "Student and member support",
       "Virtual Assistance and back-office admin",
+      "Virtual assistance for notaries and signing agents",
     ],
   };
 

@@ -124,7 +124,7 @@ function ServicesMenu({ active }: { active: boolean }) {
                     className="flex items-center gap-3 rounded-input px-3 py-2 text-sm font-medium text-text transition-colors hover:bg-sunken"
                   >
                     <ServiceIcon name={door.icon} className="size-5 shrink-0 text-accent" />
-                    <span>{door.name}</span>
+                    <span>{door.navLabel}</span>
                   </Link>
                 </div>
               ))}

@@ -23,7 +23,12 @@ const layout: Record<string, string> = {
 };
 
 export function ServicesBento() {
-  const doors = markets.flatMap((m) => doorsFor(m).map((d) => ({ door: d, label: m.label })));
+  /* Doors that opted out of the homepage (placement.home false) are skipped. */
+  const doors = markets.flatMap((m) =>
+    doorsFor(m)
+      .filter((d) => d.placement?.home !== false)
+      .map((d) => ({ door: d, label: m.label })),
+  );
   const [{ door: lead }, ...rest] = doors;
   const parts = partsOf(lead);
 
