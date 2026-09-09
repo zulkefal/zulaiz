@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/seo";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { CheckIcon } from "@phosphor-icons/react/dist/ssr";
-import { CTA, commitments, faqs, included, rate, rateNotes, ticketBundle } from "@/lib/site";
+import { CTA, commitments, faqs, included, rate, rateNotes, ticketBundle, trial } from "@/lib/site";
 import { FaqAccordion } from "@/components/faq-accordion";
 import { CtaBand } from "@/components/cta-band";
 import { Reveal } from "@/components/reveal";
@@ -11,7 +11,7 @@ import { ButtonLink, Container, Heading } from "@/components/ui";
 export const metadata: Metadata = pageMetadata({
   title: "Pricing",
   description:
-    "One flat rate of $7 an hour for every channel. From $280 a month for 10 hours a week, $560 for 20 hours plus 20 free, or 500 tickets for $350.",
+    "$8 an hour for 10 hours a week, $7 from 20 hours a week. From $320 a month, or 500 tickets for $350, every channel included, and the first five days are free.",
   path: "/pricing",
 });
 
@@ -36,13 +36,12 @@ export default function PricingPage() {
                 <span className="text-xl text-muted">{rate.unit}</span>
               </div>
               <Heading as="h1" size="lg" className="mt-6 max-w-[18ch]">
-                One rate, three ways to buy it.
+                {trial.title}
               </Heading>
               <p className="mt-5 max-w-[52ch] text-lg leading-relaxed text-muted">
-                Every channel bills at the same rate. Buy it as hours a week or
-                as a fixed bundle of tickets, and change that when it changes.
-                Before you commit, we price it from your real tickets, not a
-                guess.
+                Part time bills at $8 an hour, Standard and Full time at $7.
+                Buy it as hours a week or as a fixed bundle of tickets, and
+                change that when it changes. {trial.body}
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <ButtonLink href={CTA.primaryHref}>{CTA.primary}</ButtonLink>
@@ -75,11 +74,12 @@ export default function PricingPage() {
       <section className="border-b border-line py-16 sm:py-20">
         <Container>
           <Heading className="max-w-[22ch]">
-            Pay for 80 hours. Get 100.
+            Three packages. The $7 rate starts at 20 hours.
           </Heading>
           <p className="mt-4 max-w-[58ch] text-base leading-relaxed text-muted">
-            The same rate, packaged three ways. Standard bills 80 hours and
-            delivers 100, which is why most brands land there.
+            Part time is a first pair of hands at $8 an hour. Standard doubles
+            the hours and drops the rate to $7, which is why most brands land
+            there.
           </p>
 
           {/*
@@ -121,11 +121,6 @@ export default function PricingPage() {
                   <div className="mt-5 border-t border-line pt-5">
                     <p className="text-base font-medium text-text">{c.measure}</p>
                     <p className="mt-1 text-sm text-subtle">{c.equivalent}</p>
-                    {c.bonus ? (
-                      <p className="mt-3 inline-flex rounded-full bg-accent-soft px-3 py-1 text-sm font-semibold text-accent">
-                        {c.bonus}
-                      </p>
-                    ) : null}
                   </div>
 
                   <ul className="mt-6 grid gap-3">
@@ -248,8 +243,8 @@ export default function PricingPage() {
       </section>
 
       <CtaBand
-        title="Not sure? Start with a two-week pilot."
-        body="Two weeks on the Part time package at the same rate. Stop at the end and keep the voice guide and macros. Or send us three months of ticket exports first and we will come back with an hours estimate and what it costs, in writing."
+        title="Not sure? Start with five free days."
+        body="Two hours a day for five working days, on any service, no card and nothing to sign. Or send us three months of ticket exports first and we will come back with an hours estimate and what it costs, in writing."
       />
     </>
   );

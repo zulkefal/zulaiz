@@ -61,7 +61,7 @@ function SubmitButton({ pending }: { pending: boolean }) {
           Sending
         </>
       ) : (
-        "Book a demo"
+        "Start free trial"
       )}
     </Button>
   );
@@ -180,7 +180,7 @@ export function DemoForm() {
         </div>
 
         <div className="grid content-start gap-2">
-          <Label htmlFor="website">Store URL</Label>
+          <Label htmlFor="website">Website URL</Label>
           <input
             id="website"
             name="website"

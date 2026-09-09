@@ -21,7 +21,7 @@ export const metadata: Metadata = pageMetadata({
 /*
   Organised by who the customer is, not by channel. Ecommerce, rentals and
   courses each get one door: a bundle that covers everything that customer
-  needs, at the same rate. "For everyone" holds the channels any business
+  needs, in one package. "For everyone" holds the channels any business
   uses, email and live chat, plus Virtual Assistance. The ecommerce door
   has five parts underneath it, because a store needs all of them at once
   and should not have to pick from a menu. Parts with their own page link
@@ -39,7 +39,7 @@ export default function ServicesPage() {
       />
       <PageHeader
         title="Support shaped to who your customers are."
-        lead="One team for ecommerce brands, one for rental hosts, one for course creators, and Virtual Assistance for anyone drowning in admin. Each covers every channel that customer uses, at one rate."
+        lead="One team for ecommerce brands, one for rental hosts, one for course creators, and Virtual Assistance for anyone drowning in admin. Each covers every channel that customer uses, in one package."
       />
 
       {markets.map((market, mi) => {
@@ -104,7 +104,7 @@ export default function ServicesPage() {
               {parts.length ? (
                 <div className="mt-12 border-t border-line pt-10">
                   <h3 className="text-sm font-semibold text-subtle">
-                    What is inside, all at one rate
+                    What is inside, all in one package
                   </h3>
                   <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
                     {parts.map((part, i) => {

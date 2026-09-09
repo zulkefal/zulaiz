@@ -1,5 +1,5 @@
 import { CheckIcon } from "@phosphor-icons/react/dist/ssr";
-import { CTA, commitments, rate } from "@/lib/site";
+import { CTA, commitments, rate, trial } from "@/lib/site";
 import { ButtonLink, Container, Heading, TextLink } from "@/components/ui";
 import { Reveal } from "@/components/reveal";
 
@@ -16,12 +16,12 @@ export function PricingPreview() {
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
             <Heading className="max-w-[20ch]">
-              {rate.amount} {rate.unit}. That is the whole price list.
+              From {rate.amount} {rate.unit}. {trial.title}
             </Heading>
             <p className="mt-5 max-w-[52ch] text-lg leading-relaxed text-muted">
-              One rate for every channel, and for the back office too. Standard
-              pays for 80 hours and gets 100, and you can start with a two-week
-              pilot before committing to anything.
+              Standard and Full time bill at $7 an hour, Part time at $8. Every
+              package covers every channel and the back office, and the first
+              five days cost nothing.
             </p>
           </div>
           <TextLink href="/pricing">See what moves the number</TextLink>
@@ -76,11 +76,6 @@ export function PricingPreview() {
                     {c.measure}
                   </p>
                   <p className="mt-1 text-sm text-subtle">{c.equivalent}</p>
-                  {c.bonus ? (
-                    <p className="mt-3 inline-flex rounded-full bg-accent-soft px-3 py-1 text-sm font-semibold text-accent">
-                      {c.bonus}
-                    </p>
-                  ) : null}
                 </div>
 
                 <ul className="mt-6 grid gap-3">

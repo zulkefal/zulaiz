@@ -75,7 +75,7 @@ Two habits worth keeping:
 
 Visits are a weak signal. The number worth watching is demo requests.
 
-Umami can count a click as an event. To track the "Book a demo" button, add
+Umami can count a click as an event. To track the "Start free trial" button, add
 `data-umami-event` to it:
 
 ```tsx

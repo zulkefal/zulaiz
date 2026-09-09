@@ -107,12 +107,13 @@ export default async function ServicePage({
         <section id="inside" className="scroll-mt-20 border-b border-line bg-sunken pb-20 pt-14 sm:pb-24 sm:pt-16">
           <Container>
             <Heading className="max-w-[20ch]">
-              Five jobs. One team, one rate.
+              Five jobs. One team, one package.
             </Heading>
             <p className="mt-4 max-w-[58ch] text-base leading-relaxed text-muted">
               One team covers all five, and you buy hours, not services. Start
               with the one that hurts most and add the rest whenever you are
-              ready, at the same rate. Each has its own page for the detail.
+              ready, and the price does not change. Each has its own page for
+              the detail.
             </p>
             {/*
               Parts with a page link to it; the two without one are described
@@ -290,11 +291,6 @@ export default async function ServicePage({
                     <div className="mt-5 border-t border-line pt-5">
                       <p className="text-base font-medium text-text">{tier.measure}</p>
                       <p className="mt-1 text-sm text-subtle">{tier.equivalent}</p>
-                      {tier.bonus ? (
-                        <p className="mt-3 inline-flex rounded-full bg-accent-soft px-3 py-1 text-sm font-semibold text-accent">
-                          {tier.bonus}
-                        </p>
-                      ) : null}
                     </div>
                     <p className="mt-6 text-sm leading-relaxed text-subtle">{tier.suits}</p>
                     <ButtonLink

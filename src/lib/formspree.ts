@@ -25,7 +25,7 @@ export function buildPayload(data: ContactInput) {
     channels: data.channels.join(", "),
     volume: data.volume,
     message: data.message || "Not given",
-    _subject: `Demo request: ${data.company}`,
+    _subject: `Trial request: ${data.company}`,
   };
 }
 

@@ -17,10 +17,10 @@ export const site = {
 
 /* One CTA label per intent, used everywhere on the site. */
 export const CTA = {
-  primary: "Book a demo",
+  primary: "Start free trial",
   primaryHref: "/contact",
-  secondary: "See pricing",
-  secondaryHref: "/pricing",
+  secondary: "Book a consultation",
+  secondaryHref: "/contact",
 } as const;
 
 export const nav = [
@@ -77,7 +77,6 @@ export type Service = {
       monthly: string;
       measure: string;
       equivalent: string;
-      bonus?: string;
       badge?: string;
       featured?: boolean;
       suits: string;
@@ -205,7 +204,7 @@ export const services: Service[] = [
     faq: [
       {
         q: "Do we have to buy all of it?",
-        a: "No. Most stores start with the channel that hurts most, usually WISMO or email, and add live chat, returns and reviews as the team earns it. Everything bills at the same rate, so adding a channel is a conversation, not a new contract.",
+        a: "No. Most stores start with the channel that hurts most, usually WISMO or email, and add live chat, returns and reviews as the team earns it. Every channel comes out of the same hours, so adding one is a conversation, not a new contract.",
       },
       {
         q: "Which stores and helpdesks do you work in?",
@@ -643,7 +642,7 @@ export const services: Service[] = [
     metrics: [
       { value: "Daily", label: "Written handover of what got done and what is waiting" },
       { value: "2 days", label: "From first call to the first task list" },
-      { value: "$7/hr", label: "Same rate and packages as every other service" },
+      { value: "From $7/hr", label: "Same packages as every other service" },
     ],
     scope: [
       {
@@ -704,7 +703,7 @@ export const services: Service[] = [
       },
       {
         q: "Can I mix support and admin hours?",
-        a: "Yes. Virtual Assistance hours bill at the same rate and come out of the same Part time, Standard or Full time package, so a brand can split a week between the inbox and the back office and change the split as the month goes.",
+        a: "Yes. Virtual Assistance hours come out of the same Part time, Standard or Full time package as support, so a brand can split a week between the inbox and the back office and change the split as the month goes.",
       },
     ],
     cta: {
@@ -803,7 +802,7 @@ export const services: Service[] = [
     pricing: {
       rate: "$10",
       unit: "an hour",
-      intro: "The same three packages as every other service, at the notary rate. Hours flex month to month, and a two-week pilot on Part time is there if you would rather try it first.",
+      intro: "The same three packages as every other service, at a flat $10 an hour. Hours flex month to month, and the first five days are free if you would rather try it before committing.",
       note: "Prices exclude tax. Three month initial term, then rolling monthly with 30 days notice, and you can move between the three at any point.",
       tiers: [
         {
@@ -817,8 +816,7 @@ export const services: Service[] = [
           name: "Standard",
           monthly: "$800",
           measure: "20 hours a week",
-          equivalent: "80 hours billed a month",
-          bonus: "Plus 20 hours free, so 100 hours in total",
+          equivalent: "80 hours a month",
           badge: "Most sold",
           featured: true,
           suits: "A busy solo agent, or two agents sharing one assistant.",
@@ -935,6 +933,17 @@ export const testimonials = [
   },
 ];
 
+/*
+  The try-before-you-buy offer, quoted wherever pricing is discussed so the
+  terms never drift: two hours a day for five working days, on any service,
+  no card. It replaced a paid two-week pilot.
+*/
+export const trial = {
+  title: "The first five days are free.",
+  short: "Five free days",
+  body: "Two hours a day for five working days, on any service, with no card and nothing to sign. At the end you pick a package or walk away with the voice guide and macros we wrote.",
+};
+
 export const rate = {
   amount: "$7",
   unit: "an hour",
@@ -945,8 +954,6 @@ export type Commitment = {
   monthly: string;
   measure: string;
   equivalent: string;
-  /* Rendered as an accent line. Only the standard plan carries bonus hours. */
-  bonus?: string;
   points: string[];
   suits: string;
   badge?: string;
@@ -954,17 +961,17 @@ export type Commitment = {
 };
 
 /*
-  Priced off $7 an hour on a four week month, so every figure is exact:
-  10 hrs/wk = 40 billed = $280, 20 hrs/wk = 80 billed = $560, 40 hrs/wk = 160
-  billed = $1,120. The standard plan adds 20 hours at no charge, which brings its
-  effective rate to $5.60 an hour.
+  Two rates on a four week month, so every figure is exact. Part time bills
+  at $8: 10 hrs/wk = 40 hours = $320. Standard and Full time bill at $7:
+  20 hrs/wk = 80 hours = $560, 40 hrs/wk = 160 hours = $1,120. No bonus
+  hours; the step down in rate is what makes Standard the natural pick.
 */
 export const commitments: Commitment[] = [
   {
     name: "Part time",
-    monthly: "$280",
+    monthly: "$320",
     measure: "10 hours a week",
-    equivalent: "40 hours a month",
+    equivalent: "40 hours a month, at $8 an hour",
     points: [
       "Every channel we run",
       "Business hours in one time zone",
@@ -976,14 +983,13 @@ export const commitments: Commitment[] = [
     name: "Standard",
     monthly: "$560",
     measure: "20 hours a week",
-    equivalent: "80 hours billed a month",
-    bonus: "Plus 20 hours free, so 100 hours in total",
+    equivalent: "80 hours a month, at $7 an hour",
     points: [
       "Every channel we run",
       "One named human agent who learns your catalogue",
-      "Works out at $5.60 an hour, not $7",
+      "The $7 rate starts here",
     ],
-    suits: "The one most brands start on, and the best value on the page.",
+    suits: "The one most brands start on: twice the hours of Part time, at the lower rate.",
     badge: "Most sold",
     featured: true,
   },
@@ -991,7 +997,7 @@ export const commitments: Commitment[] = [
     name: "Full time",
     monthly: "$1,120",
     measure: "40 hours a week",
-    equivalent: "160 hours a month",
+    equivalent: "160 hours a month, at $7 an hour",
     points: [
       "Every channel we run",
       "Extended hours, weekends included",
@@ -1031,8 +1037,8 @@ export const callExpectations = [
 
 export const rateNotes = [
   {
-    title: "One rate, every channel",
-    body: "Email, live chat, WISMO, returns, guest messaging and social all bill at the same hourly rate. There is no premium channel and nothing is gated behind a bigger plan.",
+    title: "Every channel, every package",
+    body: "Email, live chat, WISMO, returns, guest messaging, student support and admin all come out of the same hours. There is no premium channel and nothing is gated behind a bigger plan.",
   },
   {
     title: "Hours flex month to month",
@@ -1040,15 +1046,15 @@ export const rateNotes = [
   },
   {
     title: "One package, inbox and back office",
-    body: "Support hours and Virtual Assistance hours come out of the same package at the same rate. Split a week between the queue and the admin however you like, and change the split as the month goes.",
+    body: "Support hours and Virtual Assistance hours come out of the same package. Split a week between the queue and the admin however you like, and change the split as the month goes.",
   },
   {
-    title: "Start with a two-week pilot",
-    body: "Two weeks on the Part time package at the same rate, then decide. Stop and you keep everything we built. Carry on and the fortnight counts toward the initial term.",
+    title: "Start with five free days",
+    body: "Two hours a day for five working days, on any service, with no card and nothing to sign. Then pick a package or walk away with everything we wrote.",
   },
   {
-    title: "The bonus hours are a real discount",
-    body: "The standard plan bills 80 hours and delivers 100, which works out at $5.60 an hour rather than $7. It is the only plan with bonus hours, and it is why most brands land there.",
+    title: "Why Part time costs a dollar more",
+    body: "Ten hours a week carries the same onboarding, QA and reporting as forty, so it bills at $8 an hour. From 20 hours a week the rate drops to $7, which is why most brands start on Standard.",
   },
 ];
 
@@ -1058,12 +1064,12 @@ export const faqs = [
     a: "Two days is typical for email and WISMO, covering the audit, voice guide, macros, access and training. Live chat usually follows a few days later, once the human agents are confident on the catalogue. If you are mid peak and need cover sooner, say so on the call and we will tell you honestly whether we can do it well.",
   },
   {
-    q: "Is everything really $7 an hour?",
-    a: "Everything except Virtual Assistance for notaries and signing agents, which is $10 an hour because the work is platform-specific and a missed report or wrong invoice costs a signing fee. Same three packages, different rate, and it has its own page.",
+    q: "Is everything $7 an hour?",
+    a: "Standard and Full time are. Part time is $8, because ten hours a week carries the same setup, QA and reporting as forty. Virtual Assistance for notaries and signing agents is $10 on every package and has its own page.",
   },
   {
     q: "Can we try it before committing?",
-    a: "Yes. Start with a two-week pilot on the Part time package, billed at the same rate. Stop at the end of it and you keep the voice guide and macros we wrote and owe nothing more. Carry on and the two weeks count toward the initial term.",
+    a: "Yes, free. The first five days cost nothing: two hours a day on any service, no card and nothing to sign. At the end you pick a package or walk away with the voice guide and macros we wrote.",
   },
   {
     q: "What happens if we stop?",
@@ -1071,7 +1077,7 @@ export const faqs = [
   },
   {
     q: "Do Virtual Assistance hours cost the same?",
-    a: "Yes. Admin work bills at the same rate as support and comes out of the same package, so you can split a week between the inbox and the back office and move the split as the month goes.",
+    a: "Yes. Admin work comes out of the same package as support, so you can split a week between the inbox and the back office and move the split as the month goes.",
   },
   {
     q: "Do we have to switch helpdesks?",
@@ -1079,7 +1085,7 @@ export const faqs = [
   },
   {
     q: "How is pricing calculated?",
-    a: "One flat rate of $7 an hour, for every channel. You pick how many hours a week you need and pay for those. The standard plan adds 20 hours a month at no charge, which brings it to $5.60 an hour. We do not gate channels behind bigger plans.",
+    a: "Two rates. Part time, 10 hours a week, bills at $8 an hour. Standard and Full time, 20 and 40 hours a week, bill at $7. Every package includes every channel and the back office, the first five days are free, and you can move between the three at any point.",
   },
   {
     q: "Who actually answers our tickets?",

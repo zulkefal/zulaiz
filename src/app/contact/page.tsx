@@ -7,9 +7,9 @@ import { DemoForm } from "@/components/demo-form";
 import { Container, Heading } from "@/components/ui";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Book a demo",
+  title: "Start your free trial",
   description:
-    "Book a thirty minute call. We read your recent tickets and come back with pod size, coverage hours and a monthly cost, whether or not you hire us.",
+    "Five free days on any service, or a thirty-minute consultation first. Tell us what your inbox looks like and we come back with the hours, coverage and monthly cost, whether or not you carry on.",
   path: "/contact",
 });
 
@@ -28,7 +28,7 @@ export default function ContactPage() {
         <div className="grid gap-14 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-7">
             <Heading as="h1" size="lg" className="max-w-[18ch]">
-              Book a demo
+              Start your free trial
             </Heading>
             <p className="mt-4 max-w-[52ch] text-lg leading-relaxed text-muted">
               Tell us what your inbox looks like today. We reply within a few

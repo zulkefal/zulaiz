@@ -21,7 +21,7 @@ export default function PrivacyPage() {
         },
         {
           heading: "Data we collect from this website",
-          prompt: "Demo request form fields, any analytics you run, and cookies set on the site.",
+          prompt: "Trial request form fields, any analytics you run, and cookies set on the site.",
         },
         {
           heading: "Data we process on behalf of clients",
