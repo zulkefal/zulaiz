@@ -26,6 +26,7 @@ export function StructuredData() {
       "Student and member support",
       "Virtual Assistance and back-office admin",
       "Virtual assistance for notaries and signing agents",
+      "Virtual assistance for real estate agents",
     ],
   };
 

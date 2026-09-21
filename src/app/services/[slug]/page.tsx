@@ -325,26 +325,33 @@ export default async function ServicePage({
         </Container>
       </section>
 
-      {service.related ? (
+      {service.related?.length ? (
         <section className="border-b border-line py-16 sm:py-20">
           <Container>
-            <div className="flex flex-col items-start gap-6 rounded-card border border-line bg-raised p-8 sm:flex-row sm:items-center sm:justify-between sm:p-10">
-              <div>
-                <h2 className="text-xl font-semibold">{service.related.title}</h2>
-                <p className="mt-2.5 max-w-[60ch] text-base leading-relaxed text-muted">
-                  {service.related.body}
-                </p>
-              </div>
-              <Link
-                href={service.related.href}
-                className="group inline-flex shrink-0 items-center gap-1.5 text-sm font-semibold text-accent hover:text-accent-hover"
-              >
-                {service.related.label}
-                <ArrowRightIcon
-                  weight="bold"
-                  className="size-4 transition-transform duration-200 ease-[var(--ease-out-soft)] group-hover:translate-x-1"
-                />
-              </Link>
+            <div className="grid gap-5">
+              {service.related.map((rel) => (
+                <div
+                  key={rel.href}
+                  className="flex flex-col items-start gap-6 rounded-card border border-line bg-raised p-8 sm:flex-row sm:items-center sm:justify-between sm:p-10"
+                >
+                  <div>
+                    <h2 className="text-xl font-semibold">{rel.title}</h2>
+                    <p className="mt-2.5 max-w-[60ch] text-base leading-relaxed text-muted">
+                      {rel.body}
+                    </p>
+                  </div>
+                  <Link
+                    href={rel.href}
+                    className="group inline-flex shrink-0 items-center gap-1.5 text-sm font-semibold text-accent hover:text-accent-hover"
+                  >
+                    {rel.label}
+                    <ArrowRightIcon
+                      weight="bold"
+                      className="size-4 transition-transform duration-200 ease-[var(--ease-out-soft)] group-hover:translate-x-1"
+                    />
+                  </Link>
+                </div>
+              ))}
             </div>
           </Container>
         </section>

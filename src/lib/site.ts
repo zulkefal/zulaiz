@@ -40,7 +40,7 @@ export const nav = [
   and live chat appear there too, since a store needs them as much as a
   course creator does.
 */
-export type MarketId = "ecommerce" | "rentals" | "courses" | "everyone" | "notaries";
+export type MarketId = "ecommerce" | "rentals" | "courses" | "everyone" | "notaries" | "realestate";
 export type Market = { id: MarketId; label: string };
 export const markets: Market[] = [
   { id: "ecommerce", label: "For ecommerce brands" },
@@ -48,6 +48,7 @@ export const markets: Market[] = [
   { id: "courses", label: "For course creators" },
   { id: "everyone", label: "For everyone" },
   { id: "notaries", label: "For notaries and signing agents" },
+  { id: "realestate", label: "For real estate agents" },
 ];
 
 export type Service = {
@@ -82,8 +83,8 @@ export type Service = {
       suits: string;
     }[];
   };
-  /* A short block pointing at a related page, shown before the closing CTA. */
-  related?: { title: string; body: string; href: string; label: string };
+  /* Short blocks pointing at related pages, shown before the closing CTA. */
+  related?: { title: string; body: string; href: string; label: string }[];
   name: string;
   navLabel: string;
   href: string;
@@ -106,7 +107,8 @@ export type Service = {
     | "graduation"
     | "clipboard"
     | "storefront"
-    | "signature";
+    | "signature"
+    | "key";
   image?: { src: string; alt: string };
   /* Only the ecommerce door has one: the home page bento tile uses a different crop. */
   tileImage?: { src: string; alt: string };
@@ -642,7 +644,7 @@ export const services: Service[] = [
     metrics: [
       { value: "Daily", label: "Written handover of what got done and what is waiting" },
       { value: "2 days", label: "From first call to the first task list" },
-      { value: "From $7/hr", label: "Same packages as every other service" },
+      { value: "$7/hr", label: "Starting rate, on the same packages as every other service" },
     ],
     scope: [
       {
@@ -710,12 +712,20 @@ export const services: Service[] = [
       title: "Got a list of things you keep not getting to?",
       body: "Send it over or book thirty minutes. We will tell you which of it we can take, how many hours it needs and what it costs, in writing, before you commit to anything.",
     },
-    related: {
-      title: "Notary or signing agent?",
-      body: "There is a page written for you: Notary Cafe, SnapDocs and Pavaso profiles kept current, completion reports filed after every signing, and every appointment invoiced and logged.",
-      href: "/services/notary-support",
-      label: "Virtual Assistance for notaries",
-    },
+    related: [
+      {
+        title: "Notary or signing agent?",
+        body: "There is a page written for you: Notary Cafe, SnapDocs and Pavaso profiles kept current, completion reports filed after every signing, and every appointment invoiced and logged.",
+        href: "/services/notary-support",
+        label: "Virtual Assistance for notaries",
+      },
+      {
+        title: "Real estate agent?",
+        body: "There is a page for you too: listings entered and kept current on the MLS, leads followed up in your CRM, showings scheduled and every transaction's paperwork chased to the finish.",
+        href: "/services/real-estate-support",
+        label: "Virtual Assistance for real estate agents",
+      },
+    ],
     tools: ["Google Sheets", "Google Docs", "Gmail", "Excel", "Outlook", "Notion", "Airtable", "Trello", "Asana", "ClickUp", "Shopify", "HubSpot", "QuickBooks", "Xero"],
     toolsNote:
       "Your Sheets and Docs, your Excel and Outlook, your Notion, Airtable, Trello or Asana boards, your Shopify admin, your HubSpot, your QuickBooks or Xero. We work inside them as named users, so the record of the work stays yours.",
@@ -833,6 +843,102 @@ export const services: Service[] = [
     tools: ["Notary Cafe", "SnapDocs", "Pavaso", "Notary Gadget", "QuickBooks", "Xero", "Google Sheets", "Google Docs", "Gmail", "Outlook"],
     toolsNote:
       "Your Notary Cafe, SnapDocs and Pavaso profiles, your QuickBooks or Xero, your Sheets and your inbox. Your assistant works inside them as a named user, so the record of every signing stays yours.",
+    featured: true,
+  },
+  {
+    slug: "real-estate-support",
+    market: "realestate",
+    placement: { home: false, footer: false },
+    name: "Virtual Assistance for Real Estate Agents",
+    navLabel: "Real estate agents",
+    href: "/services/real-estate-support",
+    summary:
+      "The admin between showings, handled by a named human assistant: listings entered and kept current on the MLS, leads followed up in your CRM, showings scheduled, and every transaction's paperwork chased to the finish.",
+    metaDescription:
+      "Virtual assistant for real estate agents: MLS listings kept current, CRM follow-ups, showings scheduled and transaction paperwork chased. From $7 an hour.",
+    icon: "key",
+    image: {
+      src: "/images/banner-real-estate-support.jpg",
+      alt: "A real estate agent's open car boot at the kerb outside a listed house at golden hour, with a folded for-sale sign, flyers, a lockbox and a tablet inside",
+    },
+    metrics: [
+      { value: "Same day", label: "Listing changes, price updates and new photos live on the MLS" },
+      { value: "$7/hr", label: "Starting rate, on the same packages as every other service" },
+      { value: "2 days", label: "From first call to your first task list" },
+    ],
+    scope: [
+      {
+        group: "Listings and the MLS",
+        items: [
+          "New listings entered on your MLS with photos ordered, descriptions written to your voice and every field checked",
+          "Price changes, status updates and open house times posted the day you decide them",
+          "Zillow, Realtor.com and your own site kept in step with the MLS",
+        ],
+      },
+      {
+        group: "Leads and follow-up",
+        items: [
+          "Every new lead logged in Follow Up Boss, kvCORE or Lofty and answered inside the hour it arrives",
+          "Follow-up sequences, past-client check-ins and review requests sent on the schedule you set",
+          "Your database cleaned: duplicates merged, stale contacts tagged, birthdays and anniversaries in the calendar",
+        ],
+      },
+      {
+        group: "Showings and calendar",
+        items: [
+          "Showings booked and confirmed through ShowingTime or by phone, with feedback collected after each one",
+          "Open houses prepared: sign-in sheets, flyers, neighbour invitations and the follow-up afterwards",
+          "Your calendar kept honest, with drive time between appointments and reminders the night before",
+        ],
+      },
+      {
+        group: "Transactions and paperwork",
+        items: [
+          "Contracts, disclosures and addenda sent for signature in DocuSign or Dotloop and chased until they are back",
+          "Every deadline in the contract on a shared timeline, with reminders to you and the other side",
+          "The file kept complete in SkySlope or Dotloop so your broker's compliance review passes first time",
+        ],
+      },
+    ],
+    approach: [
+      {
+        title: "Start with your systems",
+        body: "The first call lists your MLS, your CRM, your transaction platform and how you like a listing written. Your assistant gets a named login where the platform allows it and a written procedure per task before touching anything.",
+      },
+      {
+        title: "Work the day around your appointments",
+        body: "Listings, leads and paperwork move while you are in the car or at a showing. Your assistant clears the queue every working day, and anything that needs your decision comes as one batched message, not a call between appointments.",
+      },
+      {
+        title: "Report every week",
+        body: "A short written note each week: listings updated, leads answered and where they sit, deadlines coming up, documents still out for signature. Nothing about your business lives only in someone's head.",
+      },
+    ],
+    faq: [
+      {
+        q: "Which tools do you work in?",
+        a: "Follow Up Boss, kvCORE and Lofty for the CRM. Dotloop and SkySlope for transactions, DocuSign for signatures, ShowingTime for showings, and whatever MLS your board uses. Marketing in Mailchimp or your own system. All of it inside your accounts as a named user.",
+      },
+      {
+        q: "Can you enter listings on the MLS for me?",
+        a: "Where your MLS allows an assistant login or a licensed assistant, yes, with you reviewing before anything goes live. Where it does not, we prepare every field, photo and description so the entry takes you five minutes instead of an hour.",
+      },
+      {
+        q: "Do you deal with lenders or mortgage paperwork?",
+        a: "No. We work the agent's own admin: listings, leads, showings and the contract paperwork you are responsible for. Anything on the financing side stays with the buyer's lender and is not something we handle.",
+      },
+      {
+        q: "Will you talk to my clients?",
+        a: "As much or as little as you like. Some agents want every showing confirmation and follow-up to come from the assistant under your name; others want us to prepare and let you send. Either way, the voice guide we write together decides how it sounds.",
+      },
+    ],
+    cta: {
+      title: "Want the admin between showings handled?",
+      body: "Book thirty minutes and tell us how many active listings and open transactions you carry. We will come back with the hours it needs and what it costs, in writing.",
+    },
+    tools: ["Follow Up Boss", "kvCORE", "Lofty", "Zillow", "ShowingTime", "Dotloop", "SkySlope", "DocuSign", "Mailchimp", "Google Sheets", "Gmail", "Calendly"],
+    toolsNote:
+      "Your MLS, your Follow Up Boss or kvCORE, your Dotloop or SkySlope, your DocuSign, your inbox and calendar. Your assistant works inside them as a named user, so every listing, lead and file stays on your record.",
     featured: true,
   },
 ];
@@ -1138,7 +1244,7 @@ export const integrations = [
   Tools the team works in, grouped for the services page. `logo` points at a
   brand mark in public/images/tools, pulled from each vendor's own site or an
   open logo collection; entries without one render a monogram. `orbit` marks
-  the curated 23 of the 54 that fit on the three rings without overlapping.
+  the curated 23 of the 72 that fit on the three rings without overlapping.
   The others are still tools we work in, and several appear on the service
   pages, which orbit only the tools relevant to that job.
 */
@@ -1214,6 +1320,16 @@ export const tools: Tool[] = [
   { name: "SnapDocs", logo: "/images/tools/snapdocs.svg", group: "Notary platforms" },
   { name: "Pavaso", tone: "#1f3b73", group: "Notary platforms" },
   { name: "Notary Gadget", logo: "/images/tools/notarygadget.png", group: "Notary platforms" },
+  // Real estate. Off the overview orbit; on the real estate page.
+  { name: "Follow Up Boss", logo: "/images/tools/followupboss.png", group: "Real estate" },
+  { name: "kvCORE", logo: "/images/tools/kvcore.png", group: "Real estate" },
+  { name: "Lofty", logo: "/images/tools/lofty.png", group: "Real estate" },
+  { name: "Zillow", logo: "/images/tools/zillow.svg", group: "Real estate" },
+  { name: "Dotloop", logo: "/images/tools/dotloop.png", group: "Real estate" },
+  { name: "SkySlope", logo: "/images/tools/skyslope.png", group: "Real estate" },
+  { name: "ShowingTime", logo: "/images/tools/showingtime.png", group: "Real estate" },
+  { name: "DocuSign", logo: "/images/tools/docusign.png", group: "Real estate" },
+  { name: "Mailchimp", logo: "/images/tools/mailchimp.svg", group: "Real estate" },
   // Working with you
   { name: "Slack", logo: "/images/tools/slack.svg", group: "Working with you", orbit: true },
   { name: "Discord", logo: "/images/tools/discord.svg", group: "Working with you", orbit: true },

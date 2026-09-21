@@ -8,7 +8,7 @@ If an image ever needs regenerating, the house style is at the bottom.
 
 ## Already done
 
-Twelve images, all in `public/images/`, converted to JPEG and sized for the
+Thirteen images, all in `public/images/`, converted to JPEG and sized for the
 web. The two newest arrived as 1.8 MB PNGs and were converted with sips at
 quality 84, which brought them under 300 KB each. Masters and pre-crop originals are in `source-images/`, gitignored.
 
@@ -25,6 +25,7 @@ quality 84, which brought them under 300 KB each. Masters and pre-crop originals
 | `banner-ecommerce-support.jpg` | `/services/ecommerce-support` | 1915 x 821 |
 | `banner-guest-communication.jpg` | `/services/guest-communication` | 1915 x 821 |
 | `banner-notary-support.jpg` | `/services/notary-support` | 1915 x 821 |
+| `banner-real-estate-support.jpg` | `/services/real-estate-support` | 1914 x 822 |
 | `og.jpg` | Open Graph and Twitter cards | 1730 x 909 |
 
 Three constraints worth keeping if any of these are ever replaced:
@@ -66,6 +67,9 @@ work in this tool". None were redrawn or recoloured beyond what is noted.
 | `smoobu.png` | smoobu.com favicon; the white S lifted off the blue tile and recoloured in that blue, 109px |
 | `snapdocs.svg` | snapdocs.com, Snapdocs-Mark-Main.svg |
 | `notarygadget.png` | notarygadget.com apple-touch-icon, 180px, corners rounded. Notary Cafe and Pavaso have no usable mark and show monograms |
+| `followupboss.png`, `kvcore.png`, `lofty.png` | Each vendor's own site icon (256, 300 and 48px) |
+| `zillow.svg`, `mailchimp.svg` | Simple Icons, brand colour |
+| `docusign.png`, `dotloop.png`, `showingtime.png`, `skyslope.png` | Each vendor's official iOS app icon from Apple's public lookup, 256px, corners rounded as iOS shows them |
 
 Two rules the component relies on: chips are white in both themes because
 these marks are drawn for white, and files render at 22px on desktop and

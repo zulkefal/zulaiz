@@ -24,6 +24,10 @@ import type { Tool } from "@/lib/site";
 function monogram(name: string) {
   const words = name.split(/\s+/).filter(Boolean);
   if (words.length >= 2) return (words[0][0] + words[1][0]).toUpperCase();
+  /* One word with capitals inside it, like ShowingTime or DocuSign, takes
+     those capitals, so four single-word tools do not all read as one letter. */
+  const caps = name.match(/[A-Z]/g) ?? [];
+  if (caps.length >= 2) return caps.slice(0, 2).join("");
   return /^\d/.test(name) ? name.slice(0, 2) : name[0].toUpperCase();
 }
 

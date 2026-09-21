@@ -4,6 +4,7 @@ import {
   ClipboardTextIcon,
   EnvelopeSimpleIcon,
   GraduationCapIcon,
+  KeyIcon,
   HouseLineIcon,
   PackageIcon,
   SignatureIcon,
@@ -25,6 +26,7 @@ const map: Record<Service["icon"], Icon> = {
   clipboard: ClipboardTextIcon,
   storefront: StorefrontIcon,
   signature: SignatureIcon,
+  key: KeyIcon,
 };
 
 export function ServiceIcon({
