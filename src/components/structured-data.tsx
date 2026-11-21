@@ -1,39 +1,12 @@
-import { site } from "@/lib/site";
+import { organizationGraph } from "@/lib/schema";
+import { JsonLd } from "@/components/json-ld";
 
 /*
-  Organization schema, so a search for the brand name has something machine
-  readable to attach to rather than only prose. JSON-LD is data, not an
-  executable script, which is why it is safe to render from a component.
+  The Organization and WebSite entities, on every page. Each page adds its
+  own WebPage, Service or FAQPage nodes that point back at these by @id.
+  The logo was previously /icon1.png, which does not exist on the deployed
+  site and returned a 404 to Google.
 */
 export function StructuredData() {
-  const organization = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    name: site.name,
-    url: `${site.url}/`,
-    logo: `${site.url}/icon1.png`,
-    image: `${site.url}/images/og.jpg`,
-    description: site.description,
-    email: site.email,
-    sameAs: [site.social.linkedin, site.social.instagram],
-    areaServed: "Worldwide",
-    knowsAbout: [
-      "Ecommerce customer support",
-      "Live chat support",
-      "Order tracking and WISMO",
-      "Returns and exchanges",
-      "Short-term rental guest communication",
-      "Student and member support",
-      "Virtual Assistance and back-office admin",
-      "Virtual assistance for notaries and signing agents",
-      "Virtual assistance for real estate agents",
-    ],
-  };
-
-  return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(organization) }}
-    />
-  );
+  return <JsonLd data={organizationGraph()} />;
 }

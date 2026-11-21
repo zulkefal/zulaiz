@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/seo";
+import { graph, webPageNode, faqNode, pricingServiceNode } from "@/lib/schema";
+import { JsonLd } from "@/components/json-ld";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { CheckIcon } from "@phosphor-icons/react/dist/ssr";
 import { CTA, commitments, faqs, included, rate, rateNotes, ticketBundle, trial } from "@/lib/site";
@@ -8,16 +10,22 @@ import { CtaBand } from "@/components/cta-band";
 import { Reveal } from "@/components/reveal";
 import { ButtonLink, Container, Heading } from "@/components/ui";
 
-export const metadata: Metadata = pageMetadata({
-  title: "Pricing",
-  description:
-    "$8 an hour for 10 hours a week, $7 from 20 hours a week. From $320 a month, or 500 tickets for $350, every channel included, and the first five days are free.",
-  path: "/pricing",
-});
+const title = "Customer Support Outsourcing Pricing from $7/hr";
+const description =
+  "$8 an hour for 10 hours a week, $7 from 20 hours a week. From $320 a month, or 500 tickets for $350, every channel included, and the first five days are free.";
+
+export const metadata: Metadata = pageMetadata({ title, description, path: "/pricing" });
 
 export default function PricingPage() {
   return (
     <>
+      <JsonLd
+        data={graph(
+          webPageNode({ path: "/pricing", name: title, description, type: "WebPage" }),
+          pricingServiceNode(),
+          faqNode("/pricing", faqs),
+        )}
+      />
       <Breadcrumbs
         trail={[
           { name: "Home", path: "/" },

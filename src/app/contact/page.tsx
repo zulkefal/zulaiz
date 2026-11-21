@@ -1,22 +1,28 @@
 import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/seo";
+import { graph, webPageNode } from "@/lib/schema";
+import { JsonLd } from "@/components/json-ld";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { ClockIcon, EnvelopeSimpleIcon } from "@phosphor-icons/react/dist/ssr";
 import { callExpectations, site } from "@/lib/site";
 import { DemoForm } from "@/components/demo-form";
 import { Container, Heading } from "@/components/ui";
 
-export const metadata: Metadata = pageMetadata({
-  title: "Start your free trial",
-  description:
-    "Five free days on any service, or a thirty-minute consultation first. Tell us what your inbox looks like and we come back with the hours, coverage and monthly cost, whether or not you carry on.",
-  path: "/contact",
-});
+const title = "Contact Us: Start a Free Customer Support Trial";
+const description =
+  "Start five free days of customer support on any service, or book a thirty-minute consultation. We reply within a few hours with hours, coverage and cost.";
+
+export const metadata: Metadata = pageMetadata({ title, description, path: "/contact" });
 
 
 export default function ContactPage() {
   return (
     <>
+      <JsonLd
+        data={graph(
+          webPageNode({ path: "/contact", name: title, description, type: "ContactPage" }),
+        )}
+      />
       <Breadcrumbs
         trail={[
           { name: "Home", path: "/" },

@@ -4,6 +4,8 @@ import { notFound } from "next/navigation";
 import { ArrowRightIcon, ArrowUpRightIcon, CheckIcon } from "@phosphor-icons/react/dist/ssr";
 import { featuredServices, getService, partsOf, services, toolsNamed } from "@/lib/site";
 import { pageMetadata } from "@/lib/seo";
+import { faqNode, graph, ids, serviceNode, webPageNode } from "@/lib/schema";
+import { JsonLd } from "@/components/json-ld";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import Link from "next/link";
 import { ServiceIcon } from "@/components/service-icon";
@@ -27,7 +29,7 @@ export async function generateMetadata({
   const service = getService(slug);
   if (!service) return {};
   return pageMetadata({
-    title: service.name,
+    title: service.seoTitle ?? service.name,
     description: service.metaDescription ?? service.summary,
     path: `/services/${service.slug}`,
   });
@@ -43,9 +45,23 @@ export default async function ServicePage({
     ? services.find((s) => s.slug === service.parent)
     : undefined;
   const parts = partsOf(service);
+  const path = `/services/${service.slug}`;
 
   return (
     <>
+      <JsonLd
+        data={graph(
+          webPageNode({
+            path,
+            name: service.seoTitle ?? service.name,
+            description: service.metaDescription ?? service.summary,
+            image: service.image?.src,
+            mainEntity: ids.service(path),
+          }),
+          serviceNode(service),
+          ...(service.faq.length ? [faqNode(path, service.faq)] : []),
+        )}
+      />
       <Breadcrumbs
         trail={[
           { name: "Home", path: "/" },

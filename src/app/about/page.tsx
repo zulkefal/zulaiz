@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/seo";
+import { graph, webPageNode } from "@/lib/schema";
+import { JsonLd } from "@/components/json-ld";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import Image from "next/image";
 import { differentiators, teamFacts } from "@/lib/site";
@@ -8,16 +10,20 @@ import { CtaBand } from "@/components/cta-band";
 import { Reveal } from "@/components/reveal";
 import { Container, Heading } from "@/components/ui";
 
-export const metadata: Metadata = pageMetadata({
-  title: "About",
-  description:
-    "Zulaiz has answered ecommerce and rental tickets since 2019. Sixty specialists across three time zones, working as named pods inside your own helpdesk.",
-  path: "/about",
-});
+const title = "About Our Human Customer Support Team";
+const description =
+  "Zulaiz has answered ecommerce and rental tickets since 2019. Sixty specialists across three time zones, working as named pods inside your own helpdesk.";
+
+export const metadata: Metadata = pageMetadata({ title, description, path: "/about" });
 
 export default function AboutPage() {
   return (
     <>
+      <JsonLd
+        data={graph(
+          webPageNode({ path: "/about", name: title, description, type: "AboutPage" }),
+        )}
+      />
       <Breadcrumbs
         trail={[
           { name: "Home", path: "/" },

@@ -1,5 +1,7 @@
 import { site } from "@/lib/site";
 import { canonicalPath } from "@/lib/seo";
+import { ids } from "@/lib/schema";
+import { JsonLd } from "@/components/json-ld";
 
 export type Crumb = { name: string; path: string };
 
@@ -14,6 +16,8 @@ export function Breadcrumbs({ trail }: { trail: Crumb[] }) {
   const data = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
+    /* Same @id the page's WebPage node points at as its breadcrumb. */
+    "@id": ids.breadcrumb(trail[trail.length - 1].path),
     itemListElement: trail.map((crumb, i) => ({
       "@type": "ListItem",
       position: i + 1,
@@ -22,10 +26,5 @@ export function Breadcrumbs({ trail }: { trail: Crumb[] }) {
     })),
   };
 
-  return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
-    />
-  );
+  return <JsonLd data={data} />;
 }

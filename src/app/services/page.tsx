@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/seo";
+import { graph, webPageNode, absoluteUrl, ids } from "@/lib/schema";
+import { JsonLd } from "@/components/json-ld";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import Link from "next/link";
 import { ArrowRightIcon, ArrowUpRightIcon } from "@phosphor-icons/react/dist/ssr";
-import { doorsFor, markets, partsOf, tools } from "@/lib/site";
+import { doorsFor, featuredServices, markets, partsOf, tools } from "@/lib/site";
 import { ToolsSection } from "@/components/tools-section";
 import { PageHeader } from "@/components/page-header";
 import { CtaBand } from "@/components/cta-band";
@@ -11,12 +13,11 @@ import { ServiceIcon } from "@/components/service-icon";
 import { Reveal } from "@/components/reveal";
 import { Container, Heading } from "@/components/ui";
 
-export const metadata: Metadata = pageMetadata({
-  title: "Services",
-  description:
-    "Customer support for ecommerce brands, rental hosts and course creators, plus Virtual Assistance for the admin. Named human agents in your tools, $7 an hour.",
-  path: "/services",
-});
+const title = "Outsourced Customer Support Services";
+const description =
+  "Customer support for ecommerce brands, rental hosts and course creators, plus Virtual Assistance for the admin. Named human agents in your tools, $7 an hour.";
+
+export const metadata: Metadata = pageMetadata({ title, description, path: "/services" });
 
 /*
   Organised by who the customer is, not by channel. Ecommerce, rentals and
@@ -31,6 +32,23 @@ export const metadata: Metadata = pageMetadata({
 export default function ServicesPage() {
   return (
     <>
+      <JsonLd
+        data={graph(
+          webPageNode({ path: "/services", name: title, description, type: "CollectionPage" }),
+          {
+            "@type": "ItemList",
+            "@id": `${absoluteUrl("/services")}#list`,
+            name: "Zulaiz services",
+            itemListElement: featuredServices.map((s, i) => ({
+              "@type": "ListItem",
+              position: i + 1,
+              url: absoluteUrl(`/services/${s.slug}`),
+              name: s.seoTitle ?? s.name,
+              item: { "@id": ids.service(`/services/${s.slug}`) },
+            })),
+          },
+        )}
+      />
       <Breadcrumbs
         trail={[
           { name: "Home", path: "/" },

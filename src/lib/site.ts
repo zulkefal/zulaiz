@@ -96,6 +96,12 @@ export type Service = {
     words and has to stop under 155 characters.
   */
   metaDescription?: string;
+  /*
+    The <title> and the Service entity name. The visible heading stays
+    short; the title carries the phrase people search for, kept under 51
+    characters so that with " | Zulaiz" it stays inside Google's ~60.
+  */
+  seoTitle?: string;
   /* Phosphor icon name, resolved in components/service-icon.tsx */
   icon:
     | "envelope"
@@ -132,6 +138,7 @@ export type Service = {
 export const services: Service[] = [
   {
     slug: "ecommerce-support",
+    seoTitle: "Outsourced Ecommerce Customer Support",
     market: "ecommerce",
     parts: ["wismo", "email-support", "live-chat", "returns-and-exchanges", "reviews-and-social"],
     name: "Ecommerce support",
@@ -228,6 +235,7 @@ export const services: Service[] = [
   },
   {
     slug: "wismo",
+    seoTitle: "WISMO Support: Order Tracking Tickets Handled",
     market: "ecommerce",
     parent: "ecommerce-support",
     name: "WISMO and order tracking",
@@ -300,6 +308,7 @@ export const services: Service[] = [
   },
   {
     slug: "email-support",
+    seoTitle: "Outsourced Email Support for Ecommerce Brands",
     market: "everyone",
     name: "Email support",
     navLabel: "Email support",
@@ -371,6 +380,7 @@ export const services: Service[] = [
   },
   {
     slug: "live-chat",
+    seoTitle: "Outsourced Live Chat Support for Online Stores",
     market: "everyone",
     name: "Live chat",
     navLabel: "Live chat",
@@ -458,6 +468,7 @@ export const services: Service[] = [
   },
   {
     slug: "guest-communication",
+    seoTitle: "Airbnb and Vrbo Guest Communication Service",
     market: "rentals",
     name: "Guest communication",
     navLabel: "Guest communication",
@@ -541,6 +552,7 @@ export const services: Service[] = [
   },
   {
     slug: "student-support",
+    seoTitle: "Student Support for Online Course Creators",
     market: "courses",
     name: "Student and member support",
     navLabel: "Student support",
@@ -628,6 +640,7 @@ export const services: Service[] = [
   },
   {
     slug: "virtual-assistance",
+    seoTitle: "Virtual Assistant Services from $7 an Hour",
     market: "everyone",
     name: "Virtual Assistance",
     navLabel: "Virtual Assistance",
@@ -733,6 +746,7 @@ export const services: Service[] = [
   },
   {
     slug: "notary-support",
+    seoTitle: "Virtual Assistant for Notary Signing Agents",
     market: "notaries",
     placement: { home: false, footer: false },
     name: "Virtual Assistance for Notaries and Signing Agents",
@@ -741,7 +755,7 @@ export const services: Service[] = [
     summary:
       "The admin between signings, handled by a named human assistant: your Notary Cafe, SnapDocs and Pavaso profiles kept current, completion reports filed after every signing, and every appointment invoiced and logged.",
     metaDescription:
-      "Virtual assistant for notary signing agents: Notary Cafe, SnapDocs and Pavaso profiles, completion reports and invoicing handled. From $10 an hour.",
+      "Virtual assistant for notary signing agents: Notary Cafe, SnapDocs and Pavaso profiles, completion reports and invoicing handled. From $6 an hour.",
     icon: "signature",
     image: {
       src: "/images/banner-notary-support.jpg",
@@ -810,21 +824,21 @@ export const services: Service[] = [
       body: "Book thirty minutes and tell us which platforms you are on and how many signings you do a week. We will come back with the hours it needs and what it costs, in writing.",
     },
     pricing: {
-      rate: "$10",
+      rate: "$6",
       unit: "an hour",
-      intro: "The same three packages as every other service, at a flat $10 an hour. Hours flex month to month, and the first five days are free if you would rather try it before committing.",
+      intro: "The same three packages as every other service, at a flat $6 an hour. Hours flex month to month, and the first five days are free if you would rather try it before committing.",
       note: "Prices exclude tax. Three month initial term, then rolling monthly with 30 days notice, and you can move between the three at any point.",
       tiers: [
         {
           name: "Part time",
-          monthly: "$400",
+          monthly: "$240",
           measure: "10 hours a week",
           equivalent: "40 hours a month",
           suits: "One signing agent doing a handful of appointments a week.",
         },
         {
           name: "Standard",
-          monthly: "$800",
+          monthly: "$480",
           measure: "20 hours a week",
           equivalent: "80 hours a month",
           badge: "Most sold",
@@ -833,7 +847,7 @@ export const services: Service[] = [
         },
         {
           name: "Full time",
-          monthly: "$1,600",
+          monthly: "$960",
           measure: "40 hours a week",
           equivalent: "160 hours a month",
           suits: "A signing service running a roster of notaries.",
@@ -847,6 +861,7 @@ export const services: Service[] = [
   },
   {
     slug: "real-estate-support",
+    seoTitle: "Virtual Assistant for Real Estate Agents",
     market: "realestate",
     placement: { home: false, footer: false },
     name: "Virtual Assistance for Real Estate Agents",
@@ -1171,7 +1186,7 @@ export const faqs = [
   },
   {
     q: "Is everything $7 an hour?",
-    a: "Standard and Full time are. Part time is $8, because ten hours a week carries the same setup, QA and reporting as forty. Virtual Assistance for notaries and signing agents is $10 on every package and has its own page.",
+    a: "Standard and Full time are. Part time is $8, because ten hours a week carries the same setup, QA and reporting as forty. Virtual Assistance for notaries and signing agents is $6 on every package and has its own page.",
   },
   {
     q: "Can we try it before committing?",

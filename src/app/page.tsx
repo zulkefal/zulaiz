@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { faqs } from "@/lib/site";
 import { pageMetadata } from "@/lib/seo";
+import { faqNode, graph, ids, webPageNode } from "@/lib/schema";
+import { JsonLd } from "@/components/json-ld";
 import { Hero } from "@/components/home/hero";
 import { IntegrationStrip } from "@/components/home/integration-strip";
 import { StatBand } from "@/components/home/stat-band";
@@ -11,16 +13,32 @@ import { ContactSection } from "@/components/home/contact-section";
 import { FaqAccordion } from "@/components/faq-accordion";
 import { Container, Heading, TextLink } from "@/components/ui";
 
+const homeDescription =
+  "Customer support for ecommerce brands, rental hosts and course creators. Email, live chat, WISMO and student enquiries by named human agents, from $7 an hour.";
+
 export const metadata: Metadata = pageMetadata({
   title: "Zulaiz | Customer support for ecommerce, rentals and courses",
-  description:
-    "Customer support for ecommerce brands, rental hosts and course creators. Email, live chat, WISMO and student enquiries by named human agents, from $7 an hour.",
+  description: homeDescription,
   path: "/",
 });
 
 export default function HomePage() {
   return (
     <>
+      {/* The FAQ node mirrors the six questions rendered further down. */}
+      <JsonLd
+        data={graph(
+          webPageNode({
+            path: "/",
+            name: "Zulaiz | Customer support for ecommerce, rentals and courses",
+            description: homeDescription,
+            image: "/images/og.jpg",
+            hasBreadcrumb: false,
+            mainEntity: ids.organization,
+          }),
+          faqNode("/", faqs.slice(0, 6)),
+        )}
+      />
       <Hero />
       <IntegrationStrip />
       <StatBand />
